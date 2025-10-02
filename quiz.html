@@ -46,45 +46,48 @@
 
   <script>
     const questions = [
-      "I feel energized after spending time alone.",
-      "I prefer deep one-on-one conversations over group chats.",
-      "I often reflect before speaking.",
-      "I enjoy solitary hobbies like reading or writing.",
-      "I find large social events draining.",
-      "I need quiet time to recharge.",
-      "I think before I act.",
-      "I prefer working independently.",
-      "I focus on facts and details.",
-      "I trust experience over theory.",
-      "I prefer practical solutions.",
-      "I notice what's happening around me.",
-      "I rely on my five senses.",
-      "I enjoy hands-on tasks.",
-      "I prefer clear instructions over abstract ideas.",
-      "I value realism over imagination.",
-      "I make decisions based on logic.",
-      "I value fairness over harmony.",
-      "I stay objective in conflicts.",
-      "I prioritize efficiency.",
-      "I prefer truth over tact.",
-      "I analyze pros and cons before deciding.",
-      "I focus on results more than emotions.",
-      "I believe facts should guide decisions.",
-      "I like to plan ahead.",
-      "I prefer structure and routine.",
-      "I feel uneasy with last-minute changes.",
-      "I make to-do lists regularly.",
-      "I enjoy finishing tasks early.",
-      "I dislike surprises.",
-      "I prefer closure over open-ended options.",
-      "I stick to deadlines."
+      { text: "I feel energized after spending time alone.", dimension: "E", reverse: true },
+      { text: "I prefer deep one-on-one conversations over group chats.", dimension: "E", reverse: true },
+      { text: "I often reflect before speaking.", dimension: "E", reverse: true },
+      { text: "I enjoy solitary hobbies like reading or writing.", dimension: "E", reverse: true },
+      { text: "I find large social events draining.", dimension: "E", reverse: true },
+      { text: "I need quiet time to recharge.", dimension: "E", reverse: true },
+      { text: "I think before I act.", dimension: "E", reverse: true },
+      { text: "I prefer working independently.", dimension: "E", reverse: true },
+
+      { text: "I focus on facts and details.", dimension: "N", reverse: true },
+      { text: "I trust experience over theory.", dimension: "N", reverse: true },
+      { text: "I prefer practical solutions.", dimension: "N", reverse: true },
+      { text: "I notice what's happening around me.", dimension: "N", reverse: true },
+      { text: "I rely on my five senses.", dimension: "N", reverse: true },
+      { text: "I enjoy hands-on tasks.", dimension: "N", reverse: true },
+      { text: "I prefer clear instructions over abstract ideas.", dimension: "N", reverse: true },
+      { text: "I value realism over imagination.", dimension: "N", reverse: true },
+
+      { text: "I make decisions based on logic.", dimension: "F", reverse: true },
+      { text: "I value fairness over harmony.", dimension: "F", reverse: true },
+      { text: "I stay objective in conflicts.", dimension: "F", reverse: true },
+      { text: "I prioritize efficiency.", dimension: "F", reverse: true },
+      { text: "I prefer truth over tact.", dimension: "F", reverse: true },
+      { text: "I analyze pros and cons before deciding.", dimension: "F", reverse: true },
+      { text: "I focus on results more than emotions.", dimension: "F", reverse: true },
+      { text: "I believe facts should guide decisions.", dimension: "F", reverse: true },
+
+      { text: "I like to plan ahead.", dimension: "P", reverse: true },
+      { text: "I prefer structure and routine.", dimension: "P", reverse: true },
+      { text: "I feel uneasy with last-minute changes.", dimension: "P", reverse: true },
+      { text: "I make to-do lists regularly.", dimension: "P", reverse: true },
+      { text: "I enjoy finishing tasks early.", dimension: "P", reverse: true },
+      { text: "I dislike surprises.", dimension: "P", reverse: true },
+      { text: "I prefer closure over open-ended options.", dimension: "P", reverse: true },
+      { text: "I stick to deadlines.", dimension: "P", reverse: true }
     ];
 
     const container = document.getElementById("questions");
     questions.forEach((q, i) => {
       const div = document.createElement("div");
       div.className = "question";
-      div.innerHTML = `<p><strong>Q${i + 1}:</strong> ${q}</p>
+      div.innerHTML = `<p><strong>Q${i + 1}:</strong> ${q.text}</p>
         <label><input type="radio" name="q${i}" value="2" required> Strongly Agree</label>
         <label><input type="radio" name="q${i}" value="1"> Agree</label>
         <label><input type="radio" name="q${i}" value="0"> Neutral</label>
@@ -95,7 +98,16 @@
 
     document.getElementById("quizForm").addEventListener("submit", function (e) {
       e.preventDefault();
-      window.location.href = "result-enfp.html";
+      const scores = { E: 0, N: 0, F: 0, P: 0 };
+
+      questions.forEach((q, i) => {
+        const val = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+        const score = q.reverse ? -val : val;
+        scores[q.dimension] += score;
+      });
+
+      const query = `?E=${scores.E}&N=${scores.N}&F=${scores.F}&P=${scores.P}`;
+      window.location.href = `result-enfp.html${query}`;
     });
   </script>
 </body>
