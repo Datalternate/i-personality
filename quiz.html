@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>i-Personality Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #0078d7;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 5px 0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #0078d7;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <h1>i-Personality Test</h1>
+  <form id="quizForm">
+    <div id="questions"></div>
+    <button type="submit">See My Result</button>
+  </form>
+
+  <script>
+    const questions = [
+      "I feel energized after spending time alone.",
+      "I prefer deep one-on-one conversations over group chats.",
+      "I often reflect before speaking.",
+      "I enjoy solitary hobbies like reading or writing.",
+      "I find large social events draining.",
+      "I need quiet time to recharge.",
+      "I think before I act.",
+      "I prefer working independently.",
+      "I focus on facts and details.",
+      "I trust experience over theory.",
+      "I prefer practical solutions.",
+      "I notice what's happening around me.",
+      "I rely on my five senses.",
+      "I enjoy hands-on tasks.",
+      "I prefer clear instructions over abstract ideas.",
+      "I value realism over imagination.",
+      "I make decisions based on logic.",
+      "I value fairness over harmony.",
+      "I stay objective in conflicts.",
+      "I prioritize efficiency.",
+      "I prefer truth over tact.",
+      "I analyze pros and cons before deciding.",
+      "I focus on results more than emotions.",
+      "I believe facts should guide decisions.",
+      "I like to plan ahead.",
+      "I prefer structure and routine.",
+      "I feel uneasy with last-minute changes.",
+      "I make to-do lists regularly.",
+      "I enjoy finishing tasks early.",
+      "I dislike surprises.",
+      "I prefer closure over open-ended options.",
+      "I stick to deadlines."
+    ];
+
+    const container = document.getElementById("questions");
+    questions.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.innerHTML = `<p><strong>Q${i + 1}:</strong> ${q}</p>
+        <label><input type="radio" name="q${i}" value="2" required> Strongly Agree</label>
+        <label><input type="radio" name="q${i}" value="1"> Agree</label>
+        <label><input type="radio" name="q${i}" value="0"> Neutral</label>
+        <label><input type="radio" name="q${i}" value="-1"> Disagree</label>
+        <label><input type="radio" name="q${i}" value="-2"> Strongly Disagree</label>`;
+      container.appendChild(div);
+    });
+
+    document.getElementById("quizForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      window.location.href = "result-enfp.html";
+    });
+  </script>
+</body>
+</html>
