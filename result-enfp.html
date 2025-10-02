@@ -20,15 +20,16 @@
       color: #333;
       margin-top: 30px;
     }
-    p {
+    p, ul {
       font-size: 18px;
       color: #555;
       line-height: 1.6;
     }
-    ul {
-      font-size: 18px;
-      color: #555;
-      line-height: 1.6;
+    .highlight {
+      background: #e6f7ff;
+      padding: 10px;
+      border-left: 4px solid #0078d7;
+      margin-top: 20px;
     }
     .button {
       display: block;
@@ -50,6 +51,8 @@
 <body>
   <h1>Your Personality Type: ENFP – The Campaigner</h1>
   <p>You’re energetic, imaginative, and deeply people-oriented. You thrive on new ideas, meaningful connections, and the freedom to explore. You’re driven by purpose and passion, not just routine.</p>
+
+  <div class="highlight" id="personalized"></div>
 
   <h2>🧩 Trait Breakdown</h2>
   <ul>
@@ -90,5 +93,51 @@
   <p><strong>Mantra:</strong> “My ideas matter. My voice creates impact.”</p>
 
   <a class="button" href="index.html">Back to Home</a>
+
+  <script>
+    function getQueryScores() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        E: parseInt(params.get("E")) || 0,
+        N: parseInt(params.get("N")) || 0,
+        F: parseInt(params.get("F")) || 0,
+        P: parseInt(params.get("P")) || 0
+      };
+    }
+
+    function personalizeENFP(scores) {
+      let feedback = "<h2>🔍 Personalized Insights</h2><ul>";
+
+      feedback += scores.E > 5
+        ? "<li>You show strong extraverted energy—thriving in social settings and group dynamics.</li>"
+        : scores.E < -5
+        ? "<li>You lean introverted—an ENFP who recharges in solitude and prefers deep one-on-one connections.</li>"
+        : "<li>You balance both introverted and extraverted traits—flexible in how you engage with others.</li>";
+
+      feedback += scores.N > 5
+        ? "<li>Your intuition is dominant—you're a visionary ENFP who sees patterns and possibilities everywhere.</li>"
+        : scores.N < -5
+        ? "<li>You lean toward sensing—an ENFP who values practical experience and grounded ideas.</li>"
+        : "<li>You blend intuition and sensing—able to dream big while staying rooted in reality.</li>";
+
+      feedback += scores.F > 5
+        ? "<li>Your decisions are deeply feeling-based—empathetic and values-driven.</li>"
+        : scores.F < -5
+        ? "<li>You show a thinking edge—an ENFP who blends emotion with logic and analysis.</li>"
+        : "<li>You balance feeling and thinking—able to connect emotionally while staying objective.</li>";
+
+      feedback += scores.P > 5
+        ? "<li>You’re a classic Perceiver—spontaneous, adaptable, and open-ended.</li>"
+        : scores.P < -5
+        ? "<li>You show Judging traits—an ENFP who thrives with structure and planning.</li>"
+        : "<li>You balance flexibility and structure—able to adapt while staying organized.</li>";
+
+      feedback += "</ul>";
+      return feedback;
+    }
+
+    const scores = getQueryScores();
+    document.getElementById("personalized").innerHTML = personalizeENFP(scores);
+  </script>
 </body>
 </html>
