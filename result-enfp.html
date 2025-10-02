@@ -4,6 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Result – ENFP</title>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1RRMGHTH9T"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1RRMGHTH9T');
+  </script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -59,85 +69,4 @@
     <li>Mind: Extraverted (E)</li>
     <li>Energy: Intuitive (N)</li>
     <li>Nature: Feeling (F)</li>
-    <li>Tactics: Perceiving (P)</li>
-  </ul>
-
-  <h2>🎓 For Students & Young Adults</h2>
-  <ul>
-    <li>Best at creative and group-based learning</li>
-    <li>Thrives in open-ended assignments</li>
-    <li>Ideal subjects: Literature, Drama, Psychology, Entrepreneurship</li>
-  </ul>
-
-  <h2>💼 Career Paths</h2>
-  <ul>
-    <li>Creative Director</li>
-    <li>Public Relations Specialist</li>
-    <li>Counselor or Therapist</li>
-    <li>Entrepreneur</li>
-    <li>Event Planner</li>
-    <li>Marketing Strategist</li>
-    <li>Teacher (Arts or Humanities)</li>
-  </ul>
-
-  <h2>💞 Relationship Insights</h2>
-  <ul>
-    <li>Expressive, affectionate, and loyal</li>
-    <li>Craves emotional depth and shared dreams</li>
-    <li>Best matches: INFJ, INFP, ENFJ</li>
-    <li>Tips: Communicate your need for spontaneity and emotional connection</li>
-  </ul>
-
-  <h2>🧭 Life Direction</h2>
-  <p>You’re here to inspire, connect, and create change. You thrive when your work aligns with your values. Your growth comes from learning to focus, finish, and follow through.</p>
-  <p><strong>Mantra:</strong> “My ideas matter. My voice creates impact.”</p>
-
-  <a class="button" href="index.html">Back to Home</a>
-
-  <script>
-    function getQueryScores() {
-      const params = new URLSearchParams(window.location.search);
-      return {
-        E: parseInt(params.get("E")) || 0,
-        N: parseInt(params.get("N")) || 0,
-        F: parseInt(params.get("F")) || 0,
-        P: parseInt(params.get("P")) || 0
-      };
-    }
-
-    function personalizeENFP(scores) {
-      let feedback = "<h2>🔍 Personalized Insights</h2><ul>";
-
-      feedback += scores.E > 5
-        ? "<li>You show strong extraverted energy—thriving in social settings and group dynamics.</li>"
-        : scores.E < -5
-        ? "<li>You lean introverted—an ENFP who recharges in solitude and prefers deep one-on-one connections.</li>"
-        : "<li>You balance both introverted and extraverted traits—flexible in how you engage with others.</li>";
-
-      feedback += scores.N > 5
-        ? "<li>Your intuition is dominant—you're a visionary ENFP who sees patterns and possibilities everywhere.</li>"
-        : scores.N < -5
-        ? "<li>You lean toward sensing—an ENFP who values practical experience and grounded ideas.</li>"
-        : "<li>You blend intuition and sensing—able to dream big while staying rooted in reality.</li>";
-
-      feedback += scores.F > 5
-        ? "<li>Your decisions are deeply feeling-based—empathetic and values-driven.</li>"
-        : scores.F < -5
-        ? "<li>You show a thinking edge—an ENFP who blends emotion with logic and analysis.</li>"
-        : "<li>You balance feeling and thinking—able to connect emotionally while staying objective.</li>";
-
-      feedback += scores.P > 5
-        ? "<li>You’re a classic Perceiver—spontaneous, adaptable, and open-ended.</li>"
-        : scores.P < -5
-        ? "<li>You show Judging traits—an ENFP who thrives with structure and planning.</li>"
-        : "<li>You balance flexibility and structure—able to adapt while staying organized.</li>";
-
-      feedback += "</ul>";
-      return feedback;
-    }
-
-    const scores = getQueryScores();
-    document.getElementById("personalized").innerHTML = personalizeENFP(scores);
-  </script>
-</body>
-</html>
+    <li>Tactics: Perceiving (P)</li
