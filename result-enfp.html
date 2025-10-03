@@ -1,72 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Result – ENFP</title>
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1RRMGHTH9T"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPNW7MQF3J"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-1RRMGHTH9T');
+    gtag('config', 'G-VPNW7MQF3J');
   </script>
 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your ENFP Result</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f8ff;
-      padding: 30px;
-      max-width: 800px;
-      margin: auto;
-    }
-    h1 {
-      color: #0078d7;
-      text-align: center;
-    }
-    h2 {
-      color: #333;
-      margin-top: 30px;
-    }
-    p, ul {
-      font-size: 18px;
-      color: #555;
-      line-height: 1.6;
-    }
-    .highlight {
-      background: #e6f7ff;
-      padding: 10px;
-      border-left: 4px solid #0078d7;
-      margin-top: 20px;
-    }
-    .button {
-      display: block;
-      margin: 40px auto;
-      padding: 12px 24px;
-      background: #0078d7;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      font-size: 18px;
-      border-radius: 6px;
-      width: fit-content;
-    }
-    .button:hover {
-      background: #005fa3;
-    }
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    h1 { text-align: center; }
+    .feedback { margin-top: 20px; }
   </style>
 </head>
 <body>
-  <h1>Your Personality Type: ENFP – The Campaigner</h1>
-  <p>You’re energetic, imaginative, and deeply people-oriented. You thrive on new ideas, meaningful connections, and the freedom to explore. You’re driven by purpose and passion, not just routine.</p>
+  <h1>You are an ENFP!</h1>
+  <div class="feedback" id="personalizedFeedback"></div>
 
-  <div class="highlight" id="personalized"></div>
+  <script>
+    function getParam(name) {
+      const url = new URL(window.location.href);
+      return parseInt(url.searchParams.get(name)) || 0;
+    }
 
-  <h2>🧩 Trait Breakdown</h2>
-  <ul>
-    <li>Mind: Extraverted (E)</li>
-    <li>Energy: Intuitive (N)</li>
-    <li>Nature: Feeling (F)</li>
-    <li>Tactics: Perceiving (P)</li
+    const E = getParam("E");
+    const N = getParam("N");
+    const F = getParam("F");
+    const P = getParam("P");
+
+    const feedback = [];
+
+    if (E < 0) feedback.push("You lean introverted—an ENFP who recharges in solitude and reflects deeply.");
+    else feedback.push("Your extroversion fuels your enthusiasm and ability to connect with others easily.");
+
+    if (N > 0) feedback.push("Your strong intuition drives your curiosity and big-picture thinking.");
+    else feedback.push("You balance intuition with practical observation, making you grounded and imaginative.");
+
+    if (F > 0) feedback.push("You lead with empathy and emotional insight, valuing harmony and connection.");
+    else feedback.push("You balance feeling with logic, making decisions that are both compassionate and rational.");
+
+    if (P > 0) feedback.push("You thrive in flexible environments, embracing spontaneity and open-ended possibilities.");
+    else feedback.push("You bring structure to your creativity, preferring plans and clear goals.");
+
+    document.getElementById("personalizedFeedback").innerHTML = feedback.map(p => `<p>${p}</p>`).join("");
+  </script>
+</body>
+</html>
