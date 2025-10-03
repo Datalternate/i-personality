@@ -56,6 +56,28 @@
     .button:hover {
       background: #005fa3;
     }
+    form {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f5f5f5;
+      border-radius: 8px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    form button {
+      padding: 10px 20px;
+      background: #0078d7;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background: #005fa3;
+    }
   </style>
 </head>
 <body>
@@ -71,6 +93,18 @@
     <li>Nature: Feeling (F)</li>
     <li>Tactics: Perceiving (P)</li>
   </ul>
+
+  <!-- ✅ Feedback Form Starts Here -->
+  <h2>🧠 Does This Feel Accurate?</h2>
+  <p>Based on your answers, we matched you with <strong>ENFP – The Campaigner</strong>. Does this description reflect how you see yourself?</p>
+
+  <form action="https://sheetdb.io/api/v1/n0ctz2xylu4u6" method="POST">
+    <input type="hidden" name="data[type]" value="ENFP">
+    <label><input type="radio" name="data[feedback]" value="Yes" required> Yes, it fits me</label>
+    <label><input type="radio" name="data[feedback]" value="No"> No, not quite</label>
+    <button type="submit">Submit Feedback</button>
+  </form>
+  <!-- ✅ Feedback Form Ends Here -->
 
   <script>
     function getParam(name) {
