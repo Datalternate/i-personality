@@ -1,123 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>i-Personality Quiz</title>
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1RRMGHTH9T"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPNW7MQF3J"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-1RRMGHTH9T');
+    gtag('config', 'G-VPNW7MQF3J');
   </script>
 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>i-Personality Quiz</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fff;
-      padding: 30px;
-      max-width: 800px;
-      margin: auto;
-    }
-    h1 {
-      text-align: center;
-      color: #0078d7;
-    }
-    .question {
-      margin-bottom: 20px;
-    }
-    label {
-      display: block;
-      margin: 5px 0;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #0078d7;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #005fa3;
-    }
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    h1 { text-align: center; }
+    .question { margin-bottom: 20px; }
+    button { padding: 10px 20px; font-size: 16px; }
   </style>
 </head>
 <body>
-  <h1>i-Personality Test</h1>
+  <h1>Discover Your Personality Type</h1>
   <form id="quizForm">
-    <div id="questions"></div>
+    <div class="question">
+      <label>1. Do you enjoy social gatherings?</label><br>
+      <input type="radio" name="q1" value="E"> Yes<br>
+      <input type="radio" name="q1" value="I"> No
+    </div>
+    <div class="question">
+      <label>2. Do you rely more on facts than intuition?</label><br>
+      <input type="radio" name="q2" value="S"> Yes<br>
+      <input type="radio" name="q2" value="N"> No
+    </div>
+    <div class="question">
+      <label>3. Do you make decisions based on logic?</label><br>
+      <input type="radio" name="q3" value="T"> Yes<br>
+      <input type="radio" name="q3" value="F"> No
+    </div>
+    <div class="question">
+      <label>4. Do you prefer planning over spontaneity?</label><br>
+      <input type="radio" name="q4" value="J"> Yes<br>
+      <input type="radio" name="q4" value="P"> No
+    </div>
     <button type="submit">See My Result</button>
   </form>
 
   <script>
-    const questions = [
-      { text: "I feel energized after spending time alone.", dimension: "E", reverse: true },
-      { text: "I prefer deep one-on-one conversations over group chats.", dimension: "E", reverse: true },
-      { text: "I often reflect before speaking.", dimension: "E", reverse: true },
-      { text: "I enjoy solitary hobbies like reading or writing.", dimension: "E", reverse: true },
-      { text: "I find large social events draining.", dimension: "E", reverse: true },
-      { text: "I need quiet time to recharge.", dimension: "E", reverse: true },
-      { text: "I think before I act.", dimension: "E", reverse: true },
-      { text: "I prefer working independently.", dimension: "E", reverse: true },
-
-      { text: "I focus on facts and details.", dimension: "N", reverse: true },
-      { text: "I trust experience over theory.", dimension: "N", reverse: true },
-      { text: "I prefer practical solutions.", dimension: "N", reverse: true },
-      { text: "I notice what's happening around me.", dimension: "N", reverse: true },
-      { text: "I rely on my five senses.", dimension: "N", reverse: true },
-      { text: "I enjoy hands-on tasks.", dimension: "N", reverse: true },
-      { text: "I prefer clear instructions over abstract ideas.", dimension: "N", reverse: true },
-      { text: "I value realism over imagination.", dimension: "N", reverse: true },
-
-      { text: "I make decisions based on logic.", dimension: "F", reverse: true },
-      { text: "I value fairness over harmony.", dimension: "F", reverse: true },
-      { text: "I stay objective in conflicts.", dimension: "F", reverse: true },
-      { text: "I prioritize efficiency.", dimension: "F", reverse: true },
-      { text: "I prefer truth over tact.", dimension: "F", reverse: true },
-      { text: "I analyze pros and cons before deciding.", dimension: "F", reverse: true },
-      { text: "I focus on results more than emotions.", dimension: "F", reverse: true },
-      { text: "I believe facts should guide decisions.", dimension: "F", reverse: true },
-
-      { text: "I like to plan ahead.", dimension: "P", reverse: true },
-      { text: "I prefer structure and routine.", dimension: "P", reverse: true },
-      { text: "I feel uneasy with last-minute changes.", dimension: "P", reverse: true },
-      { text: "I make to-do lists regularly.", dimension: "P", reverse: true },
-      { text: "I enjoy finishing tasks early.", dimension: "P", reverse: true },
-      { text: "I dislike surprises.", dimension: "P", reverse: true },
-      { text: "I prefer closure over open-ended options.", dimension: "P", reverse: true },
-      { text: "I stick to deadlines.", dimension: "P", reverse: true }
-    ];
-
-    const container = document.getElementById("questions");
-    questions.forEach((q, i) => {
-      const div = document.createElement("div");
-      div.className = "question";
-      div.innerHTML = `<p><strong>Q${i + 1}:</strong> ${q.text}</p>
-        <label><input type="radio" name="q${i}" value="2" required> Strongly Agree</label>
-        <label><input type="radio" name="q${i}" value="1"> Agree</label>
-        <label><input type="radio" name="q${i}" value="0"> Neutral</label>
-        <label><input type="radio" name="q${i}" value="-1"> Disagree</label>
-        <label><input type="radio" name="q${i}" value="-2"> Strongly Disagree</label>`;
-      container.appendChild(div);
-    });
-
-    document.getElementById("quizForm").addEventListener("submit", function (e) {
+    document.getElementById("quizForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      const scores = { E: 0, N: 0, F: 0, P: 0 };
+      const form = new FormData(e.target);
+      const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
 
-      questions.forEach((q, i) => {
-        const val = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
-        const score = q.reverse ? -val : val;
-        scores[q.dimension] += score;
-      });
+      for (let [key, value] of form.entries()) {
+        scores[value]++;
+      }
 
-      const query = `?E=${scores.E}&N=${scores.N}&F=${scores.F}&P=${scores.P}`;
-      window.location.href = `result-enfp.html${query}`;
+      const type = [
+        scores.E >= scores.I ? "E" : "I",
+        scores.N >= scores.S ? "N" : "S",
+        scores.F >= scores.T ? "F" : "T",
+        scores.P >= scores.J ? "P" : "J"
+      ].join("");
+
+      const params = `?E=${scores.E - scores.I}&N=${scores.N - scores.S}&F=${scores.F - scores.T}&P=${scores.P - scores.J}`;
+      window.location.href = `result-${type.toLowerCase()}.html${params}`;
     });
   </script>
 </body>
