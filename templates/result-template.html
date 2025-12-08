@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>i-personality — Result</title>
+
+  <!-- SheetDB endpoint inserted (Option A) -->
+  <meta name="sheetdb-endpoint" content="https://sheetdb.io/api/v1/n0ctz2xylu4u6">
+
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <main id="result" data-sheetdb-endpoint="https://sheetdb.io/api/v1/n0ctz2xylu4u6">
+    <header class="result-header">
+      <div>
+        <h1 id="type-code">ENFP</h1>
+        <h2 id="type-name">Campaigner</h2>
+      </div>
+      <p id="short-description">Enthusiastic, creative, sociable free spirits...</p>
+    </header>
+
+    <section id="traits" class="card">
+      <div class="chart-wrap">
+        <canvas id="traitChart" width="400" height="400" aria-label="Personality trait chart"></canvas>
+      </div>
+      <ul id="trait-list" class="trait-list">
+        <li>Mind: <strong id="trait-mind">Extraverted</strong></li>
+        <li>Energy: <strong id="trait-energy">Intuitive</strong></li>
+        <li>Nature: <strong id="trait-nature">Feeling</strong></li>
+        <li>Tactics: <strong id="trait-tactics">Prospecting</strong></li>
+      </ul>
+    </section>
+
+    <section id="insights" class="card">
+      <h3>Careers</h3>
+      <ul id="careers"></ul>
+
+      <h3>Relationships</h3>
+      <p id="relationships"></p>
+    </section>
+
+    <section id="feedback" class="card small">
+      <h3>Was this accurate?</h3>
+
+      <form id="feedback-form" novalidate>
+        <fieldset>
+          <label><input type="radio" name="accurate" value="yes" required /> Yes</label>
+          <label><input type="radio" name="accurate" value="no" /> No</label>
+        </fieldset>
+
+        <div>
+          <label for="notes">Notes (optional)</label><br/>
+          <textarea id="notes" name="notes" rows="3" placeholder="Any comments..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">Send feedback</button>
+        <div id="feedback-status" role="status" aria-live="polite" class="feedback-status"></div>
+      </form>
+    </section>
+
+    <footer class="muted small">Tip: you can load a specific type using ?type=ENFP (or INTJ, ESFJ, ISTP)</footer>
+  </main>
+
+  <script src="/scripts/feedback.js"></script>
+  <script src="/scripts/chart-init.js"></script>
+  <script src="/scripts/score.js"></script>
+
+  <script>
+    // On page load: if ?type=CODE present, render that type immediately.
+    (function () {
+      function queryParam(name) {
+        const params = new URLSearchParams(location.search);
+        return params.get(name);
+      }
+      const code = (queryParam('type') || 'ENFP').toUpperCase();
+      if (window.renderTypeByCode) {
+        window.renderTypeByCode(code);
+      } else {
+        console.warn('renderTypeByCode not available yet, rendering ENFP fallback.');
+      }
+    })();
+  </script>
+</body>
+</html>

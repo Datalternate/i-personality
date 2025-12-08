@@ -1,0 +1,105 @@
+:root{
+  --bg: #0f0b14;                 /* deep near-black for contrast */
+  --card: #12091a;               /* dark purple card */
+  --accent: #6A0DAD;             /* rich purple */
+  --accent-2: #00BFFF;           /* electric blue */
+  --muted: #bfb8d6;
+  --text: #f4eefc;
+  --radius: 10px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  background: linear-gradient(180deg, #07040a 0%, #0b0710 100%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:1rem;
+}
+
+main#result{
+  max-width:920px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:1rem;
+}
+
+.result-header{
+  display:flex;
+  flex-direction:column;
+  gap:.5rem;
+}
+
+.result-header h1{
+  margin:0;
+  font-size:1.8rem;
+  color:var(--accent-2);
+  letter-spacing:0.08em;
+}
+
+.result-header h2{
+  margin:0;
+  font-size:1.2rem;
+  color:var(--accent);
+  font-weight:600;
+}
+
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:var(--radius);
+  padding:1rem;
+  border:1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.6);
+}
+
+/* chart area */
+.chart-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:0.25rem;
+}
+
+/* trait list */
+.trait-list{
+  list-style:none;
+  padding:0.5rem 0 0 0;
+  margin:0;
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap:0.5rem;
+  color:var(--muted);
+}
+
+.trait-list strong{ color:var(--text); }
+
+.card.small{ max-width:540px; }
+
+.btn-primary{
+  display:inline-block;
+  border:0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color:white;
+  padding:.5rem .9rem;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+  margin-top:.5rem;
+}
+
+.feedback-status { margin-top:.5rem; color:var(--muted); font-size:.95rem; }
+
+.muted { color:var(--muted); opacity:0.9; }
+.small { font-size:.9rem; }
+
+@media (min-width:720px){
+  main#result{
+    grid-template-columns: 1fr 352px;
+    align-items:start;
+  }
+  .card.small{ max-width:none; }
+}
