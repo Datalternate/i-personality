@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Result – ISFP</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPNW7MQF3J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VPNW7MQF3J');
+  </script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f8ff; padding: 30px; max-width: 800px; margin: auto; }
+    h1 { color: #0078d7; text-align: center; }
+    h2 { color: #333; margin-top: 30px; }
+    p, ul { font-size: 18px; color: #555; line-height: 1.6; }
+    .highlight { background: #e6f7ff; padding: 10px; border-left: 4px solid #0078d7; margin-top: 20px; }
+    form { margin-top: 30px; padding: 20px; background: #f5f5f5; border-radius: 8px; }
+    form label { display: block; margin-bottom: 10px; }
+    form button { padding: 10px 20px; background: #0078d7; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
+    form button:hover { background: #005fa3; }
+  </style>
+</head>
+<body>
+  <h1>Your Personality Type: ISFP – The Adventurer</h1>
+  <p>You're creative, spontaneous, and deeply in tune with your senses. You live in the moment and express yourself through art, music, or other creative pursuits. You value authenticity, freedom, and experiencing life's beauty firsthand.</p>
+  <div class="highlight" id="personalized"></div>
+  <h2>🧩 Trait Breakdown</h2>
+  <ul>
+    <li>Mind: Introverted (I)</li>
+    <li>Energy: Sensing (S)</li>
+    <li>Nature: Feeling (F)</li>
+    <li>Tactics: Perceiving (P)</li>
+  </ul>
+  <h2>💼 Career Suggestions</h2>
+  <ul>
+    <li>Artist or Graphic Designer</li>
+    <li>Photographer or Videographer</li>
+    <li>Musician or Performer</li>
+    <li>Chef or Culinary Artist</li>
+    <li>Fashion Designer or Stylist</li>
+    <li>Veterinarian or Animal Care Specialist</li>
+  </ul>
+  <h2>❤️ Relationship Insights</h2>
+  <p>You bring warmth, creativity, and gentle support to relationships. You value partners who appreciate your artistic nature and give you space to explore. While you may avoid conflict, you show love through thoughtful gestures and shared experiences. You thrive with partners who respect your independence and enjoy discovering beauty together.</p>
+  <h2>🧠 Does This Feel Accurate?</h2>
+  <p>Based on your answers, we matched you with <strong>ISFP – The Adventurer</strong>. Does this description reflect how you see yourself?</p>
+  <form action="https://sheetdb.io/api/v1/n0ctz2xylu4u6" method="POST">
+    <input type="hidden" name="data[type]" value="ISFP">
+    <label><input type="radio" name="data[feedback]" value="Yes" required> Yes, it fits me</label>
+    <label><input type="radio" name="data[feedback]" value="No"> No, not quite</label>
+    <button type="submit">Submit Feedback</button>
+  </form>
+  <script>
+    function getParam(name) {
+      const url = new URL(window.location.href);
+      return parseInt(url.searchParams.get(name)) || 0;
+    }
+    const E = getParam("E"), N = getParam("N"), F = getParam("F"), P = getParam("P");
+    const feedback = [];
+    if (E < 0) feedback.push("You lean introverted—an ISFP who creates and explores in private, personal spaces.");
+    else feedback.push("You have extraverted tendencies, sharing your creative spirit with others through collaboration.");
+    if (N < 0) feedback.push("You lean sensing—grounded in the present moment and appreciating tangible beauty.");
+    else feedback.push("You balance sensing with intuition, combining hands-on creativity with imaginative vision.");
+    if (F > 0) feedback.push("You lead with your heart and values, making choices that feel authentic and meaningful.");
+    else feedback.push("You balance feeling with logic, bringing practical consideration to your compassionate nature.");
+    if (P > 0) feedback.push("You thrive with spontaneity and openness, following your inspiration wherever it leads.");
+    else feedback.push("You bring structure to your creative process, organizing your art while staying flexible.");
+    document.getElementById("personalized").innerHTML = feedback.map(p => `<p>${p}</p>`).join("");
+  </script>
+</body>
+</html>
