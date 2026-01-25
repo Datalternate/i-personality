@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Result – ISFJ</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPNW7MQF3J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VPNW7MQF3J');
+  </script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f8ff; padding: 30px; max-width: 800px; margin: auto; }
+    h1 { color: #0078d7; text-align: center; }
+    h2 { color: #333; margin-top: 30px; }
+    p, ul { font-size: 18px; color: #555; line-height: 1.6; }
+    .highlight { background: #e6f7ff; padding: 10px; border-left: 4px solid #0078d7; margin-top: 20px; }
+    form { margin-top: 30px; padding: 20px; background: #f5f5f5; border-radius: 8px; }
+    form label { display: block; margin-bottom: 10px; }
+    form button { padding: 10px 20px; background: #0078d7; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
+    form button:hover { background: #005fa3; }
+  </style>
+</head>
+<body>
+  <h1>Your Personality Type: ISFJ – The Defender</h1>
+  <p>You're caring, dedicated, and deeply loyal. You excel at supporting others and creating harmony in your environment. You value tradition, responsibility, and helping people feel safe and cared for. Your attention to detail and commitment make you an invaluable presence in any community.</p>
+  <div class="highlight" id="personalized"></div>
+  <h2>🧩 Trait Breakdown</h2>
+  <ul>
+    <li>Mind: Introverted (I)</li>
+    <li>Energy: Sensing (S)</li>
+    <li>Nature: Feeling (F)</li>
+    <li>Tactics: Judging (J)</li>
+  </ul>
+  <h2>💼 Career Suggestions</h2>
+  <ul>
+    <li>Nurse or Healthcare Provider</li>
+    <li>Teacher or School Counselor</li>
+    <li>Social Worker or Family Therapist</li>
+    <li>Administrative Assistant or Office Manager</li>
+    <li>Librarian or Archivist</li>
+    <li>Customer Service Manager</li>
+  </ul>
+  <h2>❤️ Relationship Insights</h2>
+  <p>You bring warmth, devotion, and practical support to relationships. You value partners who appreciate your caring nature and reciprocate your loyalty. While you may struggle with setting boundaries, you show love through thoughtful actions and attentiveness. You thrive with partners who value stability and show genuine gratitude for your efforts.</p>
+  <h2>🧠 Does This Feel Accurate?</h2>
+  <p>Based on your answers, we matched you with <strong>ISFJ – The Defender</strong>. Does this description reflect how you see yourself?</p>
+  <form action="https://sheetdb.io/api/v1/n0ctz2xylu4u6" method="POST">
+    <input type="hidden" name="data[type]" value="ISFJ">
+    <label><input type="radio" name="data[feedback]" value="Yes" required> Yes, it fits me</label>
+    <label><input type="radio" name="data[feedback]" value="No"> No, not quite</label>
+    <button type="submit">Submit Feedback</button>
+  </form>
+  <script>
+    function getParam(name) {
+      const url = new URL(window.location.href);
+      return parseInt(url.searchParams.get(name)) || 0;
+    }
+    const E = getParam("E"), N = getParam("N"), F = getParam("F"), P = getParam("P");
+    const feedback = [];
+    if (E < 0) feedback.push("You lean introverted—an ISFJ who finds fulfillment in one-on-one connections and quiet service.");
+    else feedback.push("You have extraverted tendencies, bringing your nurturing nature into broader social circles.");
+    if (N < 0) feedback.push("You lean sensing—focused on practical details and hands-on care for others.");
+    else feedback.push("You balance sensing with intuition, combining practical help with understanding deeper needs.");
+    if (F > 0) feedback.push("You lead with empathy and compassion, making decisions that prioritize people's well-being.");
+    else feedback.push("You balance feeling with logic, bringing practical wisdom to your caring approach.");
+    if (P < 0) feedback.push("You thrive with organization and routine, creating stable environments where others feel secure.");
+    else feedback.push("You bring flexibility to your supportive nature, adapting to meet people's changing needs.");
+    document.getElementById("personalized").innerHTML = feedback.map(p => `<p>${p}</p>`).join("");
+  </script>
+</body>
+</html>
