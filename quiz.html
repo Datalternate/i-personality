@@ -17,30 +17,36 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #fff;
+      background: rgba(27, 138, 212, 0.596);
       padding: 30px;
       max-width: 800px;
       margin: auto;
     }
     h1 {
       text-align: center;
-      color: #0078d7;
+      color: #3fb309;
     }
     .question {
       margin-bottom: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
     }
     label {
       display: block;
       margin: 5px 0;
+      cursor: pointer;
     }
     button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #0078d7;
+      padding: 15px 30px;
+      font-size: 18px;
+      background: #189fd4;
       color: white;
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      display: block;
+      margin: 30px auto;
     }
     button:hover {
       background: #005fa3;
@@ -55,44 +61,50 @@
   </form>
 
   <script>
+    // Questions mapped to MBTI dimensions
     const questions = [
-      { text: "I feel energized after spending time alone.", dimension: "E", reverse: true },
-      { text: "I prefer deep one-on-one conversations over group chats.", dimension: "E", reverse: true },
-      { text: "I often reflect before speaking.", dimension: "E", reverse: true },
+      // E vs I (Extraversion vs Introversion)
+      { text: "I feel energized after spending time with groups of people.", dimension: "E", reverse: false },
+      { text: "I prefer one-on-one conversations over group gatherings.", dimension: "E", reverse: true },
+      { text: "I think out loud and process ideas by talking.", dimension: "E", reverse: false },
       { text: "I enjoy solitary hobbies like reading or writing.", dimension: "E", reverse: true },
       { text: "I find large social events draining.", dimension: "E", reverse: true },
-      { text: "I need quiet time to recharge.", dimension: "E", reverse: true },
-      { text: "I think before I act.", dimension: "E", reverse: true },
-      { text: "I prefer working independently.", dimension: "E", reverse: true },
+      { text: "I'm the life of the party.", dimension: "E", reverse: false },
+      { text: "I act before I think.", dimension: "E", reverse: false },
+      { text: "I prefer working in teams.", dimension: "E", reverse: false },
 
-      { text: "I focus on facts and details.", dimension: "N", reverse: true },
-      { text: "I trust experience over theory.", dimension: "N", reverse: true },
-      { text: "I prefer practical solutions.", dimension: "N", reverse: true },
-      { text: "I notice what's happening around me.", dimension: "N", reverse: true },
-      { text: "I rely on my five senses.", dimension: "N", reverse: true },
-      { text: "I enjoy hands-on tasks.", dimension: "N", reverse: true },
-      { text: "I prefer clear instructions over abstract ideas.", dimension: "N", reverse: true },
-      { text: "I value realism over imagination.", dimension: "N", reverse: true },
+      // N vs S (Intuition vs Sensing)
+      { text: "I focus on the big picture rather than details.", dimension: "N", reverse: false },
+      { text: "I trust my gut feelings and hunches.", dimension: "N", reverse: false },
+      { text: "I prefer abstract theories over practical applications.", dimension: "N", reverse: false },
+      { text: "I think about future possibilities often.", dimension: "N", reverse: false },
+      { text: "I enjoy exploring new ideas and concepts.", dimension: "N", reverse: false },
+      { text: "I'm more interested in what could be than what is.", dimension: "N", reverse: false },
+      { text: "I prefer innovation over tradition.", dimension: "N", reverse: false },
+      { text: "I enjoy brainstorming and creative thinking.", dimension: "N", reverse: false },
 
-      { text: "I make decisions based on logic.", dimension: "F", reverse: true },
-      { text: "I value fairness over harmony.", dimension: "F", reverse: true },
-      { text: "I stay objective in conflicts.", dimension: "F", reverse: true },
-      { text: "I prioritize efficiency.", dimension: "F", reverse: true },
-      { text: "I prefer truth over tact.", dimension: "F", reverse: true },
-      { text: "I analyze pros and cons before deciding.", dimension: "F", reverse: true },
-      { text: "I focus on results more than emotions.", dimension: "F", reverse: true },
-      { text: "I believe facts should guide decisions.", dimension: "F", reverse: true },
+      // T vs F (Thinking vs Feeling)
+      { text: "I make decisions based on logic rather than emotions.", dimension: "F", reverse: true },
+      { text: "I value harmony over being right.", dimension: "F", reverse: false },
+      { text: "I consider how my decisions affect others' feelings.", dimension: "F", reverse: false },
+      { text: "I prioritize compassion over justice.", dimension: "F", reverse: false },
+      { text: "I prefer tact over blunt honesty.", dimension: "F", reverse: false },
+      { text: "I put myself in others' shoes before deciding.", dimension: "F", reverse: false },
+      { text: "I focus on people's needs more than tasks.", dimension: "F", reverse: false },
+      { text: "I believe emotions should guide important decisions.", dimension: "F", reverse: false },
 
-      { text: "I like to plan ahead.", dimension: "P", reverse: true },
-      { text: "I prefer structure and routine.", dimension: "P", reverse: true },
-      { text: "I feel uneasy with last-minute changes.", dimension: "P", reverse: true },
-      { text: "I make to-do lists regularly.", dimension: "P", reverse: true },
-      { text: "I enjoy finishing tasks early.", dimension: "P", reverse: true },
-      { text: "I dislike surprises.", dimension: "P", reverse: true },
-      { text: "I prefer closure over open-ended options.", dimension: "P", reverse: true },
-      { text: "I stick to deadlines.", dimension: "P", reverse: true }
+      // J vs P (Judging vs Perceiving)
+      { text: "I prefer to keep my options open.", dimension: "P", reverse: false },
+      { text: "I like spontaneity and going with the flow.", dimension: "P", reverse: false },
+      { text: "I'm comfortable with last-minute changes.", dimension: "P", reverse: false },
+      { text: "I rarely make to-do lists.", dimension: "P", reverse: false },
+      { text: "I often start tasks at the last minute.", dimension: "P", reverse: false },
+      { text: "I enjoy surprises.", dimension: "P", reverse: false },
+      { text: "I prefer exploration over closure.", dimension: "P", reverse: false },
+      { text: "I'm flexible with deadlines.", dimension: "P", reverse: false }
     ];
 
+    // Render questions
     const container = document.getElementById("questions");
     questions.forEach((q, i) => {
       const div = document.createElement("div");
@@ -106,8 +118,11 @@
       container.appendChild(div);
     });
 
+    // Handle quiz submission
     document.getElementById("quizForm").addEventListener("submit", function (e) {
       e.preventDefault();
+
+      // Track scores for each MBTI dimension
       const scores = { E: 0, N: 0, F: 0, P: 0 };
 
       questions.forEach((q, i) => {
@@ -116,8 +131,22 @@
         scores[q.dimension] += score;
       });
 
+      // Determine MBTI letters
+      const typeLetters = [];
+      typeLetters.push(scores.E > 0 ? "E" : "I"); // E vs I
+      typeLetters.push(scores.N > 0 ? "N" : "S"); // N vs S
+      typeLetters.push(scores.F > 0 ? "F" : "T"); // F vs T
+      typeLetters.push(scores.P > 0 ? "P" : "J"); // J vs P
+
+      const bestType = typeLetters.join("");
+
+      // Debug: Show what type was calculated
+      console.log("Scores:", scores);
+      console.log("Type:", bestType);
+
+      // Pass scores via URL for personalization
       const query = `?E=${scores.E}&N=${scores.N}&F=${scores.F}&P=${scores.P}`;
-      window.location.href = `result-enfp.html${query}`;
+      window.location.href = `result-${bestType.toLowerCase()}.html${query}`;
     });
   </script>
 </body>
