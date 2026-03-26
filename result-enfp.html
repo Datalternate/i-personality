@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Result – ENFP – The Campaigner</title>
-
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPNW7MQF3J"></script>
   <script>
@@ -13,14 +12,12 @@
     gtag('js', new Date());
     gtag('config', 'G-VPNW7MQF3J');
   </script>
-
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     :root {
       --primary-gold: #d4a352;
       --primary-dark: #a67856;
@@ -31,11 +28,10 @@
       --bg-cream: #fffbf6;
       --border-gold: #c4936f;
     }
-
     body {
       font-family: 'Georgia', serif;
       background-color: var(--bg-light);
-      background-image: 
+      background-image:
         repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(193, 140, 74, 0.05) 35px, rgba(193, 140, 74, 0.05) 70px),
         repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(193, 140, 74, 0.05) 35px, rgba(193, 140, 74, 0.05) 70px);
       padding: 40px 20px;
@@ -43,7 +39,6 @@
       position: relative;
       overflow-x: hidden;
     }
-
     body::before {
       content: '';
       position: fixed;
@@ -57,7 +52,6 @@
       left: -50px;
       z-index: 0;
     }
-
     body::after {
       content: '';
       position: fixed;
@@ -69,7 +63,6 @@
       border-radius: 50%;
       z-index: 0;
     }
-
     .container {
       max-width: 750px;
       margin: 0 auto;
@@ -82,7 +75,6 @@
       border: 1px solid rgba(193, 140, 74, 0.15);
       animation: slideUp 0.6s ease-out;
     }
-
     @keyframes slideUp {
       from {
         opacity: 0;
@@ -93,13 +85,11 @@
         transform: translateY(0);
       }
     }
-
     .header-icon {
       font-size: 56px;
       text-align: center;
       margin-bottom: 20px;
     }
-
     h1 {
       font-size: 40px;
       color: var(--text-dark);
@@ -108,7 +98,6 @@
       font-weight: 700;
       font-style: italic;
     }
-
     .type-code {
       text-align: center;
       font-family: 'Segoe UI', sans-serif;
@@ -119,14 +108,12 @@
       margin-bottom: 30px;
       font-weight: 600;
     }
-
     .ornament {
       width: 40px;
       height: 4px;
       background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
       margin: 25px auto;
     }
-
     .intro-text {
       font-size: 16px;
       color: var(--text-light);
@@ -135,7 +122,6 @@
       text-align: center;
       font-style: italic;
     }
-
     .personalized-box {
       background: linear-gradient(135deg, rgba(212, 163, 58, 0.08) 0%, rgba(196, 147, 111, 0.08) 100%);
       border-left: 4px solid var(--accent-gold);
@@ -143,18 +129,15 @@
       margin-bottom: 35px;
       border-radius: 8px;
     }
-
     .personalized-box p {
       font-size: 14px;
       color: var(--text-light);
       line-height: 1.7;
       margin-bottom: 12px;
     }
-
     .personalized-box p:last-child {
       margin-bottom: 0;
     }
-
     h2 {
       font-size: 20px;
       color: var(--text-dark);
@@ -164,12 +147,10 @@
       padding-bottom: 12px;
       border-bottom: 2px solid rgba(193, 140, 74, 0.2);
     }
-
     ul {
       list-style: none;
       margin-bottom: 35px;
     }
-
     li {
       font-size: 15px;
       color: var(--text-light);
@@ -178,7 +159,6 @@
       padding-left: 30px;
       position: relative;
     }
-
     li::before {
       content: '✦';
       position: absolute;
@@ -186,46 +166,39 @@
       color: var(--primary-gold);
       font-weight: bold;
     }
-
     .insight-text {
       font-size: 15px;
       color: var(--text-light);
       line-height: 1.8;
       margin-bottom: 35px;
     }
-
     .feedback-section {
       margin-top: 50px;
       padding-top: 35px;
       border-top: 2px solid rgba(193, 140, 74, 0.2);
     }
-
     .feedback-title {
       font-size: 18px;
       color: var(--text-dark);
       margin-bottom: 15px;
       font-weight: 600;
     }
-
     .feedback-intro {
       font-size: 14px;
       color: var(--text-light);
       margin-bottom: 25px;
       line-height: 1.7;
     }
-
     form {
       display: flex;
       flex-direction: column;
       gap: 15px;
     }
-
     .radio-group {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
-
     label {
       display: flex;
       align-items: center;
@@ -238,18 +211,15 @@
       font-size: 14px;
       color: var(--text-light);
     }
-
     label:hover {
       background: rgba(212, 163, 58, 0.08);
       border-color: var(--accent-gold);
     }
-
     input[type="radio"] {
       margin-right: 12px;
       cursor: pointer;
       accent-color: var(--primary-gold);
     }
-
     button {
       padding: 14px 30px;
       font-size: 14px;
@@ -266,19 +236,16 @@
       box-shadow: 0 8px 20px rgba(193, 140, 74, 0.3);
       margin-top: 10px;
     }
-
     button:hover {
       transform: translateY(-3px);
       box-shadow: 0 12px 28px rgba(193, 140, 74, 0.4);
     }
-
     .back-link {
       text-align: center;
       margin-top: 35px;
       padding-top: 25px;
       border-top: 1px solid rgba(193, 140, 74, 0.1);
     }
-
     .back-link a {
       font-size: 13px;
       color: var(--accent-gold);
@@ -289,28 +256,62 @@
       font-weight: 600;
       transition: all 0.2s ease;
     }
-
     .back-link a:hover {
       color: var(--primary-dark);
+    }
+
+    /* Social Sharing Styles */
+    .share-section {
+      margin: 60px 0 40px;
+      padding: 35px 25px;
+      background: rgba(255,251,246,0.95);
+      border-radius: 16px;
+      border: 1px solid rgba(196,147,111,0.25);
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(212,163,58,0.1);
+    }
+    .share-section p {
+      font-size: 18px;
+      color: #5a3a2a;
+      margin-bottom: 22px;
+      font-weight: 600;
+    }
+    .share-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .share-buttons a,
+    .share-buttons button {
+      padding: 13px 26px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+    .share-buttons a:hover,
+    .share-buttons button:hover {
+      transform: translateY(-2px);
     }
 
     @media (max-width: 640px) {
       .container {
         padding: 30px 20px;
       }
-
       h1 {
         font-size: 28px;
       }
-
       h2 {
         font-size: 18px;
       }
-
       .intro-text {
         font-size: 15px;
       }
-
       li {
         font-size: 14px;
         padding-left: 25px;
@@ -325,9 +326,7 @@
     <p class="type-code">The Spark</p>
     <div class="ornament"></div>
     <p class="intro-text">You're energetic, imaginative, and deeply people-oriented. You thrive on new ideas, meaningful connections, and the freedom to explore. You're driven by purpose and passion, not just routine.</p>
-
     <div class="personalized-box" id="personalized"></div>
-
     <h2>🧩 Trait Breakdown</h2>
     <ul>
       <li>Mind: Extraverted (E)</li>
@@ -335,7 +334,6 @@
       <li>Nature: Feeling (F)</li>
       <li>Tactics: Perceiving (P)</li>
     </ul>
-
     <h2>💼 Career Suggestions</h2>
     <ul>
       <li>Entrepreneur or Creative Startup Founder</li>
@@ -345,14 +343,11 @@
       <li>Journalist or Content Creator</li>
       <li>Event Organizer or Community Manager</li>
     </ul>
-
     <h2>❤️ Relationship Insights</h2>
     <p class="insight-text">You bring excitement, authenticity, and emotional depth to relationships. You value partners who appreciate your enthusiasm and understand your need for growth and exploration. You're naturally flirtatious and enjoy deep conversations that touch the heart. You thrive with partners who embrace adventure, share your passion for meaning, and support your evolving dreams.</p>
-
     <div class="feedback-section">
       <h2>🧠 Does This Feel Accurate?</h2>
       <p class="feedback-intro">Based on your answers, we matched you with <strong>ENFP – The Campaigner</strong>. Does this description reflect how you see yourself?</p>
-
       <form action="https://sheetdb.io/api/v1/n0ctz2xylu4u6" method="POST">
         <input type="hidden" name="data[type]" value="ENFP">
         <div class="radio-group">
@@ -362,9 +357,19 @@
         <button type="submit">Submit Feedback</button>
       </form>
     </div>
-
     <div class="back-link">
       <a href="index.html">← Back to Home</a>
+    </div>
+
+    <!-- ==================== SOCIAL SHARING ==================== -->
+    <div class="share-section">
+      <p>Share your personality type with friends!</p>
+      <div class="share-buttons">
+        <a href="#" id="share-x" target="_blank">𝕏 Share on X</a>
+        <a href="#" id="share-fb" target="_blank">f Facebook</a>
+        <a href="#" id="share-wa" target="_blank">💬 WhatsApp</a>
+        <button onclick="copyLink()">📋 Copy Link</button>
+      </div>
     </div>
   </div>
 
@@ -373,28 +378,47 @@
       const url = new URL(window.location.href);
       return parseInt(url.searchParams.get(name)) || 0;
     }
-
     const E = getParam("E");
     const N = getParam("N");
     const F = getParam("F");
     const P = getParam("P");
-
     const feedback = [];
-
     if (E < 0) feedback.push("You lean introverted—an ENFP who recharges in solitude and reflects deeply.");
     else feedback.push("Your extroversion fuels your enthusiasm and ability to connect with others easily.");
-
     if (N > 0) feedback.push("Your strong intuition drives your curiosity and big-picture thinking.");
     else feedback.push("You balance intuition with practical observation, making you grounded and imaginative.");
-
     if (F > 0) feedback.push("You lead with empathy and emotional insight, valuing harmony and connection.");
     else feedback.push("You balance feeling with logic, making decisions that are both compassionate and rational.");
-
     if (P > 0) feedback.push("You thrive in flexible environments, embracing spontaneity and open-ended possibilities.");
     else feedback.push("You bring structure to your creativity, preferring plans and clear goals.");
-
     const feedbackHTML = feedback.map(p => `<p>${p}</p>`).join("");
     document.getElementById("personalized").innerHTML = feedbackHTML;
+
+    // ==================== SOCIAL SHARING SCRIPT ====================
+    function getPersonalityType() {
+      const title = document.title;
+      if (title.includes("ENFP")) return "ENFP – The Campaigner";
+      return "Personality Type";
+    }
+
+    const personalityType = getPersonalityType();
+    const pageUrl = encodeURIComponent(window.location.href);
+    const shareText = encodeURIComponent(`I'm a ${personalityType} according to the i-Personality Quiz! ✨ What's your type? Take the quiz here:`);
+
+    document.getElementById('share-x').href = `https://twitter.com/intent/tweet?text=${shareText}&url=${pageUrl}`;
+    document.getElementById('share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+    document.getElementById('share-wa').href = `https://wa.me/?text=${shareText}%20${pageUrl}`;
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const btn = document.querySelector('button[onclick="copyLink()"]');
+        if (btn) {
+          const original = btn.innerHTML;
+          btn.innerHTML = '✅ Copied!';
+          setTimeout(() => { btn.innerHTML = original; }, 2000);
+        }
+      });
+    }
   </script>
 </body>
 </html>
