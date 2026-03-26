@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>i-Personality Quiz – Discover Your Type</title>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPNW7MQF3J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VPNW7MQF3J');
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-gold: #d4a352;
+      --primary-dark: #a67856;
+      --accent-gold: #c4936f;
+      --text-dark: #5a3a2a;
+      --text-light: #6b5344;
+      --bg-light: #f4e8d8;
+      --bg-cream: #fffbf6;
+      --border-gold: #c4936f;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: var(--bg-light);
+      background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(193, 140, 74, 0.05) 35px, rgba(193, 140, 74, 0.05) 70px),
+        repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(193, 140, 74, 0.05) 35px, rgba(193, 140, 74, 0.05) 70px);
+      padding: 40px 20px;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(212, 163, 58, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      top: -50px;
+      left: -50px;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 750px;
+      margin: 0 auto;
+      z-index: 1;
+      position: relative;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+      animation: slideDown 0.6s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 42px;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .progress-text {
+      font-size: 13px;
+      color: var(--accent-gold);
+      font-family: 'Segoe UI', sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .progress-bar {
+      width: 120px;
+      height: 6px;
+      background: rgba(193, 140, 74, 0.2);
+      border-radius: 3px;
+      margin: 0 auto 30px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-gold), var(--accent-gold));
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+
+    form {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 250, 245, 0.96) 100%);
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(193, 140, 74, 0.15);
+    }
+
+    .question {
+      margin-bottom: 35px;
+      padding-bottom: 35px;
+      border-bottom: 1px solid rgba(193, 140, 74, 0.1);
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .question:last-of-type {
+      border-bottom: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .question-number {
+      font-size: 12px;
+      color: var(--accent-gold);
+      font-family: 'Segoe UI', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .question-text {
+      font-size: 16px;
+      color: var(--text-dark);
+      line-height: 1.6;
+      margin-bottom: 18px;
+      font-weight: 500;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      background: var(--bg-cream);
+      border: 1px solid rgba(193, 140, 74, 0.2);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    label:hover {
+      background: rgba(212, 163, 58, 0.08);
+      border-color: var(--accent-gold);
+    }
+
+    input[type="radio"] {
+      margin-right: 12px;
+      cursor: pointer;
+      accent-color: var(--primary-gold);
+    }
+
+    input[type="radio"]:checked + span {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .button-section {
+      display: flex;
+      gap: 15px;
+      margin-top: 40px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 16px 50px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Segoe UI', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .button-primary {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: 0 8px 20px rgba(193, 140, 74, 0.3);
+    }
+
+    .button-primary:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(193, 140, 74, 0.4);
+    }
+
+    .button-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .button-back {
+      background: rgba(193, 140, 74, 0.1);
+      color: var(--primary-dark);
+      border: 2px solid var(--accent-gold);
+    }
+
+    .button-back:hover {
+      background: rgba(193, 140, 74, 0.15);
+      transform: translateY(-3px);
+    }
+
+    .ornament {
+      width: 40px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+      margin: 20px auto 35px;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 0;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      form {
+        padding: 25px;
+        border-radius: 12px;
+      }
+
+      .question {
+        margin-bottom: 25px;
+        padding-bottom: 25px;
+      }
+
+      label {
+        font-size: 13px;
+        padding: 10px 12px;
+      }
+
+      button {
+        padding: 14px 30px;
+        font-size: 13px;
+      }
+
+      .button-section {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-icon">✨</div>
+      <h1>Personality Quiz</h1>
+      <p class="progress-text">Discovering Your Type</p>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <form id="quizForm">
+      <div id="questions"></div>
+      <div class="button-section">
+        <button type="button" class="button-back" id="backBtn" style="display: none;">← Back</button>
+        <button type="submit" class="button-primary">See My Result</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Questions mapped to MBTI dimensions
+    const questions = [
+      // E vs I (Extraversion vs Introversion)
+      { text: "I feel energized after spending time with groups of people.", dimension: "E", reverse: false },
+      { text: "I prefer one-on-one conversations over group gatherings.", dimension: "E", reverse: true },
+      { text: "I think out loud and process ideas by talking.", dimension: "E", reverse: false },
+      { text: "I enjoy solitary hobbies like reading or writing.", dimension: "E", reverse: true },
+      { text: "I find large social events draining.", dimension: "E", reverse: true },
+      { text: "I'm the life of the party.", dimension: "E", reverse: false },
+      { text: "I act before I think.", dimension: "E", reverse: false },
+      { text: "I prefer working in teams.", dimension: "E", reverse: false },
+
+      // N vs S (Intuition vs Sensing)
+      { text: "I focus on the big picture rather than details.", dimension: "N", reverse: false },
+      { text: "I trust my gut feelings and hunches.", dimension: "N", reverse: false },
+      { text: "I prefer abstract theories over practical applications.", dimension: "N", reverse: false },
+      { text: "I think about future possibilities often.", dimension: "N", reverse: false },
+      { text: "I enjoy exploring new ideas and concepts.", dimension: "N", reverse: false },
+      { text: "I'm more interested in what could be than what is.", dimension: "N", reverse: false },
+      { text: "I prefer innovation over tradition.", dimension: "N", reverse: false },
+      { text: "I enjoy brainstorming and creative thinking.", dimension: "N", reverse: false },
+
+      // T vs F (Thinking vs Feeling)
+      { text: "I make decisions based on logic rather than emotions.", dimension: "F", reverse: true },
+      { text: "I value harmony over being right.", dimension: "F", reverse: false },
+      { text: "I consider how my decisions affect others' feelings.", dimension: "F", reverse: false },
+      { text: "I prioritize compassion over justice.", dimension: "F", reverse: false },
+      { text: "I prefer tact over blunt honesty.", dimension: "F", reverse: false },
+      { text: "I put myself in others' shoes before deciding.", dimension: "F", reverse: false },
+      { text: "I focus on people's needs more than tasks.", dimension: "F", reverse: false },
+      { text: "I believe emotions should guide important decisions.", dimension: "F", reverse: false },
+
+      // J vs P (Judging vs Perceiving)
+      { text: "I prefer to keep my options open.", dimension: "P", reverse: false },
+      { text: "I like spontaneity and going with the flow.", dimension: "P", reverse: false },
+      { text: "I'm comfortable with last-minute changes.", dimension: "P", reverse: false },
+      { text: "I rarely make to-do lists.", dimension: "P", reverse: false },
+      { text: "I often start tasks at the last minute.", dimension: "P", reverse: false },
+      { text: "I enjoy surprises.", dimension: "P", reverse: false },
+      { text: "I prefer exploration over closure.", dimension: "P", reverse: false },
+      { text: "I'm flexible with deadlines.", dimension: "P", reverse: false }
+    ];
+
+    // Render questions
+    const container = document.getElementById("questions");
+    questions.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.innerHTML = `
+        <div class="question-number">Question ${i + 1} of ${questions.length}</div>
+        <div class="question-text">${q.text}</div>
+        <div class="options">
+          <label><input type="radio" name="q${i}" value="2" required><span>Strongly Agree</span></label>
+          <label><input type="radio" name="q${i}" value="1"><span>Agree</span></label>
+          <label><input type="radio" name="q${i}" value="0"><span>Neutral</span></label>
+          <label><input type="radio" name="q${i}" value="-1"><span>Disagree</span></label>
+          <label><input type="radio" name="q${i}" value="-2"><span>Strongly Disagree</span></label>
+        </div>
+      `;
+      container.appendChild(div);
+    });
+
+    // Update progress bar
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', updateProgress);
+    });
+
+    function updateProgress() {
+      const total = questions.length;
+      const answered = Array.from(document.querySelectorAll('input[type="radio"]:checked')).length;
+      const percentage = (answered / total) * 100;
+      document.getElementById('progressFill').style.width = percentage + '%';
+    }
+
+    // Handle quiz submission
+    document.getElementById("quizForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Track scores for each MBTI dimension
+      const scores = { E: 0, N: 0, F: 0, P: 0 };
+
+      questions.forEach((q, i) => {
+        const val = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+        const score = q.reverse ? -val : val;
+        scores[q.dimension] += score;
+      });
+
+      // Determine MBTI letters
+      const typeLetters = [];
+      typeLetters.push(scores.E > 0 ? "E" : "I");
+      typeLetters.push(scores.N > 0 ? "N" : "S");
+      typeLetters.push(scores.F > 0 ? "F" : "T");
+      typeLetters.push(scores.P > 0 ? "P" : "J");
+
+      const bestType = typeLetters.join("");
+
+      // Pass scores via URL for personalization
+      const query = `?E=${scores.E}&N=${scores.N}&F=${scores.F}&P=${scores.P}`;
+      window.location.href = `result-${bestType.toLowerCase()}.html${query}`;
+    });
+  </script>
+</body>
+</html>

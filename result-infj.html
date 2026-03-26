@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Result – INFJ – The Advocate</title>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPNW7MQF3J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VPNW7MQF3J');
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-gold: #d4a352;
+      --primary-dark: #a67856;
+      --accent-gold: #c4936f;
+      --text-dark: #5a3a2a;
+      --text-light: #6b5344;
+      --bg-light: #f4e8d8;
+      --bg-cream: #fffbf6;
+      --border-gold: #c4936f;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: var(--bg-light);
+      background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(193, 140, 74, 0.05) 35px, rgba(193, 140, 74, 0.05) 70px),
+        repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(193, 140, 74, 0.05) 35px, rgba(193, 140, 74, 0.05) 70px);
+      padding: 40px 20px;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(212, 163, 58, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      top: -50px;
+      left: -50px;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(139, 101, 53, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 750px;
+      margin: 0 auto;
+      z-index: 1;
+      position: relative;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 250, 245, 0.96) 100%);
+      border-radius: 15px;
+      padding: 50px 40px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(193, 140, 74, 0.15);
+      animation: slideUp 0.6s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header-icon {
+      font-size: 56px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 40px;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .type-code {
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 14px;
+      color: var(--accent-gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    .ornament {
+      width: 40px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+      margin: 25px auto;
+    }
+
+    .intro-text {
+      font-size: 16px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 35px;
+      text-align: center;
+      font-style: italic;
+    }
+
+    .personalized-box {
+      background: linear-gradient(135deg, rgba(212, 163, 58, 0.08) 0%, rgba(196, 147, 111, 0.08) 100%);
+      border-left: 4px solid var(--accent-gold);
+      padding: 20px 25px;
+      margin-bottom: 35px;
+      border-radius: 8px;
+    }
+
+    .personalized-box p {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .personalized-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-size: 20px;
+      color: var(--text-dark);
+      margin-top: 35px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      padding-bottom: 12px;
+      border-bottom: 2px solid rgba(193, 140, 74, 0.2);
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 35px;
+    }
+
+    li {
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.8;
+      padding: 12px 0;
+      padding-left: 30px;
+      position: relative;
+    }
+
+    li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--primary-gold);
+      font-weight: bold;
+    }
+
+    .insight-text {
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    .feedback-section {
+      margin-top: 50px;
+      padding-top: 35px;
+      border-top: 2px solid rgba(193, 140, 74, 0.2);
+    }
+
+    .feedback-title {
+      font-size: 18px;
+      color: var(--text-dark);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .feedback-intro {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 25px;
+      line-height: 1.7;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      background: var(--bg-cream);
+      border: 1px solid rgba(193, 140, 74, 0.2);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    label:hover {
+      background: rgba(212, 163, 58, 0.08);
+      border-color: var(--accent-gold);
+    }
+
+    input[type="radio"] {
+      margin-right: 12px;
+      cursor: pointer;
+      accent-color: var(--primary-gold);
+    }
+
+    button {
+      padding: 14px 30px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Segoe UI', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--accent-gold) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: 0 8px 20px rgba(193, 140, 74, 0.3);
+      margin-top: 10px;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(193, 140, 74, 0.4);
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 35px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(193, 140, 74, 0.1);
+    }
+
+    .back-link a {
+      font-size: 13px;
+      color: var(--accent-gold);
+      text-decoration: none;
+      font-family: 'Segoe UI', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .back-link a:hover {
+      color: var(--primary-dark);
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      .intro-text {
+        font-size: 15px;
+      }
+
+      li {
+        font-size: 14px;
+        padding-left: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header-icon">💫</div>
+    <h1>INFJ – The Advocate</h1>
+    <p class="type-code">The Visionary Helper</p>
+    <div class="ornament"></div>
+    <p class="intro-text">You're insightful, compassionate, and driven by a deep sense of purpose. You excel at understanding complex human motivations and working toward meaningful change. You're rare, introspective, and intensely committed to your values.</p>
+
+    <div class="personalized-box" id="personalized"></div>
+
+    <h2>🧩 Trait Breakdown</h2>
+    <ul>
+      <li>Mind: Introverted (I)</li>
+      <li>Energy: Intuitive (N)</li>
+      <li>Nature: Feeling (F)</li>
+      <li>Tactics: Judging (J)</li>
+    </ul>
+
+    <h2>💼 Career Suggestions</h2>
+    <ul>
+      <li>Psychologist or Counselor</li>
+      <li>Author or Activist</li>
+      <li>Nonprofit Leader or Social Worker</li>
+      <li>Teacher or Academic</li>
+      <li>Diplomat or Mediator</li>
+      <li>Healthcare Provider or Researcher</li>
+    </ul>
+
+    <h2>❤️ Relationship Insights</h2>
+    <p class="insight-text">You bring deep understanding, authenticity, and emotional intimacy to relationships. You see people's potential and feel called to help them grow. You're intensely loyal but need partners who respect your need for alone time. You thrive with partners who share your values and appreciate your emotional depth.</p>
+
+    <div class="feedback-section">
+      <h2>🧠 Does This Feel Accurate?</h2>
+      <p class="feedback-intro">Based on your answers, we matched you with <strong>INFJ – The Advocate</strong>. Does this description reflect how you see yourself?</p>
+
+      <form action="https://sheetdb.io/api/v1/n0ctz2xylu4u6" method="POST">
+        <input type="hidden" name="data[type]" value="INFJ">
+        <div class="radio-group">
+          <label><input type="radio" name="data[feedback]" value="Yes" required> Yes, it fits me perfectly</label>
+          <label><input type="radio" name="data[feedback]" value="No"> Not quite, I'm different</label>
+        </div>
+        <button type="submit">Submit Feedback</button>
+      </form>
+    </div>
+
+    <div class="back-link">
+      <a href="index.html">← Back to Home</a>
+    </div>
+  </div>
+
+  <script>
+    function getParam(name) {
+      const url = new URL(window.location.href);
+      return parseInt(url.searchParams.get(name)) || 0;
+    }
+
+    const E = getParam("E");
+    const N = getParam("N");
+    const F = getParam("F");
+    const P = getParam("P");
+
+    const feedback = [];
+
+    if (E < 0) feedback.push("You lean introverted—an INFJ who develops deep influence through one-on-one connections.");
+    else feedback.push("You have extraverted tendencies, bringing your vision into the broader world.");
+
+    if (N > 0) feedback.push("Your strong intuition gives you insight into human nature and future possibilities.");
+    else feedback.push("You balance intuition with practical observation, making you both visionary and grounded.");
+
+    if (F > 0) feedback.push("You lead with empathy and values-based thinking, prioritizing human impact.");
+    else feedback.push("You balance feeling with objectivity, bringing wisdom to your compassionate approach.");
+
+    if (P > 0) feedback.push("You bring flexibility to your values, understanding complexity and nuance.");
+    else feedback.push("You thrive with purpose and direction, focusing on meaningful long-term goals.");
+
+    const feedbackHTML = feedback.map(p => `<p>${p}</p>`).join("");
+    document.getElementById("personalized").innerHTML = feedbackHTML;
+  </script>
+</body>
+</html>
