@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Temperament Results – i-Personality</title>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPNW7MQF3J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VPNW7MQF3J');
+  </script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary-gold: #d4a352;
+      --primary-dark: #a67856;
+      --accent-gold: #c4936f;
+      --text-dark: #5a3a2a;
+      --text-light: #6b5344;
+      --bg-light: #f4e8d8;
+      --bg-cream: #fffbf6;
+      --border-gold: #c4936f;
+
+      /* Temperament accent colours */
+      --san-color: #e8845a;
+      --cho-color: #c0392b;
+      --mel-color: #2e86ab;
+      --phle-color: #27ae60;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: var(--bg-light);
+      background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(193,140,74,0.05) 35px, rgba(193,140,74,0.05) 70px),
+        repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(193,140,74,0.05) 35px, rgba(193,140,74,0.05) 70px);
+      padding: 40px 20px 80px;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50px; left: -50px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(212,163,58,0.1) 0%, transparent 70%);
+      border-radius: 50%; z-index: 0; pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(139,101,53,0.08) 0%, transparent 70%);
+      border-radius: 50%; z-index: 0; pointer-events: none;
+    }
+
+    .container {
+      max-width: 750px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Back link ── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 12px;
+      color: var(--accent-gold);
+      text-decoration: none;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 28px;
+      transition: opacity 0.2s;
+    }
+    .back-link:hover { opacity: 0.7; }
+
+    /* ── Hero result card ── */
+    .result-hero {
+      background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(255,250,245,0.97) 100%);
+      border-radius: 20px;
+      padding: 50px 44px 44px;
+      border: 2px solid rgba(193,140,74,0.15);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      text-align: center;
+      margin-bottom: 28px;
+      animation: slideUp 0.7s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-eyebrow {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .result-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+      display: block;
+      animation: pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) 0.3s both;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.5); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .result-type-label {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 44px;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .result-tagline {
+      font-size: 16px;
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--accent-gold);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .ornament {
+      width: 50px; height: 4px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+      margin: 0 auto 22px;
+    }
+
+    .result-summary {
+      font-size: 16px;
+      color: var(--text-light);
+      line-height: 1.85;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ── Percentage bars card ── */
+    .card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(255,250,245,0.97) 100%);
+      border-radius: 16px;
+      padding: 36px 40px;
+      border: 2px solid rgba(193,140,74,0.12);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+      animation: slideUp 0.7s ease-out both;
+    }
+
+    .card:nth-child(2) { animation-delay: 0.1s; }
+    .card:nth-child(3) { animation-delay: 0.15s; }
+    .card:nth-child(4) { animation-delay: 0.2s; }
+    .card:nth-child(5) { animation-delay: 0.25s; }
+
+    .card-title {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    /* bars */
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .bar-row:last-child { margin-bottom: 0; }
+
+    .bar-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 130px;
+      flex-shrink: 0;
+    }
+
+    .bar-icon { font-size: 18px; }
+
+    .bar-name {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 14px;
+      background: rgba(193,140,74,0.12);
+      border-radius: 7px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 7px;
+      width: 0%;
+      transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .bar-pct {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      width: 38px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .bar-dominant-tag {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: white;
+      background: var(--primary-dark);
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 6px;
+    }
+
+    /* ── Detail sections ── */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .detail-box {
+      background: rgba(193,140,74,0.06);
+      border-radius: 10px;
+      padding: 18px 16px;
+      border: 1px solid rgba(193,140,74,0.15);
+    }
+
+    .detail-box h4 {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 12px;
+    }
+
+    .detail-box ul {
+      list-style: none;
+    }
+
+    .detail-box ul li {
+      font-size: 14px;
+      color: var(--text-light);
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(193,140,74,0.1);
+      line-height: 1.5;
+      display: flex;
+      gap: 8px;
+    }
+
+    .detail-box ul li:last-child { border-bottom: none; }
+
+    .detail-box ul li::before {
+      content: '·';
+      color: var(--accent-gold);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ── Blend insight ── */
+    .blend-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .blend-chip {
+      text-align: center;
+      padding: 14px 10px;
+      border-radius: 10px;
+      border: 2px solid rgba(193,140,74,0.15);
+      background: rgba(255,255,255,0.6);
+    }
+
+    .blend-chip .bc-icon { font-size: 22px; margin-bottom: 6px; }
+    .blend-chip .bc-name {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+    }
+    .blend-chip .bc-pct {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+    .blend-chip .bc-label {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 10px;
+      color: var(--text-light);
+    }
+
+    /* ── Careers ── */
+    .career-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 4px;
+    }
+
+    .career-pill {
+      background: rgba(193,140,74,0.1);
+      color: var(--primary-dark);
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(193,140,74,0.2);
+    }
+
+    /* ── Relationship insight ── */
+    .relationship-text {
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.85;
+    }
+
+    .compat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .compat-box {
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(193,140,74,0.15);
+      background: rgba(255,255,255,0.6);
+    }
+
+    .compat-box .cb-label {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .compat-box p {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* ── CTA ── */
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 6px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: 'Segoe UI', sans-serif;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: 0 6px 18px rgba(193,140,74,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(193,140,74,0.45);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--accent-gold);
+      border: 2px solid rgba(193,140,74,0.35);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(193,140,74,0.08);
+      border-color: var(--accent-gold);
+    }
+
+    .share-note {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 12px;
+      color: var(--accent-gold);
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    /* ── Disclaimer ── */
+    .disclaimer {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 12px;
+      color: rgba(107,83,68,0.55);
+      text-align: center;
+      margin-top: 32px;
+      line-height: 1.7;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .result-hero { padding: 36px 22px 32px; }
+      h1 { font-size: 34px; }
+      .card { padding: 28px 20px; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .blend-row { grid-template-columns: repeat(2, 1fr); }
+      .compat-row { grid-template-columns: 1fr; }
+      .bar-info { width: 110px; }
+      .cta-row { flex-direction: column; align-items: stretch; }
+      .btn { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <a href="index.html" class="back-link">← Back to Tests</a>
+
+  <!-- Hero -->
+  <div class="result-hero" id="result-hero">
+    <div class="result-eyebrow">Your Temperament Profile</div>
+    <span class="result-icon" id="result-icon"></span>
+    <div class="result-type-label" id="result-type-label"></div>
+    <h1 id="result-name"></h1>
+    <div class="result-tagline" id="result-tagline"></div>
+    <div class="ornament"></div>
+    <p class="result-summary" id="result-summary"></p>
+  </div>
+
+  <!-- Percentage bars -->
+  <div class="card">
+    <div class="card-title">Your Temperament Breakdown</div>
+    <div id="bars-container"></div>
+  </div>
+
+  <!-- Your blend -->
+  <div class="card">
+    <div class="card-title">Your Full Temperament Blend</div>
+    <div class="blend-row" id="blend-row"></div>
+    <p style="font-size:13px; color:var(--text-light); margin-top:18px; line-height:1.7;" id="blend-note"></p>
+  </div>
+
+  <!-- Strengths & Challenges -->
+  <div class="card">
+    <div class="card-title">Strengths & Growth Areas</div>
+    <div class="detail-grid" id="strengths-grid"></div>
+  </div>
+
+  <!-- Careers -->
+  <div class="card">
+    <div class="card-title">Career Paths That Suit You</div>
+    <p style="font-size:14px; color:var(--text-light); margin-bottom:16px; line-height:1.7;" id="career-intro"></p>
+    <div class="career-pills" id="career-pills"></div>
+  </div>
+
+  <!-- Relationships -->
+  <div class="card">
+    <div class="card-title">In Relationships</div>
+    <p class="relationship-text" id="rel-text"></p>
+    <div class="compat-row" id="compat-row"></div>
+  </div>
+
+  <!-- CTAs -->
+  <div class="card" style="text-align:center;">
+    <div class="card-title">What's Next?</div>
+    <div class="cta-row">
+      <a href="temperaments.html" class="btn btn-ghost">Retake This Test</a>
+      <a href="quiz.html" class="btn btn-primary">Also Try the MBTI Test</a>
+    </div>
+    <p class="share-note">Share your results with a friend — see if they guess right 🌱</p>
+  </div>
+
+  <p class="disclaimer">
+    This assessment is for personal insight and growth purposes only. It is not a clinical diagnostic tool.<br>
+    Results reflect tendencies, not fixed traits — you are always more than a type.
+  </p>
+
+</div>
+
+<script>
+  const TYPE_DATA = {
+    S: {
+      name: 'Sanguine',
+      icon: '🌟',
+      tagline: 'The Enthusiast — Social · Expressive · Spontaneous',
+      color: '#e8845a',
+      label: 'SANGUINE TEMPERAMENT',
+      summary: `You are the person who lights up a room without trying. Warm, animated, and naturally magnetic, you process life out loud and find your energy in connection with others. You bring colour and life to every space you enter — your enthusiasm is not a performance, it is simply who you are. Like many Sanguines, you may find that follow-through is harder than starting, but your ability to inspire and energise others is a rare and powerful gift.`,
+      strengths: [
+        'Natural charisma and warmth',
+        'Energises and inspires others',
+        'Creative and imaginative',
+        'Highly adaptable to new situations',
+        'Excellent communicator and storyteller',
+      ],
+      challenges: [
+        'Can struggle to finish what is started',
+        'May avoid difficult conversations',
+        'Impulsive decisions under excitement',
+        'Organisation and follow-through',
+        'Sensitivity to rejection or criticism',
+      ],
+      careers: ['Marketing & Advertising', 'Public Relations', 'Teaching & Training', 'Sales', 'Event Management', 'Journalism', 'Acting & Performance', 'Counselling', 'Social Work', 'Entrepreneurship'],
+      careerIntro: 'You thrive in people-centred, dynamic roles where your energy, communication skills, and creativity are valued assets.',
+      relText: `In relationships, you are affectionate, fun, and deeply invested in connection. You love deeply and show it openly. However, you may need to work on consistency and listening as much as you express. You give a lot of yourself — ensure the relationships you invest in give back.`,
+      compatGood: { type: 'Melancholic', reason: 'Their depth and attention to detail balances your spontaneity. Together you cover what the other misses.' },
+      compatChallenge: { type: 'Choleric', reason: 'Two high-energy drivers can clash over control and direction. Mutual respect is essential.' },
+    },
+    C: {
+      name: 'Choleric',
+      icon: '⚡',
+      tagline: 'The Leader — Driven · Decisive · Goal-Oriented',
+      color: '#c0392b',
+      label: 'CHOLERIC TEMPERAMENT',
+      summary: `You are built to lead. Where others see obstacles, you see problems to solve. Decisive, determined, and results-driven, you move with intention and expect those around you to keep up. You have an exceptional ability to cut through noise and focus on what matters — and you carry a quiet confidence that makes people follow you even when you have not asked them to. Your growth edge lies in slowing down enough to bring people with you, not just ahead of them.`,
+      strengths: [
+        'Natural leadership and initiative',
+        'Decisive under pressure',
+        'Highly productive and goal-focused',
+        'Excellent problem-solver',
+        'Confident and self-motivated',
+      ],
+      challenges: [
+        'Can come across as blunt or domineering',
+        'Impatience with slower-paced people',
+        'May overlook others\' emotional needs',
+        'Difficulty delegating fully',
+        'Tendency toward stubbornness',
+      ],
+      careers: ['Business Leadership & Management', 'Entrepreneurship', 'Law & Advocacy', 'Surgery & Emergency Medicine', 'Military & Law Enforcement', 'Politics', 'Engineering', 'Sports Coaching', 'Finance & Investment', 'Project Management'],
+      careerIntro: 'You excel in high-stakes, results-oriented environments where your decisiveness and drive can directly shape outcomes.',
+      relText: `In relationships, you are loyal and committed — but on your terms. You show love through action, not always words. You protect fiercely and expect honesty in return. Learning to slow down and acknowledge your partner's emotional world will deepen every relationship you have.`,
+      compatGood: { type: 'Phlegmatic', reason: 'Their calm, adaptable nature softens your intensity and provides the steady loyalty you value.' },
+      compatChallenge: { type: 'Sanguine', reason: 'Both want to lead the energy in a room. Shared goals are needed to prevent friction.' },
+    },
+    M: {
+      name: 'Melancholic',
+      icon: '🌊',
+      tagline: 'The Thinker — Analytical · Deep · Detail-Oriented',
+      color: '#2e86ab',
+      label: 'MELANCHOLIC TEMPERAMENT',
+      summary: `You experience life more deeply than most people around you. You notice what others miss — the unspoken tension in a room, the detail no one checked, the pattern hiding in the data. Your mind is always working, always asking whether things could be better, truer, more precise. This depth is your greatest strength and, sometimes, your heaviest burden. Melancholics produce the world's finest work — not because they work the hardest, but because they refuse to settle for less than excellence.`,
+      strengths: [
+        'Deep analytical and critical thinking',
+        'Exceptional attention to detail',
+        'High personal standards and integrity',
+        'Creative with rich emotional depth',
+        'Empathetic and perceptive of others',
+      ],
+      challenges: [
+        'Tendency toward overthinking and worry',
+        'Self-critical beyond what is useful',
+        'Can be slow to decide under perfectionism',
+        'May withdraw when overwhelmed',
+        'Pessimistic outlook in difficult seasons',
+      ],
+      careers: ['Research & Academia', 'Psychology & Counselling', 'Writing & Literature', 'Architecture & Design', 'Data Science & Analysis', 'Medicine & Psychiatry', 'Music & Fine Arts', 'Auditing & Accounting', 'Philosophy', 'Software Engineering'],
+      careerIntro: 'You thrive in roles requiring depth, precision, and original thinking — where quality matters more than speed.',
+      relText: `In relationships, you love with rare depth and loyalty. You are thoughtful and attentive, remembering details others forget. However, your tendency to internalise can make you hard to read. Open, regular communication — even when it feels uncomfortable — is the key to your closest relationships thriving.`,
+      compatGood: { type: 'Sanguine', reason: 'Their lightness and optimism lifts you out of your head. Their warmth meets your depth beautifully.' },
+      compatChallenge: { type: 'Choleric', reason: 'Their bluntness can feel dismissive of your depth. Clear communication on both sides is essential.' },
+    },
+    P: {
+      name: 'Phlegmatic',
+      icon: '🕊',
+      tagline: 'The Peacemaker — Calm · Patient · Steady',
+      color: '#27ae60',
+      label: 'PHLEGMATIC TEMPERAMENT',
+      summary: `You are the person everyone trusts to stay calm when everything else is moving fast. Your steady, grounded presence is not passivity — it is a profound kind of strength. You read people well, hold space generously, and consistently show up for those who need you. In a world that rewards noise and speed, your quiet reliability is underestimated and deeply needed. Your growth edge is learning to claim space for your own needs and opinions as boldly as you protect everyone else's.`,
+      strengths: [
+        'Exceptional listener and mediator',
+        'Steady, reliable, and trustworthy',
+        'Excellent at building team harmony',
+        'Patient under pressure',
+        'Highly empathetic and supportive',
+      ],
+      challenges: [
+        'Can be too passive or conflict-avoidant',
+        'May suppress own needs to keep peace',
+        'Resistance to change even when helpful',
+        'Difficulty making decisions decisively',
+        'Can be taken for granted by others',
+      ],
+      careers: ['Nursing & Healthcare', 'Human Resources', 'Counselling & Therapy', 'Teaching (Early Childhood)', 'Social Work', 'Administration & Operations', 'Diplomacy & Mediation', 'Community Development', 'Library & Information Science', 'Customer Relations'],
+      careerIntro: 'You flourish in stable, people-centred roles where your patience, reliability, and ability to hold space for others creates real impact.',
+      relText: `In relationships, you are one of the most loyal and giving partners possible. You anticipate needs before they are expressed and create a safe, consistent space for those you love. Your work is learning to communicate your own needs with the same care you give everyone else — your feelings matter too.`,
+      compatGood: { type: 'Choleric', reason: 'Their drive and decisiveness gives you direction while your calm gives them balance.' },
+      compatChallenge: { type: 'Melancholic', reason: 'Two inward-processing types can fall into silence. Intentional, regular check-ins keep the connection alive.' },
+    }
+  };
+
+  const TYPE_ICONS = { S: '🌟', C: '⚡', M: '🌊', P: '🕊' };
+  const TYPE_NAMES = { S: 'Sanguine', C: 'Choleric', M: 'Melancholic', P: 'Phlegmatic' };
+
+  function getParams() {
+    const p = new URLSearchParams(window.location.search);
+    return {
+      S: parseInt(p.get('S') || 25),
+      C: parseInt(p.get('C') || 25),
+      M: parseInt(p.get('M') || 25),
+      P: parseInt(p.get('P') || 25),
+    };
+  }
+
+  function dominant(scores) {
+    return Object.entries(scores).reduce((a, b) => b[1] > a[1] ? b : a)[0];
+  }
+
+  function render() {
+    const scores = getParams();
+    const dom = dominant(scores);
+    const d = TYPE_DATA[dom];
+
+    // Sort by score descending
+    const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
+
+    // Hero
+    document.getElementById('result-icon').textContent = d.icon;
+    document.getElementById('result-type-label').textContent = d.label;
+    document.getElementById('result-type-label').style.color = d.color;
+    document.getElementById('result-name').textContent = d.name;
+    document.getElementById('result-tagline').textContent = d.tagline;
+    document.getElementById('result-summary').textContent = d.summary;
+
+    // Bars
+    const barsEl = document.getElementById('bars-container');
+    barsEl.innerHTML = '';
+    sorted.forEach(([t, pct]) => {
+      const td = TYPE_DATA[t];
+      const isDom = t === dom;
+      const row = document.createElement('div');
+      row.className = 'bar-row';
+      row.innerHTML = `
+        <div class="bar-info">
+          <span class="bar-icon">${td.icon}</span>
+          <span class="bar-name">${td.name}${isDom ? '<span class="bar-dominant-tag">You</span>' : ''}</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" id="bar-${t}" style="background: ${td.color};"></div>
+        </div>
+        <span class="bar-pct">${pct}%</span>
+      `;
+      barsEl.appendChild(row);
+    });
+
+    // Animate bars after paint
+    setTimeout(() => {
+      sorted.forEach(([t, pct]) => {
+        const el = document.getElementById(`bar-${t}`);
+        if (el) el.style.width = pct + '%';
+      });
+    }, 200);
+
+    // Blend chips
+    const blendEl = document.getElementById('blend-row');
+    blendEl.innerHTML = '';
+    // Show all 4 sorted
+    sorted.forEach(([t, pct]) => {
+      const td = TYPE_DATA[t];
+      const chip = document.createElement('div');
+      chip.className = 'blend-chip';
+      chip.innerHTML = `
+        <div class="bc-icon">${td.icon}</div>
+        <div class="bc-name">${td.name}</div>
+        <div class="bc-pct" style="color:${td.color}">${pct}%</div>
+        <div class="bc-label">${getStrengthLabel(pct)}</div>
+      `;
+      blendEl.appendChild(chip);
+    });
+
+    // Blend note
+    const second = sorted[1];
+    document.getElementById('blend-note').innerHTML =
+      `Your dominant temperament is <strong>${d.name}</strong>, but you carry a meaningful <strong>${TYPE_NAMES[second[0]]} (${second[1]}%)</strong> influence. This blend shapes your unique personality — you are more nuanced than any single type.`;
+
+    // Strengths & Challenges
+    const grid = document.getElementById('strengths-grid');
+    grid.innerHTML = `
+      <div class="detail-box">
+        <h4>✦ Your Strengths</h4>
+        <ul>${d.strengths.map(s => `<li>${s}</li>`).join('')}</ul>
+      </div>
+      <div class="detail-box">
+        <h4>◇ Growth Areas</h4>
+        <ul>${d.challenges.map(c => `<li>${c}</li>`).join('')}</ul>
+      </div>
+    `;
+
+    // Careers
+    document.getElementById('career-intro').textContent = d.careerIntro;
+    const pillsEl = document.getElementById('career-pills');
+    pillsEl.innerHTML = d.careers.map(c => `<span class="career-pill">${c}</span>`).join('');
+
+    // Relationships
+    document.getElementById('rel-text').textContent = d.relText;
+    const compatEl = document.getElementById('compat-row');
+    compatEl.innerHTML = `
+      <div class="compat-box">
+        <div class="cb-label" style="color: var(--phle-color)">✦ Natural Compatibility</div>
+        <p><strong>${TYPE_ICONS[getTypeKey(d.compatGood.type)]} ${d.compatGood.type}</strong> — ${d.compatGood.reason}</p>
+      </div>
+      <div class="compat-box">
+        <div class="cb-label" style="color: #c0392b;">◇ Where to Be Mindful</div>
+        <p><strong>${TYPE_ICONS[getTypeKey(d.compatChallenge.type)]} ${d.compatChallenge.type}</strong> — ${d.compatChallenge.reason}</p>
+      </div>
+    `;
+  }
+
+  function getTypeKey(name) {
+    const map = { Sanguine:'S', Choleric:'C', Melancholic:'M', Phlegmatic:'P' };
+    return map[name] || 'S';
+  }
+
+  function getStrengthLabel(pct) {
+    if (pct >= 40) return 'Dominant';
+    if (pct >= 25) return 'Strong';
+    if (pct >= 15) return 'Present';
+    return 'Subtle';
+  }
+
+  render();
+</script>
+</body>
+</html>
