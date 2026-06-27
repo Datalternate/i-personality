@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Temperaments Test – i-Personality</title>
-
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPNW7MQF3J"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -12,826 +11,341 @@
     gtag('js', new Date());
     gtag('config', 'G-VPNW7MQF3J');
   </script>
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
-      --primary-gold: #d4a352;
-      --primary-dark: #a67856;
-      --accent-gold: #c4936f;
-      --text-dark: #5a3a2a;
-      --text-light: #6b5344;
-      --bg-light: #f4e8d8;
-      --bg-cream: #fffbf6;
-      --border-gold: #c4936f;
+      --gold: #c4936f;
+      --dark: #a67856;
+      --text: #5a3a2a;
+      --light: #6b5344;
+      --bg: #f4e8d8;
     }
-
     body {
       font-family: 'Georgia', serif;
-      background-color: var(--bg-light);
+      background: var(--bg);
       background-image:
-        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(193,140,74,0.05) 35px, rgba(193,140,74,0.05) 70px),
-        repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(193,140,74,0.05) 35px, rgba(193,140,74,0.05) 70px);
-      padding: 40px 20px 80px;
+        repeating-linear-gradient(45deg,transparent,transparent 35px,rgba(193,140,74,0.05) 35px,rgba(193,140,74,0.05) 70px),
+        repeating-linear-gradient(-45deg,transparent,transparent 35px,rgba(193,140,74,0.05) 35px,rgba(193,140,74,0.05) 70px);
       min-height: 100vh;
+      padding: 40px 20px 80px;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; }
+
+    /* back link */
+    .back { display:inline-flex;align-items:center;gap:6px;font-family:'Segoe UI',sans-serif;font-size:12px;color:var(--gold);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:600;margin-bottom:28px; }
+
+    /* header */
+    .header { text-align:center; margin-bottom:36px; }
+    .header .icon { font-size:50px;margin-bottom:14px; }
+    .eyebrow { font-family:'Segoe UI',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px; }
+    h1 { font-size:38px;font-weight:700;font-style:italic;color:var(--text);margin-bottom:8px; }
+    .ornament { width:40px;height:4px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:14px auto; }
+    .subtitle { font-size:14px;color:var(--light);line-height:1.7; }
+
+    /* card */
+    .card {
+      background:linear-gradient(135deg,rgba(255,255,255,0.98),rgba(255,250,245,0.98));
+      border-radius:16px;
+      border:2px solid rgba(193,140,74,0.15);
+      box-shadow:0 10px 32px rgba(0,0,0,0.07);
+      padding:40px 36px;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: -50px; left: -50px;
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(212,163,58,0.1) 0%, transparent 70%);
-      border-radius: 50%; z-index: 0; pointer-events: none;
+    /* intro */
+    .intro-card { text-align:center; }
+    .intro-card h2 { font-size:26px;font-style:italic;color:var(--text);margin-bottom:14px; }
+    .intro-card p { font-size:14px;color:var(--light);line-height:1.8;margin-bottom:10px; }
+    .type-grid { display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0; }
+    .type-chip { padding:14px;border-radius:10px;border:1px solid rgba(193,140,74,0.2);background:rgba(255,255,255,0.7);text-align:left; }
+    .chip-name { font-family:'Segoe UI',sans-serif;font-size:13px;font-weight:700;color:var(--dark);margin-bottom:4px; }
+    .chip-desc { font-size:12px;color:var(--light);line-height:1.5; }
+    .btn-start { display:inline-block;margin-top:10px;padding:14px 40px;background:linear-gradient(135deg,var(--gold),var(--dark));color:white;font-family:'Segoe UI',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:none;border-radius:10px;cursor:pointer;box-shadow:0 6px 18px rgba(193,140,74,0.35); }
+
+    /* quiz */
+    .quiz-card { display:none; }
+
+    /* progress */
+    .progress-wrap { margin-bottom:22px; }
+    .progress-top { display:flex;justify-content:space-between;margin-bottom:8px; }
+    .progress-label { font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold); }
+    .progress-pct { font-family:'Segoe UI',sans-serif;font-size:11px;font-weight:700;color:var(--dark); }
+    .progress-track { width:100%;height:6px;background:rgba(193,140,74,0.15);border-radius:3px;overflow:hidden; }
+    .progress-fill { height:100%;background:linear-gradient(90deg,var(--gold),var(--dark));border-radius:3px;width:0%;transition:width 0.4s ease; }
+
+    /* question */
+    .q-num { font-family:'Segoe UI',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px; }
+    .q-text { font-size:20px;color:var(--text);line-height:1.6;margin-bottom:28px; }
+
+    /* options */
+    .options { display:flex;flex-direction:column;gap:12px; }
+    .opt {
+      display:flex;align-items:center;gap:14px;
+      padding:16px 20px;border-radius:10px;
+      border:2px solid rgba(193,140,74,0.2);
+      background:rgba(255,255,255,0.7);
+      cursor:pointer;
+      transition:all 0.2s ease;
+      user-select:none;
     }
+    .opt:hover { border-color:var(--gold);background:rgba(193,140,74,0.08);transform:translateX(4px); }
+    .opt.selected { border-color:var(--dark);background:rgba(166,120,86,0.12);pointer-events:none; }
+    .opt.locked { pointer-events:none; }
+    .dot { width:20px;height:20px;border-radius:50%;border:2px solid rgba(193,140,74,0.4);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s; }
+    .opt.selected .dot { background:var(--dark);border-color:var(--dark); }
+    .opt.selected .dot::after { content:'';width:8px;height:8px;border-radius:50%;background:white; }
+    .lbl { font-family:'Segoe UI',sans-serif;font-size:13px;font-weight:700;color:var(--gold);flex-shrink:0; }
+    .opt-text { font-size:15px;color:var(--light);line-height:1.45; }
 
-    .container { max-width: 750px; margin: 0 auto; position: relative; z-index: 1; }
+    /* nav */
+    .nav { display:flex;justify-content:space-between;align-items:center;margin-top:28px; }
+    .btn-prev { background:transparent;color:var(--gold);border:2px solid rgba(193,140,74,0.3);padding:12px 24px;border-radius:10px;font-family:'Segoe UI',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer; }
+    .btn-results { display:none;padding:13px 32px;background:linear-gradient(135deg,var(--gold),var(--dark));color:white;font-family:'Segoe UI',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:none;border-radius:10px;cursor:pointer;box-shadow:0 6px 18px rgba(193,140,74,0.35); }
 
-    /* Header */
-    .header {
-      text-align: center;
-      margin-bottom: 40px;
-      animation: slideDown 0.6s ease-out;
-    }
-
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 12px;
-      color: var(--accent-gold);
-      text-decoration: none;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 24px;
-      transition: opacity 0.2s;
-    }
-
-    .back-link:hover { opacity: 0.7; }
-
-    .header-icon { font-size: 48px; margin-bottom: 14px; }
-
-    .eyebrow {
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--accent-gold);
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    h1 {
-      font-size: 40px;
-      font-weight: 700;
-      font-style: italic;
-      color: var(--text-dark);
-      margin-bottom: 10px;
-    }
-
-    .ornament {
-      width: 40px; height: 4px;
-      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
-      margin: 16px auto;
-    }
-
-    .header-desc {
-      font-size: 15px;
-      color: var(--text-light);
-      line-height: 1.75;
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-    /* Progress */
-    .progress-wrap {
-      background: rgba(255,255,255,0.8);
-      border-radius: 12px;
-      padding: 18px 24px;
-      margin-bottom: 28px;
-      border: 1px solid rgba(193,140,74,0.15);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
-    }
-
-    .progress-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .progress-label {
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 12px;
-      color: var(--accent-gold);
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .progress-count {
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 13px;
-      color: var(--text-light);
-      font-weight: 600;
-    }
-
-    .progress-bar-bg {
-      width: 100%;
-      height: 8px;
-      background: rgba(193,140,74,0.15);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent-gold), var(--primary-dark));
-      border-radius: 4px;
-      transition: width 0.4s ease;
-      width: 0%;
-    }
-
-    /* Question card */
-    .question-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(255,250,245,0.97) 100%);
-      border-radius: 16px;
-      padding: 40px 36px;
-      border: 2px solid rgba(193,140,74,0.15);
-      box-shadow: 0 10px 32px rgba(0,0,0,0.07);
-      animation: fadeSlide 0.35s ease-out;
-    }
-
-    @keyframes fadeSlide {
-      from { opacity: 0; transform: translateX(12px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-
-    .q-number {
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent-gold);
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-
-    .q-text {
-      font-size: 20px;
-      color: var(--text-dark);
-      line-height: 1.6;
-      margin-bottom: 32px;
-      font-weight: 400;
-    }
-
-    /* Options */
-    .options { display: flex; flex-direction: column; gap: 12px; }
-
-    .option {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px 20px;
-      border-radius: 10px;
-      border: 2px solid rgba(193,140,74,0.2);
-      background: rgba(255,255,255,0.7);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: left;
-    }
-
-    .option:hover {
-      border-color: var(--accent-gold);
-      background: rgba(193,140,74,0.08);
-      transform: translateX(4px);
-    }
-
-    .option.selected {
-      border-color: var(--primary-dark);
-      background: rgba(166,120,86,0.12);
-    }
-
-    .option-dot {
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      border: 2px solid rgba(193,140,74,0.4);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-
-    .option.selected .option-dot {
-      background: var(--primary-dark);
-      border-color: var(--primary-dark);
-    }
-
-    .option.selected .option-dot::after {
-      content: '';
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: white;
-    }
-
-    .option-label {
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--accent-gold);
-      letter-spacing: 0.5px;
-      flex-shrink: 0;
-    }
-
-    .option-text {
-      font-size: 15px;
-      color: var(--text-light);
-      line-height: 1.45;
-    }
-
-    /* Navigation */
-    .nav-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 32px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 13px 32px;
-      font-size: 13px;
-      font-weight: 700;
-      font-family: 'Segoe UI', sans-serif;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-gold) 0%, var(--primary-dark) 100%);
-      color: white;
-      box-shadow: 0 6px 18px rgba(193,140,74,0.35);
-    }
-
-    .btn-primary:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(193,140,74,0.45);
-    }
-
-    .btn-primary:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--accent-gold);
-      border: 2px solid rgba(193,140,74,0.3);
-    }
-
-    .btn-ghost:hover {
-      background: rgba(193,140,74,0.08);
-      border-color: var(--accent-gold);
-    }
-
-    .skip-note {
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 12px;
-      color: rgba(107,83,68,0.5);
-      text-align: center;
-      margin-top: 16px;
-    }
-
-    /* Instruction screen */
-    .instruction-screen {
-      background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(255,250,245,0.97) 100%);
-      border-radius: 16px;
-      padding: 48px 40px;
-      border: 2px solid rgba(193,140,74,0.15);
-      box-shadow: 0 10px 32px rgba(0,0,0,0.07);
-      text-align: center;
-    }
-
-    .instruction-screen h2 {
-      font-size: 28px;
-      color: var(--text-dark);
-      margin-bottom: 18px;
-      font-style: italic;
-    }
-
-    .instruction-screen p {
-      font-size: 15px;
-      color: var(--text-light);
-      line-height: 1.8;
-      margin-bottom: 14px;
-    }
-
-    .type-preview {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin: 28px 0;
-    }
-
-    .type-chip {
-      padding: 12px 16px;
-      border-radius: 10px;
-      border: 2px solid rgba(193,140,74,0.2);
-      background: rgba(255,255,255,0.8);
-      text-align: left;
-    }
-
-    .type-chip .chip-name {
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin-bottom: 4px;
-    }
-
-    .type-chip .chip-desc {
-      font-size: 12px;
-      color: var(--text-light);
-      line-height: 1.5;
-    }
-
-    @media (max-width: 600px) {
-      h1 { font-size: 30px; }
-      .question-card { padding: 28px 20px; }
-      .q-text { font-size: 17px; }
-      .instruction-screen { padding: 32px 20px; }
-      .type-preview { grid-template-columns: 1fr; }
-      .nav-row { flex-direction: column; gap: 12px; }
-      .btn { width: 100%; text-align: center; }
+    @media(max-width:600px){
+      .card{padding:28px 18px;}
+      h1{font-size:30px;}
+      .q-text{font-size:17px;}
+      .type-grid{grid-template-columns:1fr;}
     }
   </style>
 </head>
 <body>
-  <div class="container">
+<div class="wrap">
 
-    <div class="header">
-      <a href="index.html" class="back-link">← Back to Tests</a>
-      <div class="header-icon">🔥</div>
-      <div class="eyebrow">Ancient Wisdom · Modern Insight</div>
-      <h1>Temperaments Test</h1>
-      <div class="ornament"></div>
-      <p class="header-desc">40 questions · 8–10 minutes · Discover your dominant temperament with a full percentage breakdown</p>
-    </div>
+  <a href="index.html" class="back">← Back to Tests</a>
 
-    <!-- Instruction screen (shown first) -->
-    <div id="instruction-screen" class="instruction-screen">
-      <h2>Before You Begin</h2>
-      <p>This test measures four core temperament types rooted in ancient psychology. There are no right or wrong answers — only honest ones.</p>
-      <p>Answer based on how you <em>naturally are</em>, not how you wish to be or how you act at work. Think of yourself in everyday life.</p>
-      <div class="type-preview">
-        <div class="type-chip">
-          <div class="chip-name">🌟 Sanguine</div>
-          <div class="chip-desc">Enthusiastic, social, expressive, and spontaneous</div>
-        </div>
-        <div class="type-chip">
-          <div class="chip-name">⚡ Choleric</div>
-          <div class="chip-desc">Decisive, driven, goal-oriented, natural leader</div>
-        </div>
-        <div class="type-chip">
-          <div class="chip-name">🌊 Melancholic</div>
-          <div class="chip-desc">Thoughtful, analytical, sensitive, detail-focused</div>
-        </div>
-        <div class="type-chip">
-          <div class="chip-name">🕊 Phlegmatic</div>
-          <div class="chip-desc">Calm, patient, diplomatic, steady presence</div>
-        </div>
-      </div>
-      <p style="font-size:13px; color:var(--accent-gold); font-family:'Segoe UI',sans-serif;">Most people are a blend — you'll see exact percentages for each type.</p>
-      <br>
-      <button class="btn btn-primary" onclick="startQuiz()">Begin Test →</button>
-    </div>
-
-    <!-- Question card -->
-    <div id="question-card" class="question-card" style="display:none">
-      <!-- Inline progress bar -->
-      <div style="margin-bottom:20px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-family:'Segoe UI',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--accent-gold);" id="progress-answered">0 of 40 answered</span>
-          <span style="font-family:'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:var(--primary-dark);" id="progress-pct">0%</span>
-        </div>
-        <div style="width:100%; height:6px; background:rgba(193,140,74,0.15); border-radius:3px; overflow:hidden;">
-          <div id="progress-fill" style="height:100%; background:linear-gradient(90deg, var(--accent-gold), var(--primary-dark)); border-radius:3px; width:0%; transition:width 0.4s ease;"></div>
-        </div>
-      </div>
-      <div class="q-number" id="q-number">Question 1 of 40</div>
-      <div class="q-text" id="q-text"></div>
-      <div class="options" id="options-container"></div>
-      <div class="nav-row">
-        <button class="btn btn-ghost" id="btn-prev" onclick="prevQuestion()" style="visibility:hidden">← Previous</button>
-        <button class="btn btn-primary" id="btn-results" onclick="submitQuiz()" style="display:none">See My Results →</button>
-      </div>
-    </div>
-
+  <div class="header">
+    <div class="icon">🔥</div>
+    <div class="eyebrow">Ancient Wisdom · Modern Insight</div>
+    <h1>Temperaments Test</h1>
+    <div class="ornament"></div>
+    <p class="subtitle">40 questions · 8–10 minutes · Full percentage breakdown</p>
   </div>
 
-  <script>
-    // S = Sanguine, C = Choleric, M = Melancholic, P = Phlegmatic
-    // 10 questions per type, shuffled for natural flow
-    const questions = [
-      // Sanguine
-      { t: 'S', text: 'In social situations, I am usually...', options: [
-        { v: 4, text: 'The one making people laugh and keeping conversation flowing' },
-        { v: 2, text: 'Comfortable but not necessarily the centre of attention' },
-        { v: 1, text: 'Observing more than talking' },
-        { v: 0, text: 'Content to be in the background' }
-      ]},
-      { t: 'C', text: 'When a group is without direction or leadership...', options: [
-        { v: 4, text: 'I naturally step in and start organising things' },
-        { v: 2, text: 'I contribute ideas but let others lead' },
-        { v: 1, text: 'I wait to see how things unfold' },
-        { v: 0, text: 'I prefer someone else to take charge' }
-      ]},
-      { t: 'M', text: 'When making an important decision, I tend to...', options: [
-        { v: 4, text: 'Research thoroughly, weigh every option, and plan carefully' },
-        { v: 2, text: 'Think it through but trust my gut too' },
-        { v: 1, text: 'Decide fairly quickly based on the situation' },
-        { v: 0, text: 'Go with what feels right in the moment' }
-      ]},
-      { t: 'P', text: 'When conflict arises between people I care about...', options: [
-        { v: 4, text: 'I try to mediate and find common ground' },
-        { v: 2, text: 'I listen to both sides and stay neutral' },
-        { v: 1, text: 'I speak my mind if it matters enough' },
-        { v: 0, text: 'I tend to pull back until things settle' }
-      ]},
-      { t: 'S', text: 'How do you feel about spontaneous plans?', options: [
-        { v: 4, text: 'I love them — some of my best memories were unplanned' },
-        { v: 2, text: 'They are fine occasionally if I am in the mood' },
-        { v: 1, text: 'I prefer some warning ahead of time' },
-        { v: 0, text: 'I strongly prefer to plan ahead' }
-      ]},
-      { t: 'C', text: 'When working on a project with others...', options: [
-        { v: 4, text: 'I usually end up directing how things should be done' },
-        { v: 2, text: 'I take initiative on parts I feel confident about' },
-        { v: 1, text: 'I follow the plan but speak up if something is wrong' },
-        { v: 0, text: 'I focus on my assigned role and complete it well' }
-      ]},
-      { t: 'M', text: 'After making a decision, I often...', options: [
-        { v: 4, text: 'Replay it wondering if I chose the best option' },
-        { v: 2, text: 'Think about what I could do better next time' },
-        { v: 1, text: 'Accept it and move on fairly quickly' },
-        { v: 0, text: 'Rarely second-guess once I have decided' }
-      ]},
-      { t: 'P', text: 'My friends would describe me as...', options: [
-        { v: 4, text: 'Reliable, easy-going, and always there when needed' },
-        { v: 2, text: 'Supportive and adaptable' },
-        { v: 1, text: 'Fun and energetic' },
-        { v: 0, text: 'Driven and focused' }
-      ]},
-      { t: 'S', text: 'At a party or gathering, I am usually...', options: [
-        { v: 4, text: 'Meeting new people and energised by the whole atmosphere' },
-        { v: 2, text: 'Enjoying myself but sticking mostly with people I know' },
-        { v: 1, text: 'Finding a few good conversations rather than working the room' },
-        { v: 0, text: 'Ready to leave after a couple of hours' }
-      ]},
-      { t: 'C', text: 'When someone challenges my ideas or decisions...', options: [
-        { v: 4, text: 'I defend my position confidently and argue my case' },
-        { v: 2, text: 'I listen, but stand firm if I believe I am right' },
-        { v: 1, text: 'I consider their view and may revise my thinking' },
-        { v: 0, text: 'I tend to give in to keep the peace' }
-      ]},
-      { t: 'M', text: 'In creative work or projects, I tend to focus on...', options: [
-        { v: 4, text: 'Getting the details exactly right — quality over speed' },
-        { v: 2, text: 'A balance of quality and meeting the deadline' },
-        { v: 1, text: 'Getting it done and improving as I go' },
-        { v: 0, text: 'The big picture more than the small details' }
-      ]},
-      { t: 'P', text: 'When someone upsets me, I typically...', options: [
-        { v: 4, text: 'Avoid confrontation and let it pass' },
-        { v: 2, text: 'Address it calmly when the moment is right' },
-        { v: 1, text: 'Express how I feel fairly directly' },
-        { v: 0, text: 'Deal with it immediately and move on' }
-      ]},
-      { t: 'S', text: 'My energy level around other people is generally...', options: [
-        { v: 4, text: 'Higher — people fuel me and I feel more alive' },
-        { v: 2, text: 'Similar — I enjoy it but do not need it to feel okay' },
-        { v: 1, text: 'I need recovery time after a lot of social activity' },
-        { v: 0, text: 'Drained — I strongly prefer quiet, solitary time' }
-      ]},
-      { t: 'C', text: 'When I set a goal for myself...', options: [
-        { v: 4, text: 'I pursue it with determination until it is done' },
-        { v: 2, text: 'I work hard at it but I am flexible if circumstances change' },
-        { v: 1, text: 'I work steadily at my own pace' },
-        { v: 0, text: 'I sometimes lose steam before finishing' }
-      ]},
-      { t: 'M', text: 'My inner emotional life is generally...', options: [
-        { v: 4, text: 'Rich and complex — I feel things deeply, sometimes too deeply' },
-        { v: 2, text: 'Fairly reflective but I can switch it off' },
-        { v: 1, text: 'Steady, not many highs or lows' },
-        { v: 0, text: 'Mostly pragmatic and action-oriented' }
-      ]},
-      { t: 'P', text: 'When it comes to change in routines or plans...', options: [
-        { v: 4, text: 'I adapt quietly, though I prefer things to stay predictable' },
-        { v: 2, text: 'I go along with it but appreciate a heads-up' },
-        { v: 1, text: 'I adjust easily if there is a good reason' },
-        { v: 0, text: 'I enjoy variety and rarely mind disruption' }
-      ]},
-      { t: 'S', text: 'When telling a story or sharing news...', options: [
-        { v: 4, text: 'I naturally add drama, humour, and expression to bring it to life' },
-        { v: 2, text: 'I share it engagingly but keep it mostly to the point' },
-        { v: 1, text: 'I give the key facts without much embellishment' },
-        { v: 0, text: 'I am brief and factual' }
-      ]},
-      { t: 'C', text: 'Achieving results matters to me...', options: [
-        { v: 4, text: 'A great deal — I hate wasting time and expect excellence' },
-        { v: 2, text: 'Quite a bit, but I care about how we get there too' },
-        { v: 1, text: 'Somewhat — the process and relationships matter as much' },
-        { v: 0, text: 'I value consistency and reliability more than speed' }
-      ]},
-      { t: 'M', text: 'When reading or learning something new, I prefer...', options: [
-        { v: 4, text: 'Going deep into the topic and understanding every layer' },
-        { v: 2, text: 'Understanding it well enough to apply it' },
-        { v: 1, text: 'Getting the main points and moving on' },
-        { v: 0, text: 'Hands-on experience over theory' }
-      ]},
-      { t: 'P', text: 'In group decisions, my usual role is...', options: [
-        { v: 4, text: 'The one who listens to everyone and helps find agreement' },
-        { v: 2, text: 'A steady voice that considers what is fair for all' },
-        { v: 1, text: 'Someone who shares my view but adapts when needed' },
-        { v: 0, text: 'Often the one driving us toward a decision' }
-      ]},
-      { t: 'S', text: 'I tend to speak before I think...', options: [
-        { v: 4, text: 'Often — I process out loud and respond quickly' },
-        { v: 2, text: 'Sometimes, especially when excited' },
-        { v: 1, text: 'Rarely — I usually think before speaking' },
-        { v: 0, text: 'Almost never — I am very deliberate with words' }
-      ]},
-      { t: 'C', text: 'When someone is inefficient or slow...', options: [
-        { v: 4, text: 'It frustrates me and I may step in or say something' },
-        { v: 2, text: 'It bothers me internally but I try to be patient' },
-        { v: 1, text: 'I accept that people work differently' },
-        { v: 0, text: 'It rarely bothers me much' }
-      ]},
-      { t: 'M', text: 'I hold myself to high personal standards...', options: [
-        { v: 4, text: 'Yes, and I often feel I fall short of them' },
-        { v: 2, text: 'Yes, but I try to be realistic and forgive myself' },
-        { v: 1, text: 'Somewhat — I do my best without obsessing' },
-        { v: 0, text: 'Not especially — I take things as they come' }
-      ]},
-      { t: 'P', text: 'When I am under pressure, I tend to...', options: [
-        { v: 4, text: 'Stay quiet and steady, not wanting to add to the tension' },
-        { v: 2, text: 'Keep going at a calm, methodical pace' },
-        { v: 1, text: 'Focus hard and work until the pressure is off' },
-        { v: 0, text: 'Charge ahead to resolve the situation' }
-      ]},
-      { t: 'S', text: 'When I have free time, I tend to...', options: [
-        { v: 4, text: 'Seek out people, activities, and things to do' },
-        { v: 2, text: 'Mix social time with some rest' },
-        { v: 1, text: 'Prefer quieter activities — reading, music, reflection' },
-        { v: 0, text: 'Focus on tasks or goals even in my downtime' }
-      ]},
-      { t: 'C', text: 'Which describes your approach to rules?', options: [
-        { v: 4, text: 'I follow them if they make sense, but will challenge rules I think are wrong' },
-        { v: 2, text: 'I generally follow them but adapt when needed' },
-        { v: 1, text: 'I follow them consistently — they exist for good reason' },
-        { v: 0, text: 'I prefer to find a smooth, agreed-upon way rather than confrontation' }
-      ]},
-      { t: 'M', text: 'My workspace or living space tends to be...', options: [
-        { v: 4, text: 'Organised and tidy — disorder affects my concentration' },
-        { v: 2, text: 'Reasonably organised with a system others might not see' },
-        { v: 1, text: 'Functional — I keep what I need close but am not rigid about it' },
-        { v: 0, text: 'Often messy — I focus on the work, not the setup' }
-      ]},
-      { t: 'P', text: 'When someone needs help, I...', options: [
-        { v: 4, text: 'Am usually the first to offer and follow through quietly' },
-        { v: 2, text: 'Help when asked and give it my full attention' },
-        { v: 1, text: 'Help but make sure to communicate what I can and cannot do' },
-        { v: 0, text: 'Help if it aligns with what I am working on' }
-      ]},
-      { t: 'S', text: 'When I am excited about something, I...', options: [
-        { v: 4, text: 'Tell everyone I know immediately' },
-        { v: 2, text: 'Share it with people close to me' },
-        { v: 1, text: 'Enjoy it privately and share selectively' },
-        { v: 0, text: 'Keep it to myself and channel it into action' }
-      ]},
-      { t: 'C', text: 'Failure affects me by...', options: [
-        { v: 4, text: 'Motivating me — I get up, adjust, and go harder' },
-        { v: 2, text: 'Stinging briefly, then I move forward' },
-        { v: 1, text: 'Making me reflect and analyse what went wrong' },
-        { v: 0, text: 'Taking time to process before I can move forward' }
-      ]},
-      { t: 'M', text: 'I often notice things that others miss — details, patterns, moods...', options: [
-        { v: 4, text: 'Yes, I pick up on things very quickly and remember them' },
-        { v: 2, text: 'I notice quite a bit but do not always act on it' },
-        { v: 1, text: 'Occasionally, especially when something feels off' },
-        { v: 0, text: 'Not particularly — I focus on the bigger picture' }
-      ]},
-      { t: 'P', text: 'When someone asks for my opinion on a sensitive matter, I...', options: [
-        { v: 4, text: 'Choose words carefully to avoid hurting them' },
-        { v: 2, text: 'Give an honest but gentle answer' },
-        { v: 1, text: 'Share my view directly while being respectful' },
-        { v: 0, text: 'Tell them clearly what I think' }
-      ]},
-      { t: 'S', text: 'People often say I bring...', options: [
-        { v: 4, text: 'Energy, laughter, and lightness into the room' },
-        { v: 2, text: 'Warmth and friendliness' },
-        { v: 1, text: 'Thoughtfulness and depth' },
-        { v: 0, text: 'Structure, focus, and direction' }
-      ]},
-      { t: 'C', text: 'My biggest personal strength is...', options: [
-        { v: 4, text: 'My ability to get things done and make things happen' },
-        { v: 2, text: 'My vision and confidence in my decisions' },
-        { v: 1, text: 'My discipline and attention to detail' },
-        { v: 0, text: 'My patience and ability to keep peace' }
-      ]},
-      { t: 'M', text: 'I sometimes struggle with...', options: [
-        { v: 4, text: 'Overthinking, worry, or being too hard on myself' },
-        { v: 2, text: 'Balancing high standards with real-world limitations' },
-        { v: 1, text: 'Being too passive when I should speak up' },
-        { v: 0, text: 'Slowing down and considering others\' feelings' }
-      ]},
-      { t: 'P', text: 'My approach to confrontation is...', options: [
-        { v: 4, text: 'Avoid it if possible — it takes a lot out of me' },
-        { v: 2, text: 'Handle it carefully and only when necessary' },
-        { v: 1, text: 'Address it directly but calmly' },
-        { v: 0, text: 'Tackle it head-on — avoiding it just makes things worse' }
-      ]},
-      { t: 'S', text: 'Looking back, I have started more things than I have finished...', options: [
-        { v: 4, text: 'Definitely — new ideas always grab my attention' },
-        { v: 2, text: 'Sometimes — I lose momentum if interest drops' },
-        { v: 1, text: 'Rarely — I usually see things through' },
-        { v: 0, text: 'Never — completing things is a point of pride for me' }
-      ]},
-      { t: 'C', text: 'My biggest weakness is probably...', options: [
-        { v: 4, text: 'Impatience or coming across as too blunt' },
-        { v: 2, text: 'Being too competitive or stubborn' },
-        { v: 1, text: 'Taking too long to decide or overanalysing' },
-        { v: 0, text: 'Avoiding conflict when I should speak up' }
-      ]},
-      { t: 'M', text: 'When I feel unappreciated, I tend to...', options: [
-        { v: 4, text: 'Withdraw emotionally and feel it deeply' },
-        { v: 2, text: 'Reflect on it and wonder what I did wrong' },
-        { v: 1, text: 'Stay composed but feel it inwardly' },
-        { v: 0, text: 'Address it directly or channel it into work' }
-      ]},
-      { t: 'P', text: 'My ideal working style is...', options: [
-        { v: 4, text: 'Steady and consistent, with a cooperative team' },
-        { v: 2, text: 'Flexible but stable, with clear expectations' },
-        { v: 1, text: 'Structured and detailed, with high standards' },
-        { v: 0, text: 'Fast-paced, goal-focused, and results-driven' }
-      ]},
-      { t: 'S', text: 'I forget about time most easily when I am...', options: [
-        { v: 4, text: 'Connecting with people or doing something creative and fun' },
-        { v: 2, text: 'Working on something I enjoy' },
-        { v: 1, text: 'Deep in research or reading something absorbing' },
-        { v: 0, text: 'Working toward a meaningful goal' }
-      ]},
-      { t: 'C', text: 'When I believe I am right, I am...', options: [
-        { v: 4, text: 'Persistent and willing to argue until others see my point' },
-        { v: 2, text: 'Confident but open to a compelling counter-argument' },
-        { v: 1, text: 'Willing to step back and reconsider' },
-        { v: 0, text: 'Happy to let others disagree — I rarely need to win' }
-      ]}
-    ];
+  <!-- INTRO SCREEN -->
+  <div class="card intro-card" id="intro">
+    <h2>Before You Begin</h2>
+    <p>Answer based on how you <em>naturally are</em> — not how you wish to be or how you act at work.</p>
+    <p>There are no right or wrong answers.</p>
+    <div class="type-grid">
+      <div class="type-chip"><div class="chip-name">🌟 Sanguine</div><div class="chip-desc">Enthusiastic, social, expressive, spontaneous</div></div>
+      <div class="type-chip"><div class="chip-name">⚡ Choleric</div><div class="chip-desc">Decisive, driven, goal-oriented, natural leader</div></div>
+      <div class="type-chip"><div class="chip-name">🌊 Melancholic</div><div class="chip-desc">Thoughtful, analytical, sensitive, detail-focused</div></div>
+      <div class="type-chip"><div class="chip-name">🕊 Phlegmatic</div><div class="chip-desc">Calm, patient, diplomatic, steady presence</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--gold);font-family:'Segoe UI',sans-serif;">Most people are a blend — you will see exact percentages for each type.</p>
+    <br>
+    <button class="btn-start" id="startBtn">Begin Test →</button>
+  </div>
 
-    let current = 0;
-    let answers = new Array(questions.length).fill(null);
+  <!-- QUIZ CARD -->
+  <div class="card quiz-card" id="quiz">
+    <div class="progress-wrap">
+      <div class="progress-top">
+        <span class="progress-label" id="prog-label">0 of 40 answered</span>
+        <span class="progress-pct" id="prog-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="prog-fill"></div>
+      </div>
+    </div>
+    <div class="q-num" id="qnum"></div>
+    <div class="q-text" id="qtext"></div>
+    <div class="options" id="opts"></div>
+    <div class="nav">
+      <button class="btn-prev" id="prevBtn">← Previous</button>
+      <button class="btn-results" id="resultsBtn">See My Results →</button>
+    </div>
+  </div>
 
-    function startQuiz() {
-      document.getElementById('instruction-screen').style.display = 'none';
-      document.getElementById('question-card').style.display = 'block';
+</div>
+
+<script>
+  var questions = [
+    {t:'S',q:'In social situations, I am usually...',o:['The one making people laugh and keeping conversation flowing','Comfortable but not necessarily the centre of attention','Observing more than talking','Content to be in the background']},
+    {t:'C',q:'When a group is without direction or leadership...',o:['I naturally step in and start organising things','I contribute ideas but let others lead','I wait to see how things unfold','I prefer someone else to take charge']},
+    {t:'M',q:'When making an important decision, I tend to...',o:['Research thoroughly, weigh every option, and plan carefully','Think it through but trust my gut too','Decide fairly quickly based on the situation','Go with what feels right in the moment']},
+    {t:'P',q:'When conflict arises between people I care about...',o:['I try to mediate and find common ground','I listen to both sides and stay neutral','I speak my mind if it matters enough','I tend to pull back until things settle']},
+    {t:'S',q:'How do you feel about spontaneous plans?',o:['I love them — some of my best memories were unplanned','They are fine occasionally if I am in the mood','I prefer some warning ahead of time','I strongly prefer to plan ahead']},
+    {t:'C',q:'When working on a project with others...',o:['I usually end up directing how things should be done','I take initiative on parts I feel confident about','I follow the plan but speak up if something is wrong','I focus on my assigned role and complete it well']},
+    {t:'M',q:'After making a decision, I often...',o:['Replay it wondering if I chose the best option','Think about what I could do better next time','Accept it and move on fairly quickly','Rarely second-guess once I have decided']},
+    {t:'P',q:'My friends would describe me as...',o:['Reliable, easy-going, and always there when needed','Supportive and adaptable','Fun and energetic','Driven and focused']},
+    {t:'S',q:'At a party or gathering, I am usually...',o:['Meeting new people and energised by the whole atmosphere','Enjoying myself but sticking mostly with people I know','Finding a few good conversations rather than working the room','Ready to leave after a couple of hours']},
+    {t:'C',q:'When someone challenges my ideas or decisions...',o:['I defend my position confidently and argue my case','I listen, but stand firm if I believe I am right','I consider their view and may revise my thinking','I tend to give in to keep the peace']},
+    {t:'M',q:'In creative work or projects, I tend to focus on...',o:['Getting the details exactly right — quality over speed','A balance of quality and meeting the deadline','Getting it done and improving as I go','The big picture more than the small details']},
+    {t:'P',q:'When someone upsets me, I typically...',o:['Avoid confrontation and let it pass','Address it calmly when the moment is right','Express how I feel fairly directly','Deal with it immediately and move on']},
+    {t:'S',q:'My energy level around other people is generally...',o:['Higher — people fuel me and I feel more alive','Similar — I enjoy it but do not need it to feel okay','Lower — I need recovery time after social activity','Drained — I strongly prefer quiet, solitary time']},
+    {t:'C',q:'When I set a goal for myself...',o:['I pursue it with determination until it is done','I work hard at it but am flexible if circumstances change','I work steadily at my own pace','I sometimes lose steam before finishing']},
+    {t:'M',q:'My inner emotional life is generally...',o:['Rich and complex — I feel things deeply, sometimes too deeply','Fairly reflective but I can switch it off','Steady, not many highs or lows','Mostly pragmatic and action-oriented']},
+    {t:'P',q:'When it comes to change in routines or plans...',o:['I adapt quietly, though I prefer things to stay predictable','I go along with it but appreciate a heads-up','I adjust easily if there is a good reason','I enjoy variety and rarely mind disruption']},
+    {t:'S',q:'When telling a story or sharing news...',o:['I naturally add drama, humour, and expression to bring it to life','I share it engagingly but keep it mostly to the point','I give the key facts without much embellishment','I am brief and factual']},
+    {t:'C',q:'Achieving results matters to me...',o:['A great deal — I hate wasting time and expect excellence','Quite a bit, but I care about how we get there too','Somewhat — the process and relationships matter as much','I value consistency and reliability more than speed']},
+    {t:'M',q:'When reading or learning something new, I prefer...',o:['Going deep into the topic and understanding every layer','Understanding it well enough to apply it','Getting the main points and moving on','Hands-on experience over theory']},
+    {t:'P',q:'In group decisions, my usual role is...',o:['The one who listens to everyone and helps find agreement','A steady voice that considers what is fair for all','Someone who shares my view but adapts when needed','Often the one driving us toward a decision']},
+    {t:'S',q:'I tend to speak before I think...',o:['Often — I process out loud and respond quickly','Sometimes, especially when excited','Rarely — I usually think before speaking','Almost never — I am very deliberate with words']},
+    {t:'C',q:'When someone is inefficient or slow...',o:['It frustrates me and I may step in or say something','It bothers me internally but I try to be patient','I accept that people work differently','It rarely bothers me much']},
+    {t:'M',q:'I hold myself to high personal standards...',o:['Yes, and I often feel I fall short of them','Yes, but I try to be realistic and forgive myself','Somewhat — I do my best without obsessing','Not especially — I take things as they come']},
+    {t:'P',q:'When I am under pressure, I tend to...',o:['Stay quiet and steady, not wanting to add to the tension','Keep going at a calm, methodical pace','Focus hard and work until the pressure is off','Charge ahead to resolve the situation']},
+    {t:'S',q:'When I have free time, I tend to...',o:['Seek out people, activities, and things to do','Mix social time with some rest','Prefer quieter activities — reading, music, reflection','Focus on tasks or goals even in my downtime']},
+    {t:'C',q:'Which describes your approach to rules?',o:['I follow them if they make sense, but will challenge ones I think are wrong','I generally follow them but adapt when needed','I follow them consistently — they exist for good reason','I prefer to find a smooth, agreed-upon way rather than confrontation']},
+    {t:'M',q:'My workspace or living space tends to be...',o:['Organised and tidy — disorder affects my concentration','Reasonably organised with a system others might not see','Functional — I keep what I need close but am not rigid','Often messy — I focus on the work, not the setup']},
+    {t:'P',q:'When someone needs help, I...',o:['Am usually the first to offer and follow through quietly','Help when asked and give it my full attention','Help but make sure to communicate what I can and cannot do','Help if it aligns with what I am working on']},
+    {t:'S',q:'When I am excited about something, I...',o:['Tell everyone I know immediately','Share it with people close to me','Enjoy it privately and share selectively','Keep it to myself and channel it into action']},
+    {t:'C',q:'Failure affects me by...',o:['Motivating me — I get up, adjust, and go harder','Stinging briefly, then I move forward','Making me reflect and analyse what went wrong','Taking time to process before I can move forward']},
+    {t:'M',q:'I often notice things that others miss...',o:['Yes, I pick up on things very quickly and remember them','I notice quite a bit but do not always act on it','Occasionally, especially when something feels off','Not particularly — I focus on the bigger picture']},
+    {t:'P',q:'When someone asks for my opinion on a sensitive matter, I...',o:['Choose words carefully to avoid hurting them','Give an honest but gentle answer','Share my view directly while being respectful','Tell them clearly what I think']},
+    {t:'S',q:'People often say I bring...',o:['Energy, laughter, and lightness into the room','Warmth and friendliness','Thoughtfulness and depth','Structure, focus, and direction']},
+    {t:'C',q:'My biggest personal strength is...',o:['My ability to get things done and make things happen','My vision and confidence in my decisions','My discipline and attention to detail','My patience and ability to keep peace']},
+    {t:'M',q:'I sometimes struggle with...',o:['Overthinking, worry, or being too hard on myself','Balancing high standards with real-world limitations','Being too passive when I should speak up','Slowing down and considering others feelings']},
+    {t:'P',q:'My approach to confrontation is...',o:['Avoid it if possible — it takes a lot out of me','Handle it carefully and only when necessary','Address it directly but calmly','Tackle it head-on — avoiding it just makes things worse']},
+    {t:'S',q:'Looking back, I have started more things than I have finished...',o:['Definitely — new ideas always grab my attention','Sometimes — I lose momentum if interest drops','Rarely — I usually see things through','Never — completing things is a point of pride for me']},
+    {t:'C',q:'My biggest weakness is probably...',o:['Impatience or coming across as too blunt','Being too competitive or stubborn','Taking too long to decide or overanalysing','Avoiding conflict when I should speak up']},
+    {t:'M',q:'When I feel unappreciated, I tend to...',o:['Withdraw emotionally and feel it deeply','Reflect on it and wonder what I did wrong','Stay composed but feel it inwardly','Address it directly or channel it into work']},
+    {t:'P',q:'My ideal working style is...',o:['Steady and consistent, with a cooperative team','Flexible but stable, with clear expectations','Structured and detailed, with high standards','Fast-paced, goal-focused, and results-driven']}
+  ];
+
+  // scores: index 0=4pts, 1=2pts, 2=1pt, 3=0pts
+  var SCORES = [4, 2, 1, 0];
+  var answers = new Array(questions.length).fill(null);
+  var current = 0;
+  var locked = false;
+
+  document.getElementById('startBtn').addEventListener('click', function() {
+    document.getElementById('intro').style.display = 'none';
+    document.getElementById('quiz').style.display = 'block';
+    renderQuestion();
+  });
+
+  document.getElementById('prevBtn').addEventListener('click', function() {
+    if (current > 0) {
+      current--;
+      locked = false;
       renderQuestion();
     }
+  });
 
-    function renderQuestion() {
-      const q = questions[current];
-      document.getElementById('q-number').textContent = `Question ${current + 1} of ${questions.length}`;
-      document.getElementById('q-text').textContent = q.text;
-      const answered = answers.filter(a => a !== null).length;
-      const pct = Math.round((answered / questions.length) * 100);
-      document.getElementById('progress-fill').style.width = pct + '%';
-      document.getElementById('progress-answered').textContent = `${answered} of ${questions.length} answered`;
-      document.getElementById('progress-pct').textContent = pct + '%';
+  document.getElementById('resultsBtn').addEventListener('click', function() {
+    submitQuiz();
+  });
 
-      const container = document.getElementById('options-container');
-      container.innerHTML = '';
+  function renderQuestion() {
+    var q = questions[current];
 
-      const labels = ['A', 'B', 'C', 'D'];
-      q.options.forEach((opt, i) => {
-        const div = document.createElement('div');
-        div.className = 'option' + (answers[current] === i ? ' selected' : '');
-        div.dataset.index = i;
-        div.innerHTML = `
-          <div class="option-dot"></div>
-          <span class="option-label">${labels[i]}</span>
-          <span class="option-text">${opt.text}</span>
-        `;
-        div.addEventListener('click', () => selectOption(i));
-        container.appendChild(div);
-      });
+    // progress
+    var answered = answers.filter(function(a){ return a !== null; }).length;
+    var pct = Math.round((answered / questions.length) * 100);
+    document.getElementById('prog-fill').style.width = pct + '%';
+    document.getElementById('prog-label').textContent = answered + ' of ' + questions.length + ' answered';
+    document.getElementById('prog-pct').textContent = pct + '%';
 
-      document.getElementById('btn-prev').style.visibility = current === 0 ? 'hidden' : 'visible';
-      // Show results button only if last question already answered
-      document.getElementById('btn-results').style.display = (current === questions.length - 1 && answers[current] !== null) ? 'inline-block' : 'none';
+    // question
+    document.getElementById('qnum').textContent = 'Question ' + (current + 1) + ' of ' + questions.length;
+    document.getElementById('qtext').textContent = q.q;
 
-      // Scroll to top of card
-      document.getElementById('question-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    // prev button
+    document.getElementById('prevBtn').style.visibility = current === 0 ? 'hidden' : 'visible';
 
-    function selectOption(index) {
-      // Prevent double firing
-      if (answers[current] !== null) return;
+    // results button — only on last question if answered
+    document.getElementById('resultsBtn').style.display =
+      (current === questions.length - 1 && answers[current] !== null) ? 'inline-block' : 'none';
 
-      answers[current] = index;
+    // options
+    var container = document.getElementById('opts');
+    container.innerHTML = '';
+    var labels = ['A','B','C','D'];
 
-      // Highlight selected
-      document.querySelectorAll('.option').forEach((el, i) => {
-        el.classList.toggle('selected', i === index);
-        el.style.pointerEvents = 'none';
-      });
+    for (var i = 0; i < q.o.length; i++) {
+      (function(idx) {
+        var div = document.createElement('div');
+        div.className = 'opt' + (answers[current] === idx ? ' selected' : '');
+        if (answers[current] !== null) div.className += ' locked';
+        div.innerHTML =
+          '<div class="dot"></div>' +
+          '<span class="lbl">' + labels[idx] + '</span>' +
+          '<span class="opt-text">' + q.o[idx] + '</span>';
 
-      // Update progress bar immediately
-      const answered = answers.filter(a => a !== null).length;
-      const pct = Math.round((answered / questions.length) * 100);
-      document.getElementById('progress-fill').style.width = pct + '%';
-      document.getElementById('progress-answered').textContent = answered + ' of ' + questions.length + ' answered';
-      document.getElementById('progress-pct').textContent = pct + '%';
-
-      // Last question — show results button. Otherwise advance after delay.
-      if (current === questions.length - 1) {
-        document.getElementById('btn-results').style.display = 'inline-block';
-      } else {
-        setTimeout(() => {
-          current++;
-          renderQuestion();
-        }, 350);
-      }
-    }
-
-    function nextQuestion() {
-      if (answers[current] === null) return;
-      if (current === questions.length - 1) {
-        submitQuiz();
-      } else {
-        current++;
-        renderQuestion();
-      }
-    }
-
-    function prevQuestion() {
-      if (current > 0) {
-        current--;
-        renderQuestion();
-      }
-    }
-
-    function submitQuiz() {
-      // Tally scores
-      const scores = { S: 0, C: 0, M: 0, P: 0 };
-      const maxScores = { S: 0, C: 0, M: 0, P: 0 };
-
-      questions.forEach((q, i) => {
-        const selectedIdx = answers[i];
-        if (selectedIdx !== null) {
-          scores[q.t] += q.options[selectedIdx].v;
-        }
-        // max possible per question is 4
-        maxScores[q.t] += 4;
-      });
-
-      // Convert to percentages
-      const pct = {};
-      ['S','C','M','P'].forEach(t => {
-        pct[t] = Math.round((scores[t] / maxScores[t]) * 100);
-      });
-
-      // Normalise so they add to 100
-      const total = pct.S + pct.C + pct.M + pct.P;
-      if (total > 0) {
-        ['S','C','M','P'].forEach(t => {
-          pct[t] = Math.round((pct[t] / total) * 100);
+        div.addEventListener('click', function() {
+          if (locked || answers[current] !== null) return;
+          locked = true;
+          selectOption(idx);
         });
-      }
 
-      // Fix rounding to sum to 100
-      const sum = pct.S + pct.C + pct.M + pct.P;
-      const diff = 100 - sum;
-      const dominant = ['S','C','M','P'].reduce((a,b) => pct[a] > pct[b] ? a : b);
-      pct[dominant] += diff;
-
-      const params = new URLSearchParams({
-        S: pct.S, C: pct.C, M: pct.M, P: pct.P
-      });
-
-      window.location.href = `temperaments-result.html?${params.toString()}`;
+        container.appendChild(div);
+      })(i);
     }
-  </script>
+
+    // scroll top
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function selectOption(idx) {
+    answers[current] = idx;
+
+    // highlight all, lock all
+    var opts = document.getElementById('opts').querySelectorAll('.opt');
+    for (var i = 0; i < opts.length; i++) {
+      opts[i].classList.toggle('selected', i === idx);
+      opts[i].classList.add('locked');
+    }
+
+    // update progress immediately
+    var answered = answers.filter(function(a){ return a !== null; }).length;
+    var pct = Math.round((answered / questions.length) * 100);
+    document.getElementById('prog-fill').style.width = pct + '%';
+    document.getElementById('prog-label').textContent = answered + ' of ' + questions.length + ' answered';
+    document.getElementById('prog-pct').textContent = pct + '%';
+
+    if (current === questions.length - 1) {
+      // last question — show results button
+      document.getElementById('resultsBtn').style.display = 'inline-block';
+    } else {
+      // advance after 350ms so selection is visible
+      setTimeout(function() {
+        current++;
+        locked = false;
+        renderQuestion();
+      }, 350);
+    }
+  }
+
+  function submitQuiz() {
+    var scores = { S:0, C:0, M:0, P:0 };
+    var max = { S:0, C:0, M:0, P:0 };
+
+    for (var i = 0; i < questions.length; i++) {
+      var t = questions[i].t;
+      max[t] += 4;
+      if (answers[i] !== null) {
+        scores[t] += SCORES[answers[i]];
+      }
+    }
+
+    // convert to percentages
+    var pct = {
+      S: Math.round((scores.S / max.S) * 100),
+      C: Math.round((scores.C / max.C) * 100),
+      M: Math.round((scores.M / max.M) * 100),
+      P: Math.round((scores.P / max.P) * 100)
+    };
+
+    // normalise to 100
+    var total = pct.S + pct.C + pct.M + pct.P;
+    if (total > 0) {
+      pct.S = Math.round((pct.S / total) * 100);
+      pct.C = Math.round((pct.C / total) * 100);
+      pct.M = Math.round((pct.M / total) * 100);
+      pct.P = Math.round((pct.P / total) * 100);
+    }
+
+    // fix rounding to sum to 100
+    var sum = pct.S + pct.C + pct.M + pct.P;
+    var diff = 100 - sum;
+    var keys = ['S','C','M','P'];
+    var dom = keys.reduce(function(a,b){ return pct[a] > pct[b] ? a : b; });
+    pct[dom] += diff;
+
+    window.location.href = 'temperaments-result.html?S=' + pct.S + '&C=' + pct.C + '&M=' + pct.M + '&P=' + pct.P;
+  }
+</script>
 </body>
 </html>
