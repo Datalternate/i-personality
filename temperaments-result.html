@@ -521,6 +521,25 @@
     <div class="compat-row" id="compat-row"></div>
   </div>
 
+  <!-- Feedback -->
+  <div class="card" style="text-align:center;" id="feedback-card">
+    <div class="card-title">🧠 Does This Feel Accurate?</div>
+    <p style="font-size:15px; color:var(--text-light); line-height:1.8; margin-bottom:24px;">
+      Based on your answers, we matched you with this personality type. Does this description reflect how you see yourself?
+    </p>
+    <div id="feedback-buttons" class="cta-row" style="justify-content:center; margin-bottom:20px;">
+      <button class="btn btn-primary" onclick="submitFeedback('yes')">✓ Yes, it fits me perfectly</button>
+      <button class="btn btn-ghost" onclick="submitFeedback('no')">✗ Not quite, I'm different</button>
+    </div>
+    <div id="feedback-thanks" style="display:none;">
+      <div style="font-size:32px; margin-bottom:10px;" id="feedback-emoji"></div>
+      <p style="font-size:15px; color:var(--text-light); line-height:1.8;" id="feedback-message"></p>
+    </div>
+    <div style="margin-top:20px; padding-top:20px; border-top:1px solid rgba(193,140,74,0.15);">
+      <a href="https://datalternate.github.io/i-personality/index.html" class="back-link" style="margin-bottom:0;">← Back to Home</a>
+    </div>
+  </div>
+
   <!-- CTAs -->
   <div class="card" style="text-align:center;">
     <div class="card-title">What's Next?</div>
@@ -780,6 +799,27 @@
   }
 
   render();
+
+  function submitFeedback(choice) {
+    document.getElementById('feedback-buttons').style.display = 'none';
+    const thanks = document.getElementById('feedback-thanks');
+    const emoji = document.getElementById('feedback-emoji');
+    const msg = document.getElementById('feedback-message');
+
+    if (choice === 'yes') {
+      emoji.textContent = '🎯';
+      msg.textContent = "Thank you! We're glad the results resonated. Self-knowledge is the beginning of growth — carry this insight with you.";
+    } else {
+      emoji.textContent = '💡';
+      msg.textContent = "That's valuable to know. Personality blends are complex — consider retaking the test and answering based on your most natural self, not your current season of life. You may also find the MBTI test gives you a clearer fit.";
+    }
+
+    thanks.style.display = 'block';
+
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'temperament_feedback', { feedback: choice });
+    }
+  }
 </script>
 </body>
 </html>
