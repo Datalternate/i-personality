@@ -750,6 +750,9 @@
         el.classList.toggle('selected', i === index);
       });
       document.getElementById('btn-next').disabled = false;
+
+      // Auto-advance after brief pause so selection is visible
+      setTimeout(() => nextQuestion(), 480);
     }
 
     function nextQuestion() {
