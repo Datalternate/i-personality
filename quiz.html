@@ -1,418 +1,859 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>i-Personality Quiz – Discover Your Type</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Personality Result</title>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VPNW7MQF3J"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-VPNW7MQF3J');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPNW7MQF3J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VPNW7MQF3J');
+  </script>
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-:root{
---primary-gold:#d4a352;
---primary-dark:#a67856;
---accent-gold:#c4936f;
---text-dark:#5a3a2a;
---text-light:#6b5344;
---bg-light:#f4e8d8;
---bg-cream:#fffbf6;
---border-gold:#c4936f;
-}
+    :root {
+      --primary-gold: #d4a352;
+      --primary-dark: #a67856;
+      --accent-gold: #c4936f;
+      --text-dark: #5a3a2a;
+      --text-light: #6b5344;
+      --bg-light: #f4e8d8;
+      --bg-cream: #fffbf6;
+      --border-gold: #c4936f;
+    }
 
-body{
-font-family:'Georgia',serif;
-background-color:var(--bg-light);
-background-image:
-repeating-linear-gradient(45deg,transparent,transparent 35px,rgba(193,140,74,0.05) 35px,rgba(193,140,74,0.05) 70px),
-repeating-linear-gradient(-45deg,transparent,transparent 35px,rgba(193,140,74,0.05) 35px,rgba(193,140,74,0.05) 70px);
-padding:40px 20px;
-min-height:100vh;
-position:relative;
-overflow-x:hidden;
-}
+    body {
+      font-family: 'Georgia', serif;
+      background-color: var(--bg-light);
+      background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(193, 140, 74, 0.05) 35px, rgba(193, 140, 74, 0.05) 70px),
+        repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(193, 140, 74, 0.05) 35px, rgba(193, 140, 74, 0.05) 70px);
+      padding: 40px 20px;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-body::before{
-content:'';
-position:fixed;
-width:300px;
-height:300px;
-background:radial-gradient(circle,rgba(212,163,58,0.1) 0%,transparent 70%);
-border-radius:50%;
-top:-50px;
-left:-50px;
-z-index:0;
-}
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(212, 163, 58, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      top: -50px;
+      left: -50px;
+      z-index: 0;
+    }
 
-.container{
-max-width:750px;
-margin:0 auto;
-z-index:1;
-position:relative;
-}
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(139, 101, 53, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
 
-.header{
-text-align:center;
-margin-bottom:50px;
-animation:slideDown 0.6s ease-out;
-}
+    .container {
+      max-width: 750px;
+      margin: 0 auto;
+      z-index: 1;
+      position: relative;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 250, 245, 0.96) 100%);
+      border-radius: 15px;
+      padding: 50px 40px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(193, 140, 74, 0.15);
+      animation: slideUp 0.6s ease-out;
+    }
 
-@keyframes slideDown{
-from{opacity:0;transform:translateY(-20px);}
-to{opacity:1;transform:translateY(0);}
-}
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-.header-icon{
-font-size:48px;
-margin-bottom:15px;
-}
+    .header-icon {
+      font-size: 56px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-h1{
-font-size:42px;
-color:var(--text-dark);
-margin-bottom:10px;
-font-weight:700;
-font-style:italic;
-}
+    h1 {
+      font-size: 40px;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-style: italic;
+    }
 
-.progress-text{
-font-size:13px;
-color:var(--accent-gold);
-font-family:'Segoe UI',sans-serif;
-letter-spacing:2px;
-text-transform:uppercase;
-margin-bottom:15px;
-}
+    .type-code {
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 14px;
+      color: var(--accent-gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
 
-.progress-bar{
-width:120px;
-height:6px;
-background:rgba(193,140,74,0.2);
-border-radius:3px;
-margin:0 auto 30px;
-overflow:hidden;
-}
+    .ornament {
+      width: 40px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+      margin: 25px auto;
+    }
 
-.progress-fill{
-height:100%;
-background:linear-gradient(90deg,var(--primary-gold),var(--accent-gold));
-border-radius:3px;
-transition:width 0.3s ease;
-}
+    .intro-text {
+      font-size: 16px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 35px;
+      text-align: center;
+      font-style: italic;
+    }
 
-form{
-background:linear-gradient(135deg,rgba(255,255,255,0.96) 0%,rgba(255,250,245,0.96) 100%);
-border-radius:15px;
-padding:40px;
-box-shadow:0 15px 40px rgba(0,0,0,0.08);
-border:1px solid rgba(193,140,74,0.15);
-}
+    h2 {
+      font-size: 20px;
+      color: var(--text-dark);
+      margin-top: 35px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      padding-bottom: 12px;
+      border-bottom: 2px solid rgba(193, 140, 74, 0.2);
+    }
 
-.question{
-margin-bottom:35px;
-padding-bottom:35px;
-border-bottom:1px solid rgba(193,140,74,0.1);
-animation:fadeIn 0.5s ease-out;
-}
+    ul {
+      list-style: none;
+      margin-bottom: 35px;
+    }
 
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
-}
+    li {
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.8;
+      padding: 12px 0;
+      padding-left: 30px;
+      position: relative;
+    }
 
-.question-number{
-font-size:12px;
-color:var(--accent-gold);
-font-family:'Segoe UI',sans-serif;
-letter-spacing:1px;
-text-transform:uppercase;
-margin-bottom:8px;
-font-weight:600;
-}
+    li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--primary-gold);
+      font-weight: bold;
+    }
 
-.question-text{
-font-size:16px;
-color:var(--text-dark);
-line-height:1.6;
-margin-bottom:18px;
-font-weight:500;
-}
+    .insight-text {
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
 
-.options{
-display:flex;
-flex-direction:column;
-gap:10px;
-}
+    .social-share {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
 
-label{
-display:flex;
-align-items:center;
-padding:12px 16px;
-background:var(--bg-cream);
-border:1px solid rgba(193,140,74,0.2);
-border-radius:8px;
-cursor:pointer;
-transition:all 0.2s ease;
-font-size:14px;
-color:var(--text-light);
-line-height:1.5;
-}
+    .share-btn {
+      padding: 10px 20px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-family: 'Segoe UI', sans-serif;
+      display: inline-block;
+    }
 
-label:hover{
-background:rgba(212,163,58,0.08);
-border-color:var(--accent-gold);
-}
+    .share-twitter {
+      background: #1DA1F2;
+      color: white;
+    }
 
-input[type="radio"]{
-margin-right:12px;
-cursor:pointer;
-accent-color:var(--primary-gold);
-}
+    .share-twitter:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
 
-input[type="radio"]:checked + span{
-color:var(--text-dark);
-font-weight:600;
-}
+    .share-facebook {
+      background: #1877F2;
+      color: white;
+    }
 
-.button-section{
-display:flex;
-gap:15px;
-margin-top:40px;
-justify-content:center;
-}
+    .share-facebook:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
 
-button{
-padding:16px 50px;
-font-size:15px;
-font-weight:600;
-border-radius:10px;
-border:none;
-cursor:pointer;
-transition:all 0.3s ease;
-font-family:'Segoe UI',sans-serif;
-letter-spacing:1px;
-text-transform:uppercase;
-}
+    .share-whatsapp {
+      background: #25D366;
+      color: white;
+    }
 
-.button-primary{
-background:linear-gradient(135deg,var(--accent-gold) 0%,var(--primary-dark) 100%);
-color:white;
-box-shadow:0 8px 20px rgba(193,140,74,0.3);
-}
+    .share-whatsapp:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
 
-.button-primary:hover:not(:disabled){
-transform:translateY(-3px);
-box-shadow:0 12px 28px rgba(193,140,74,0.4);
-}
+    .share-copy {
+      background: rgba(193, 140, 74, 0.2);
+      color: var(--text-dark);
+      border: 2px solid var(--accent-gold);
+    }
 
-.button-primary:disabled{
-opacity:0.5;
-cursor:not-allowed;
-}
+    .share-copy:hover {
+      background: rgba(193, 140, 74, 0.3);
+      transform: translateY(-2px);
+    }
 
-.button-back{
-background:rgba(193,140,74,0.1);
-color:var(--primary-dark);
-border:2px solid var(--accent-gold);
-}
+    .feedback-section {
+      margin-top: 50px;
+      padding-top: 35px;
+      border-top: 2px solid rgba(193, 140, 74, 0.2);
+    }
 
-.button-back:hover{
-background:rgba(193,140,74,0.15);
-transform:translateY(-3px);
-}
+    .feedback-title {
+      font-size: 18px;
+      color: var(--text-dark);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
 
-@media(max-width:640px){
+    .feedback-intro {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 25px;
+      line-height: 1.7;
+    }
 
-h1{font-size:32px;}
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
 
-form{padding:25px;border-radius:12px;}
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
-.question{margin-bottom:25px;padding-bottom:25px;}
+    label {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      background: var(--bg-cream);
+      border: 1px solid rgba(193, 140, 74, 0.2);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      color: var(--text-light);
+    }
 
-label{font-size:13px;padding:10px 12px;}
+    label:hover {
+      background: rgba(212, 163, 58, 0.08);
+      border-color: var(--accent-gold);
+    }
 
-button{padding:14px 30px;font-size:13px;}
+    input[type="radio"] {
+      margin-right: 12px;
+      cursor: pointer;
+      accent-color: var(--primary-gold);
+    }
 
-.button-section{flex-direction:column;}
+    button {
+      padding: 14px 30px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Segoe UI', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--accent-gold) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: 0 8px 20px rgba(193, 140, 74, 0.3);
+      margin-top: 10px;
+    }
 
-}
-</style>
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(193, 140, 74, 0.4);
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 35px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(193, 140, 74, 0.1);
+    }
+
+    .back-link a {
+      font-size: 13px;
+      color: var(--accent-gold);
+      text-decoration: none;
+      font-family: 'Segoe UI', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .back-link a:hover {
+      color: var(--primary-dark);
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      .intro-text {
+        font-size: 15px;
+      }
+
+      li {
+        font-size: 14px;
+        padding-left: 25px;
+      }
+
+      .social-share {
+        gap: 8px;
+      }
+
+      .share-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
+    <div class="header-icon" id="icon">🧠</div>
+    <h1 id="typeName">Loading...</h1>
+    <p class="type-code" id="typeCode">MBTI</p>
+    <div class="ornament"></div>
+    <p class="intro-text" id="intro">Discovering your personality...</p>
 
-<div class="container">
+    <h2>🧩 Trait Breakdown</h2>
+    <ul id="traits">
+      <li>Loading traits...</li>
+    </ul>
 
-<div class="header">
-<div class="header-icon">✨</div>
-<h1>Personality Quiz</h1>
-<p class="progress-text">Discovering Your Type</p>
+    <h2>💼 Career Suggestions</h2>
+    <ul id="careers">
+      <li>Loading careers...</li>
+    </ul>
 
-<div class="progress-bar">
-<div class="progress-fill" id="progressFill" style="width:0%"></div>
-</div>
-</div>
+    <h2>❤️ Relationship Insights</h2>
+    <p class="insight-text" id="relationships">Loading insights...</p>
 
-<form id="quizForm">
+    <div class="social-share">
+      <button class="share-btn share-twitter" id="shareTwitter">Share on Twitter</button>
+      <button class="share-btn share-facebook" id="shareFacebook">Share on Facebook</button>
+      <button class="share-btn share-whatsapp" id="shareWhatsApp">Share on WhatsApp</button>
+      <button class="share-btn share-copy" id="shareCopy">Copy Link</button>
+    </div>
 
-<div id="questions"></div>
+    <div class="feedback-section">
+      <h2>🧠 Does This Feel Accurate?</h2>
+      <p class="feedback-intro">Based on your answers, we matched you with this personality type. Does this description reflect how you see yourself?</p>
 
-<div class="button-section">
-<button type="button" class="button-back" id="backBtn" style="display:none">← Back</button>
-<button type="submit" class="button-primary" id="submitBtn" style="display:none">See My Result</button>
-</div>
+      <form id="feedbackForm">
+        <div class="radio-group">
+          <label><input type="radio" name="feedback" value="Yes" required> Yes, it fits me perfectly</label>
+          <label><input type="radio" name="feedback" value="No"> Not quite, I'm different</label>
+        </div>
+        <button type="submit">Submit Feedback</button>
+      </form>
+    </div>
 
-</form>
-</div>
+    <!-- Temperament test nudge -->
+    <div style="margin: 30px 0; padding: 24px 28px; background: linear-gradient(135deg, rgba(255,255,255,0.97), rgba(255,250,245,0.97)); border-radius: 16px; border: 2px solid rgba(193,140,74,0.2); text-align:center; box-shadow: 0 8px 24px rgba(0,0,0,0.06);">
+      <div style="font-size:36px; margin-bottom:10px;">🔥</div>
+      <p style="font-family:'Segoe UI',sans-serif; font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:#c4936f; margin-bottom:8px;">Go Deeper</p>
+      <h3 style="font-family:'Georgia',serif; font-size:22px; font-style:italic; color:#5a3a2a; margin-bottom:10px;">Now Try the Temperaments Test</h3>
+      <p style="font-size:14px; color:#6b5344; line-height:1.75; max-width:420px; margin: 0 auto 20px;">Your MBTI type shows <em>how</em> you think. The Four Temperaments reveal <em>why</em> you feel and act the way you do — rooted in 2,400 years of human psychology.</p>
+      <a href="https://datalternate.github.io/i-personality/temperaments.html" style="display:inline-block; padding:13px 32px; background:linear-gradient(135deg,#c4936f,#a67856); color:white; font-family:'Segoe UI',sans-serif; font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; border-radius:10px; text-decoration:none; box-shadow:0 6px 18px rgba(193,140,74,0.35); transition:all 0.25s ease;">Take the Temperaments Test →</a>
+    </div>
 
-<script>
+    <div class="back-link">
+      <a href="index.html">← Back to Home</a>
+    </div>
+  </div>
 
-const questions=[
+  <script>
+    // PERSONALITY DATABASE - All 16 types
+    const personalities = {
+      intj: {
+        name: "INTJ – The Mastermind",
+        subtitle: "The Architect",
+        icon: "🧠",
+        intro: "You're strategic, independent, and visionary. You excel at long-term planning, solving complex problems, and turning abstract ideas into reality. You value knowledge, efficiency, and competence above all else.",
+        traits: [
+          "Mind: Introverted (I)",
+          "Energy: Intuitive (N)",
+          "Nature: Thinking (T)",
+          "Tactics: Judging (J)"
+        ],
+        careers: [
+          "Strategic Consultant or Business Analyst",
+          "Software Architect or Systems Engineer",
+          "Research Scientist or Academic",
+          "Investment Banker or Financial Analyst",
+          "Entrepreneur or Startup Founder",
+          "Lawyer or Legal Strategist"
+        ],
+        relationships: "You bring loyalty, depth, and intellectual stimulation to relationships. You value partners who respect your independence and share your drive for continuous improvement. While you may appear reserved, you're deeply committed once you trust someone."
+      },
+      infj: {
+        name: "INFJ – The Advocate",
+        subtitle: "The Visionary Helper",
+        icon: "💫",
+        intro: "You're insightful, compassionate, and driven by a deep sense of purpose. You excel at understanding complex human motivations and working toward meaningful change. You're rare, introspective, and intensely committed to your values.",
+        traits: [
+          "Mind: Introverted (I)",
+          "Energy: Intuitive (N)",
+          "Nature: Feeling (F)",
+          "Tactics: Judging (J)"
+        ],
+        careers: [
+          "Psychologist or Counselor",
+          "Author or Activist",
+          "Nonprofit Leader or Social Worker",
+          "Teacher or Academic",
+          "Diplomat or Mediator",
+          "Healthcare Provider or Researcher"
+        ],
+        relationships: "You bring deep understanding, authenticity, and emotional intimacy to relationships. You see people's potential and feel called to help them grow. You're intensely loyal but need partners who respect your need for alone time."
+      },
+      intp: {
+        name: "INTP – The Logician",
+        subtitle: "The Thinker",
+        icon: "🔬",
+        intro: "You're analytical, original, and driven by the quest for knowledge. You excel at logical reasoning, identifying patterns, and solving complex problems. You're the seeker of truth who questions everything.",
+        traits: [
+          "Mind: Introverted (I)",
+          "Energy: Intuitive (N)",
+          "Nature: Thinking (T)",
+          "Tactics: Perceiving (P)"
+        ],
+        careers: [
+          "Software Developer or IT Specialist",
+          "Scientist or Researcher",
+          "Engineer or Architect",
+          "Mathematician or Accountant",
+          "Philosopher or Theoretical Expert",
+          "Systems Analyst or Data Scientist"
+        ],
+        relationships: "You bring intellectual curiosity, honesty, and unconventional perspective to relationships. You value partners who can engage in deep discussion and respect your need for independence. You show love through loyalty and effort."
+      },
+      infp: {
+        name: "INFP – The Mediator",
+        subtitle: "The Idealist",
+        icon: "🌟",
+        intro: "You're imaginative, authentic, and deeply driven by your personal values. You excel at empathizing with others' experiences and expressing yourself creatively. You see meaning in everything and are guided by your inner compass.",
+        traits: [
+          "Mind: Introverted (I)",
+          "Energy: Intuitive (N)",
+          "Nature: Feeling (F)",
+          "Tactics: Perceiving (P)"
+        ],
+        careers: [
+          "Therapist or Counselor",
+          "Writer or Creative Director",
+          "Artist or Musician",
+          "Teacher or Academic",
+          "Non-Profit Worker or Activist",
+          "Translator or Linguist"
+        ],
+        relationships: "You bring authenticity, emotional depth, and unconditional acceptance to relationships. You see the best in people and celebrate their individuality. You're deeply loyal but need partners who appreciate your idealism."
+      },
+      entj: {
+        name: "ENTJ – The Commander",
+        subtitle: "The Natural Leader",
+        icon: "⚡",
+        intro: "You're ambitious, assertive, and driven by a clear vision of what's possible. You excel at strategic planning, making tough decisions, and rallying others toward a common goal. You're results-oriented and value efficiency.",
+        traits: [
+          "Mind: Extraverted (E)",
+          "Energy: Intuitive (N)",
+          "Nature: Thinking (T)",
+          "Tactics: Judging (J)"
+        ],
+        careers: [
+          "CEO or Founder",
+          "Management Consultant or Strategy Director",
+          "Military Officer or Law Enforcement Leader",
+          "Investment Manager or Financial Director",
+          "Project Manager or Operations Executive",
+          "Judge or Corporate Lawyer"
+        ],
+        relationships: "You bring directness, loyalty, and intellectual engagement to relationships. You respect partners who challenge you and can match your ambition. While you may seem tough, you're deeply committed to those you care about."
+      },
+      enfj: {
+        name: "ENFJ – The Protagonist",
+        subtitle: "The Teacher",
+        icon: "👥",
+        intro: "You're charismatic, empathetic, and naturally drawn to inspiring others. You excel at understanding people's needs and motivations, making you a natural leader and mentor. You value authenticity, harmony, and bringing out the best in those around you.",
+        traits: [
+          "Mind: Extraverted (E)",
+          "Energy: Intuitive (N)",
+          "Nature: Feeling (F)",
+          "Tactics: Judging (J)"
+        ],
+        careers: [
+          "Executive Coach or Leadership Trainer",
+          "Human Resources Manager or Talent Scout",
+          "Teacher or University Professor",
+          "Counselor or Therapist",
+          "Non-Profit Director or Social Activist",
+          "Public Relations Manager or Brand Ambassador"
+        ],
+        relationships: "You bring warmth, dedication, and genuine interest to relationships. You naturally gravitate toward supporting others' growth and success. You're skilled at reading emotions and creating emotional intimacy."
+      },
+      entp: {
+        name: "ENTP – The Debater",
+        subtitle: "The Innovator",
+        icon: "💡",
+        intro: "You're intellectually curious, quick-witted, and endlessly inventive. You love exploring ideas, challenging assumptions, and finding creative solutions to complex problems. You thrive on debate and the pursuit of knowledge.",
+        traits: [
+          "Mind: Extraverted (E)",
+          "Energy: Intuitive (N)",
+          "Nature: Thinking (T)",
+          "Tactics: Perceiving (P)"
+        ],
+        careers: [
+          "Entrepreneur or Inventor",
+          "Software Developer or Tech Innovator",
+          "Consultant or Strategic Advisor",
+          "Journalist or Research Writer",
+          "Professor or Academic Researcher",
+          "Venture Capitalist or Business Analyst"
+        ],
+        relationships: "You bring intellectual stimulation, humor, and genuine interest to relationships. You value partners who can keep up with your ideas and don't take you too seriously. You're excellent at spotting potential in people."
+      },
+      enfp: {
+        name: "ENFP – The Campaigner",
+        subtitle: "The Spark",
+        icon: "✨",
+        intro: "You're energetic, imaginative, and deeply people-oriented. You thrive on new ideas, meaningful connections, and the freedom to explore. You're driven by purpose and passion, not just routine.",
+        traits: [
+          "Mind: Extraverted (E)",
+          "Energy: Intuitive (N)",
+          "Nature: Feeling (F)",
+          "Tactics: Perceiving (P)"
+        ],
+        careers: [
+          "Entrepreneur or Creative Startup Founder",
+          "Marketing Manager or Brand Strategist",
+          "Teacher or Educational Innovator",
+          "Counselor or Life Coach",
+          "Journalist or Content Creator",
+          "Event Organizer or Community Manager"
+        ],
+        relationships: "You bring excitement, authenticity, and emotional depth to relationships. You value partners who appreciate your enthusiasm and understand your need for growth and exploration. You thrive with partners who embrace adventure."
+      },
+      istj: {
+        name: "ISTJ – The Logistician",
+        subtitle: "The Responsible One",
+        icon: "🛡️",
+        intro: "You're reliable, practical, and deeply committed to duty. You excel at organizing systems, following through on commitments, and maintaining order. You're the dependable one everyone can count on.",
+        traits: [
+          "Mind: Introverted (I)",
+          "Energy: Sensing (S)",
+          "Nature: Thinking (T)",
+          "Tactics: Judging (J)"
+        ],
+        careers: [
+          "Accountant or Financial Manager",
+          "Manager or Administrator",
+          "Military Officer or Police Officer",
+          "Project Manager or Quality Control",
+          "Auditor or Compliance Officer",
+          "Surgeon or Dentist"
+        ],
+        relationships: "You bring stability, commitment, and quiet reliability to relationships. You show love through consistent support and follow-through. You value loyalty and traditional structures."
+      },
+      isfj: {
+        name: "ISFJ – The Defender",
+        subtitle: "The Caregiver",
+        icon: "❤️",
+        intro: "You're caring, dedicated, and deeply loyal. You excel at supporting others and creating harmony in your environment. You value tradition, responsibility, and helping people feel safe and cared for.",
+        traits: [
+          "Mind: Introverted (I)",
+          "Energy: Sensing (S)",
+          "Nature: Feeling (F)",
+          "Tactics: Judging (J)"
+        ],
+        careers: [
+          "Nurse or Healthcare Provider",
+          "Teacher or School Counselor",
+          "Social Worker or Family Therapist",
+          "Administrative Assistant or Office Manager",
+          "Librarian or Archivist",
+          "Customer Service Manager"
+        ],
+        relationships: "You bring warmth, devotion, and practical support to relationships. You value partners who appreciate your caring nature and reciprocate your loyalty. You show love through thoughtful actions and attentiveness."
+      },
+      istp: {
+        name: "ISTP – The Virtuoso",
+        subtitle: "The Craftsperson",
+        icon: "🔧",
+        intro: "You're practical, analytical, and driven by a desire to understand how things work. You excel at hands-on problem-solving, adapting to new situations, and maintaining cool under pressure. You're independent and self-reliant.",
+        traits: [
+          "Mind: Introverted (I)",
+          "Energy: Sensing (S)",
+          "Nature: Thinking (T)",
+          "Tactics: Perceiving (P)"
+        ],
+        careers: [
+          "Mechanic or Technician",
+          "Engineer or Architect",
+          "Pilot or Military Specialist",
+          "Carpenter or Tradesperson",
+          "Surgeon or Anesthesiologist",
+          "Computer Programmer or Systems Analyst"
+        ],
+        relationships: "You bring practical support, loyalty, and independence to relationships. You show love through actions rather than words. You value partners who respect your need for space and don't require constant emotional expression."
+      },
+      isfp: {
+        name: "ISFP – The Adventurer",
+        subtitle: "The Artist",
+        icon: "🎨",
+        intro: "You're sensitive, artistic, and driven by personal values and authentic expression. You excel at creating beauty, living in the present moment, and forming deep connections with those around you.",
+        traits: [
+          "Mind: Introverted (I)",
+          "Energy: Sensing (S)",
+          "Nature: Feeling (F)",
+          "Tactics: Perceiving (P)"
+        ],
+        careers: [
+          "Artist or Designer",
+          "Musician or Performer",
+          "Landscaper or Interior Designer",
+          "Chef or Food Stylist",
+          "Photographer or Videographer",
+          "Craft Maker or Artisan"
+        ],
+        relationships: "You bring sensitivity, authenticity, and artistic expression to relationships. You value partners who appreciate your unique perspective and don't judge your quietness. You're deeply loyal and show love through acts of service."
+      },
+      estj: {
+        name: "ESTJ – The Logistician",
+        subtitle: "The Organizer",
+        icon: "📋",
+        intro: "You're practical, no-nonsense, and deeply committed to tradition and duty. You excel at organizing systems, managing projects, and ensuring everything runs smoothly. You value loyalty, honesty, and doing the right thing.",
+        traits: [
+          "Mind: Extraverted (E)",
+          "Energy: Sensing (S)",
+          "Nature: Thinking (T)",
+          "Tactics: Judging (J)"
+        ],
+        careers: [
+          "Manager or Administrator",
+          "Military Officer or Police Detective",
+          "Accountant or Financial Manager",
+          "Project Manager or Quality Assurance Manager",
+          "Government Official or Civil Servant",
+          "Surgeon or Medical Director"
+        ],
+        relationships: "You bring stability, commitment, and reliability to relationships. You show love through loyalty and consistent support. You value partners who respect tradition and share your sense of responsibility."
+      },
+      esfj: {
+        name: "ESFJ – The Consul",
+        subtitle: "The Caregiver",
+        icon: "🤝",
+        intro: "You're warm, responsible, and genuinely invested in others' well-being. You excel at creating harmony, organizing group activities, and ensuring everyone feels included. You're the glue that holds communities together.",
+        traits: [
+          "Mind: Extraverted (E)",
+          "Energy: Sensing (S)",
+          "Nature: Feeling (F)",
+          "Tactics: Judging (J)"
+        ],
+        careers: [
+          "Teacher or School Administrator",
+          "Nurse or Healthcare Provider",
+          "Social Worker or Counselor",
+          "Event Planner or Hospitality Manager",
+          "HR Manager or Recruiter",
+          "Family Therapist or Community Organizer"
+        ],
+        relationships: "You bring warmth, loyalty, and genuine care to relationships. You're naturally attentive to others' needs and show love through thoughtful actions. You value stability and clear commitment."
+      },
+      estp: {
+        name: "ESTP – The Entrepreneur",
+        subtitle: "The Doer",
+        icon: "🚀",
+        intro: "You're bold, action-oriented, and energized by immediate challenges. You excel at problem-solving on the fly, adapting to new situations, and making things happen. You're the risk-taker who lives for the thrill of the moment.",
+        traits: [
+          "Mind: Extraverted (E)",
+          "Energy: Sensing (S)",
+          "Nature: Thinking (T)",
+          "Tactics: Perceiving (P)"
+        ],
+        careers: [
+          "Entrepreneur or Business Owner",
+          "Sales Manager or Negotiator",
+          "Stunt Person or Athlete",
+          "Emergency Responder or Firefighter",
+          "Mechanic or Technician",
+          "Stockbroker or Trader"
+        ],
+        relationships: "You bring excitement, loyalty, and directness to relationships. You're action-oriented in showing love and creating shared adventures. You value partners who can keep up with your pace and appreciate your frankness."
+      },
+      esfp: {
+        name: "ESFP – The Entertainer",
+        subtitle: "The Life of the Party",
+        icon: "🎉",
+        intro: "You're outgoing, spontaneous, and full of life. You love being the center of attention and bringing joy to those around you. You value fun, authentic connection, and living in the moment.",
+        traits: [
+          "Mind: Extraverted (E)",
+          "Energy: Sensing (S)",
+          "Nature: Feeling (F)",
+          "Tactics: Perceiving (P)"
+        ],
+        careers: [
+          "Actor or Performer",
+          "Event Planner or Party Coordinator",
+          "Tour Guide or Travel Agent",
+          "Fashion Designer or Stylist",
+          "Fitness Instructor or Personal Trainer",
+          "Social Media Influencer or Content Creator"
+        ],
+        relationships: "You bring warmth, spontaneity, and infectious enthusiasm to relationships. You value partners who appreciate your playful nature and enjoy adventure. You show love through affection, surprises, and creating memorable experiences."
+      }
+    };
 
-{ text:"I feel energized after spending time with groups of people.",dimension:"E",reverse:false},
-{ text:"I prefer one-on-one conversations over group gatherings.",dimension:"E",reverse:true},
-{ text:"I think out loud and process ideas by talking.",dimension:"E",reverse:false},
-{ text:"I enjoy solitary hobbies like reading or writing.",dimension:"E",reverse:true},
-{ text:"I find large social events draining.",dimension:"E",reverse:true},
-{ text:"I'm the life of the party.",dimension:"E",reverse:false},
-{ text:"I act before I think.",dimension:"E",reverse:false},
-{ text:"I prefer working in teams.",dimension:"E",reverse:false},
+    // Get personality type from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const typeParam = urlParams.get('type');
+    const personalityType = typeParam ? typeParam.toLowerCase() : null;
 
-{ text:"I focus on the big picture rather than details.",dimension:"N",reverse:false},
-{ text:"I trust my gut feelings and hunches.",dimension:"N",reverse:false},
-{ text:"I prefer abstract theories over practical applications.",dimension:"N",reverse:false},
-{ text:"I think about future possibilities often.",dimension:"N",reverse:false},
-{ text:"I enjoy exploring new ideas and concepts.",dimension:"N",reverse:false},
-{ text:"I'm more interested in what could be than what is.",dimension:"N",reverse:false},
-{ text:"I prefer innovation over tradition.",dimension:"N",reverse:false},
-{ text:"I enjoy brainstorming and creative thinking.",dimension:"N",reverse:false},
-
-{ text:"I make decisions based on logic rather than emotions.",dimension:"F",reverse:true},
-{ text:"I value harmony over being right.",dimension:"F",reverse:false},
-{ text:"I consider how my decisions affect others' feelings.",dimension:"F",reverse:false},
-{ text:"I prioritize compassion over justice.",dimension:"F",reverse:false},
-{ text:"I prefer tact over blunt honesty.",dimension:"F",reverse:false},
-{ text:"I put myself in others' shoes before deciding.",dimension:"F",reverse:false},
-{ text:"I focus on people's needs more than tasks.",dimension:"F",reverse:false},
-{ text:"I believe emotions should guide important decisions.",dimension:"F",reverse:false},
-
-{ text:"I prefer to keep my options open.",dimension:"P",reverse:false},
-{ text:"I like spontaneity and going with the flow.",dimension:"P",reverse:false},
-{ text:"I'm comfortable with last-minute changes.",dimension:"P",reverse:false},
-{ text:"I rarely make to-do lists.",dimension:"P",reverse:false},
-{ text:"I often start tasks at the last minute.",dimension:"P",reverse:false},
-{ text:"I enjoy surprises.",dimension:"P",reverse:false},
-{ text:"I prefer exploration over closure.",dimension:"P",reverse:false},
-{ text:"I'm flexible with deadlines.",dimension:"P",reverse:false}
-
-];
-
-let currentQuestion=0;
-const answers=new Array(questions.length).fill(null);
-
-const container=document.getElementById("questions");
-const progressFill=document.getElementById("progressFill");
-const backBtn=document.getElementById("backBtn");
-const submitBtn=document.getElementById("submitBtn");
-
-function renderQuestion(){
-
-const q=questions[currentQuestion];
-container.innerHTML=`
-<div class="question">
-<div class="question-number">Question ${currentQuestion+1} of ${questions.length}</div>
-<div class="question-text">${q.text}</div>
-
-<div class="options">
-
-<label><input type="radio" name="q" value="2"><span>Strongly Agree</span></label>
-<label><input type="radio" name="q" value="1"><span>Agree</span></label>
-<label><input type="radio" name="q" value="0"><span>Neutral</span></label>
-<label><input type="radio" name="q" value="-1"><span>Disagree</span></label>
-<label><input type="radio" name="q" value="-2"><span>Strongly Disagree</span></label>
-
-</div>
-</div>
-`;
-
-document.querySelectorAll('input[type="radio"]').forEach(radio=>{
-
-radio.addEventListener("change",()=>{
-
-answers[currentQuestion]=parseInt(radio.value);
-updateProgress();
-
-if(currentQuestion<questions.length-1){
-currentQuestion++;
-renderQuestion();
-}
-
-});
-
-});
-
-backBtn.style.display=currentQuestion>0?"inline-block":"none";
-
-submitBtn.style.display=currentQuestion===questions.length-1?"inline-block":"none";
-
-}
-
-backBtn.addEventListener("click",()=>{
-currentQuestion--;
-renderQuestion();
-});
-
-function updateProgress(){
-
-const answered=answers.filter(a=>a!==null).length;
-const percentage=(answered/questions.length)*100;
-progressFill.style.width=percentage+"%";
-
-}
-
-renderQuestion();
-
-document.getElementById("quizForm").addEventListener("submit",function(e){
-
-e.preventDefault();
-
-const scores={E:0,N:0,F:0,P:0};
-
-questions.forEach((q,i)=>{
-
-const val=answers[i];
-const score=q.reverse?-val:val;
-scores[q.dimension]+=score;
-
-});
-
-const typeLetters=[];
-
-typeLetters.push(scores.E>0?"E":"I");
-typeLetters.push(scores.N>0?"N":"S");
-typeLetters.push(scores.F>0?"F":"T");
-typeLetters.push(scores.P>0?"P":"J");
-
-const bestType=typeLetters.join("");
-
-console.log("Scores:", scores);
-console.log("Type:", bestType);
-
-// ✅ UPDATED LINE - Now redirects to dynamic result.html with type parameter
-// OLD: window.location.href=`result-${bestType.toLowerCase()}.html${query}`;
-// NEW: Uses dynamic single page approach
-window.location.href = `result.html?type=${bestType.toLowerCase()}`;
-
-});
-
-</script>
-
+    // Display personality
+    if (personalityType && personalities[personalityType]) {
+      const p = personalities[personalityType];
+      
+      document.querySelector('.header-icon').textContent = p.icon;
+      document.getElementById('typeName').textContent = p.name;
+      document.getElementById('typeCode').textContent = p.subtitle;
+      document.getElementById('intro').textContent = p.intro;
+      
+      // Traits
+      const traitsHtml = p.traits.map(t => `<li>${t}</li>`).join('');
+      document.getElementById('traits').innerHTML = traitsHtml;
+      
+      // Careers
+      const careersHtml = p.careers.map(c => `<li>${c}</li>`).join('');
+      document.getElementById('careers').innerHTML = careersHtml;
+      
+      // Relationships
+      document.getElementById('relationships').textContent = p.relationships;
+      
+      // Update page title
+      document.title = p.name + ' - i-Personality';
+      
+      // Set personality type in form
+      document.querySelector('input[name="feedback"]').parentElement.parentElement.parentElement.querySelector('input[name="feedback"]').setAttribute('data-type', personalityType.toUpperCase());
+      
+      // Feedback form type input
+      const feedbackForm = document.getElementById('feedbackForm');
+      const typeInput = document.createElement('input');
+      typeInput.type = 'hidden';
+      typeInput.name = 'data[type]';
+      typeInput.value = personalityType.toUpperCase();
+      feedbackForm.insertBefore(typeInput, feedbackForm.firstChild);
+      
+      // Social sharing
+      const resultUrl = window.location.href;
+      const resultText = `I'm a ${p.name}! Check out what this personality type means on i-Personality. ${resultUrl}`;
+      
+      document.getElementById('shareTwitter').onclick = function() {
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(resultText)}`, '_blank');
+      };
+      
+      document.getElementById('shareFacebook').onclick = function() {
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(resultUrl)}`, '_blank');
+      };
+      
+      document.getElementById('shareWhatsApp').onclick = function() {
+        window.open(`https://wa.me/?text=${encodeURIComponent(resultText)}`, '_blank');
+      };
+      
+      document.getElementById('shareCopy').onclick = function() {
+        navigator.clipboard.writeText(resultUrl).then(() => {
+          this.textContent = 'Copied!';
+          setTimeout(() => { this.textContent = 'Copy Link'; }, 2000);
+        });
+      };
+      
+      // Feedback form submission
+      feedbackForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const feedback = document.querySelector('input[name="feedback"]:checked').value;
+        
+        // Submit to SheetDB
+        fetch('https://sheetdb.io/api/v1/n0ctz2xylu4u6', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            data: {
+              type: personalityType.toUpperCase(),
+              feedback: feedback
+            }
+          })
+        }).then(response => {
+          if (response.ok) {
+            alert('Thank you for your feedback!');
+            feedbackForm.reset();
+          }
+        }).catch(error => console.error('Error:', error));
+      });
+      
+    } else {
+      document.getElementById('typeName').textContent = 'Invalid Type';
+      document.getElementById('intro').textContent = 'Please complete the quiz to see your personality result.';
+    }
+  </script>
 </body>
 </html>
