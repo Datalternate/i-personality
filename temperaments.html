@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Temperaments Test – i-Personality</title>
+  <title>Your Temperament Results – i-Personality</title>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPNW7MQF3J"></script>
   <script>
@@ -25,6 +25,12 @@
       --bg-light: #f4e8d8;
       --bg-cream: #fffbf6;
       --border-gold: #c4936f;
+
+      /* Temperament accent colours */
+      --san-color: #e8845a;
+      --cho-color: #c0392b;
+      --mel-color: #2e86ab;
+      --phle-color: #27ae60;
     }
 
     body {
@@ -46,20 +52,23 @@
       border-radius: 50%; z-index: 0; pointer-events: none;
     }
 
-    .container { max-width: 750px; margin: 0 auto; position: relative; z-index: 1; }
-
-    /* Header */
-    .header {
-      text-align: center;
-      margin-bottom: 40px;
-      animation: slideDown 0.6s ease-out;
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(139,101,53,0.08) 0%, transparent 70%);
+      border-radius: 50%; z-index: 0; pointer-events: none;
     }
 
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .container {
+      max-width: 750px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
+    /* ── Back link ── */
     .back-link {
       display: inline-flex;
       align-items: center;
@@ -71,204 +80,332 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       font-weight: 600;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
       transition: opacity 0.2s;
     }
-
     .back-link:hover { opacity: 0.7; }
 
-    .header-icon { font-size: 48px; margin-bottom: 14px; }
+    /* ── Hero result card ── */
+    .result-hero {
+      background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(255,250,245,0.97) 100%);
+      border-radius: 20px;
+      padding: 50px 44px 44px;
+      border: 2px solid rgba(193,140,74,0.15);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      text-align: center;
+      margin-bottom: 28px;
+      animation: slideUp 0.7s ease-out;
+    }
 
-    .eyebrow {
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-eyebrow {
       font-family: 'Segoe UI', sans-serif;
       font-size: 11px;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--accent-gold);
       font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    h1 {
-      font-size: 40px;
-      font-weight: 700;
-      font-style: italic;
-      color: var(--text-dark);
-      margin-bottom: 10px;
-    }
-
-    .ornament {
-      width: 40px; height: 4px;
-      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
-      margin: 16px auto;
-    }
-
-    .header-desc {
-      font-size: 15px;
-      color: var(--text-light);
-      line-height: 1.75;
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-    /* Progress */
-    .progress-wrap {
-      background: rgba(255,255,255,0.8);
-      border-radius: 12px;
-      padding: 18px 24px;
-      margin-bottom: 28px;
-      border: 1px solid rgba(193,140,74,0.15);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
-    }
-
-    .progress-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .progress-label {
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 12px;
-      color: var(--accent-gold);
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .progress-count {
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 13px;
-      color: var(--text-light);
-      font-weight: 600;
-    }
-
-    .progress-bar-bg {
-      width: 100%;
-      height: 8px;
-      background: rgba(193,140,74,0.15);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent-gold), var(--primary-dark));
-      border-radius: 4px;
-      transition: width 0.4s ease;
-      width: 0%;
-    }
-
-    /* Question card */
-    .question-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(255,250,245,0.97) 100%);
-      border-radius: 16px;
-      padding: 40px 36px;
-      border: 2px solid rgba(193,140,74,0.15);
-      box-shadow: 0 10px 32px rgba(0,0,0,0.07);
-      animation: fadeSlide 0.35s ease-out;
-    }
-
-    @keyframes fadeSlide {
-      from { opacity: 0; transform: translateX(12px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-
-    .q-number {
-      font-family: 'Segoe UI', sans-serif;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent-gold);
-      font-weight: 700;
       margin-bottom: 14px;
     }
 
-    .q-text {
-      font-size: 20px;
-      color: var(--text-dark);
-      line-height: 1.6;
-      margin-bottom: 32px;
-      font-weight: 400;
+    .result-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+      display: block;
+      animation: pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) 0.3s both;
     }
 
-    /* Options */
-    .options { display: flex; flex-direction: column; gap: 12px; }
+    @keyframes pop {
+      from { transform: scale(0.5); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
 
-    .option {
+    .result-type-label {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 44px;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .result-tagline {
+      font-size: 16px;
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--accent-gold);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .ornament {
+      width: 50px; height: 4px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+      margin: 0 auto 22px;
+    }
+
+    .result-summary {
+      font-size: 16px;
+      color: var(--text-light);
+      line-height: 1.85;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ── Percentage bars card ── */
+    .card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(255,250,245,0.97) 100%);
+      border-radius: 16px;
+      padding: 36px 40px;
+      border: 2px solid rgba(193,140,74,0.12);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+      animation: slideUp 0.7s ease-out both;
+    }
+
+    .card:nth-child(2) { animation-delay: 0.1s; }
+    .card:nth-child(3) { animation-delay: 0.15s; }
+    .card:nth-child(4) { animation-delay: 0.2s; }
+    .card:nth-child(5) { animation-delay: 0.25s; }
+
+    .card-title {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    /* bars */
+    .bar-row {
       display: flex;
       align-items: center;
       gap: 14px;
-      padding: 16px 20px;
-      border-radius: 10px;
-      border: 2px solid rgba(193,140,74,0.2);
-      background: rgba(255,255,255,0.7);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: left;
+      margin-bottom: 18px;
     }
 
-    .option:hover {
-      border-color: var(--accent-gold);
-      background: rgba(193,140,74,0.08);
-      transform: translateX(4px);
-    }
+    .bar-row:last-child { margin-bottom: 0; }
 
-    .option.selected {
-      border-color: var(--primary-dark);
-      background: rgba(166,120,86,0.12);
-    }
-
-    .option-dot {
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      border: 2px solid rgba(193,140,74,0.4);
-      flex-shrink: 0;
+    .bar-info {
       display: flex;
       align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
+      gap: 8px;
+      width: 130px;
+      flex-shrink: 0;
     }
 
-    .option.selected .option-dot {
-      background: var(--primary-dark);
-      border-color: var(--primary-dark);
+    .bar-icon { font-size: 18px; }
+
+    .bar-name {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
     }
 
-    .option.selected .option-dot::after {
-      content: '';
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: white;
+    .bar-track {
+      flex: 1;
+      height: 14px;
+      background: rgba(193,140,74,0.12);
+      border-radius: 7px;
+      overflow: hidden;
     }
 
-    .option-label {
+    .bar-fill {
+      height: 100%;
+      border-radius: 7px;
+      width: 0%;
+      transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .bar-pct {
       font-family: 'Segoe UI', sans-serif;
       font-size: 14px;
-      font-weight: 600;
-      color: var(--accent-gold);
-      letter-spacing: 0.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+      width: 38px;
+      text-align: right;
       flex-shrink: 0;
     }
 
-    .option-text {
-      font-size: 15px;
-      color: var(--text-light);
-      line-height: 1.45;
+    .bar-dominant-tag {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: white;
+      background: var(--primary-dark);
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 6px;
     }
 
-    /* Navigation */
-    .nav-row {
+    /* ── Detail sections ── */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .detail-box {
+      background: rgba(193,140,74,0.06);
+      border-radius: 10px;
+      padding: 18px 16px;
+      border: 1px solid rgba(193,140,74,0.15);
+    }
+
+    .detail-box h4 {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 12px;
+    }
+
+    .detail-box ul {
+      list-style: none;
+    }
+
+    .detail-box ul li {
+      font-size: 14px;
+      color: var(--text-light);
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(193,140,74,0.1);
+      line-height: 1.5;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 32px;
+      gap: 8px;
+    }
+
+    .detail-box ul li:last-child { border-bottom: none; }
+
+    .detail-box ul li::before {
+      content: '·';
+      color: var(--accent-gold);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ── Blend insight ── */
+    .blend-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .blend-chip {
+      text-align: center;
+      padding: 14px 10px;
+      border-radius: 10px;
+      border: 2px solid rgba(193,140,74,0.15);
+      background: rgba(255,255,255,0.6);
+    }
+
+    .blend-chip .bc-icon { font-size: 22px; margin-bottom: 6px; }
+    .blend-chip .bc-name {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+    }
+    .blend-chip .bc-pct {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+    .blend-chip .bc-label {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 10px;
+      color: var(--text-light);
+    }
+
+    /* ── Careers ── */
+    .career-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 4px;
+    }
+
+    .career-pill {
+      background: rgba(193,140,74,0.1);
+      color: var(--primary-dark);
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(193,140,74,0.2);
+    }
+
+    /* ── Relationship insight ── */
+    .relationship-text {
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.85;
+    }
+
+    .compat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .compat-box {
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(193,140,74,0.15);
+      background: rgba(255,255,255,0.6);
+    }
+
+    .compat-box .cb-label {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .compat-box p {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* ── CTA ── */
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 6px;
     }
 
     .btn {
       display: inline-block;
-      padding: 13px 32px;
+      padding: 14px 32px;
       font-size: 13px;
       font-weight: 700;
       font-family: 'Segoe UI', sans-serif;
@@ -277,6 +414,7 @@
       border-radius: 10px;
       border: none;
       cursor: pointer;
+      text-decoration: none;
       transition: all 0.25s ease;
     }
 
@@ -286,20 +424,15 @@
       box-shadow: 0 6px 18px rgba(193,140,74,0.35);
     }
 
-    .btn-primary:hover:not(:disabled) {
+    .btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 24px rgba(193,140,74,0.45);
-    }
-
-    .btn-primary:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
     }
 
     .btn-ghost {
       background: transparent;
       color: var(--accent-gold);
-      border: 2px solid rgba(193,140,74,0.3);
+      border: 2px solid rgba(193,140,74,0.35);
     }
 
     .btn-ghost:hover {
@@ -307,531 +440,455 @@
       border-color: var(--accent-gold);
     }
 
-    .skip-note {
+    .share-note {
       font-family: 'Segoe UI', sans-serif;
       font-size: 12px;
-      color: rgba(107,83,68,0.5);
+      color: var(--accent-gold);
       text-align: center;
-      margin-top: 16px;
+      margin-top: 14px;
     }
 
-    /* Instruction screen */
-    .instruction-screen {
-      background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(255,250,245,0.97) 100%);
-      border-radius: 16px;
-      padding: 48px 40px;
-      border: 2px solid rgba(193,140,74,0.15);
-      box-shadow: 0 10px 32px rgba(0,0,0,0.07);
-      text-align: center;
+
+    /* ── Share buttons ── */
+    .social-share {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 6px;
     }
 
-    .instruction-screen h2 {
-      font-size: 28px;
-      color: var(--text-dark);
-      margin-bottom: 18px;
-      font-style: italic;
-    }
-
-    .instruction-screen p {
-      font-size: 15px;
-      color: var(--text-light);
-      line-height: 1.8;
-      margin-bottom: 14px;
-    }
-
-    .type-preview {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin: 28px 0;
-    }
-
-    .type-chip {
-      padding: 12px 16px;
-      border-radius: 10px;
-      border: 2px solid rgba(193,140,74,0.2);
-      background: rgba(255,255,255,0.8);
-      text-align: left;
-    }
-
-    .type-chip .chip-name {
-      font-family: 'Segoe UI', sans-serif;
+    .share-btn {
+      padding: 11px 22px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
       font-size: 13px;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin-bottom: 4px;
+      font-weight: 600;
+      font-family: 'Segoe UI', sans-serif;
+      transition: all 0.25s ease;
+      display: inline-block;
+      text-decoration: none;
     }
 
-    .type-chip .chip-desc {
+    .share-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    .share-twitter  { background: #1DA1F2; color: white; }
+    .share-whatsapp { background: #25D366; color: white; }
+    .share-facebook { background: #1877F2; color: white; }
+    .share-copy     { background: rgba(193,140,74,0.15); color: var(--text-dark); border: 2px solid var(--accent-gold); }
+    .share-copy:hover { background: rgba(193,140,74,0.28); opacity: 1; }
+    /* ── Disclaimer ── */
+    .disclaimer {
+      font-family: 'Segoe UI', sans-serif;
       font-size: 12px;
-      color: var(--text-light);
-      line-height: 1.5;
+      color: rgba(107,83,68,0.55);
+      text-align: center;
+      margin-top: 32px;
+      line-height: 1.7;
     }
 
+    /* ── Responsive ── */
     @media (max-width: 600px) {
-      h1 { font-size: 30px; }
-      .question-card { padding: 28px 20px; }
-      .q-text { font-size: 17px; }
-      .instruction-screen { padding: 32px 20px; }
-      .type-preview { grid-template-columns: 1fr; }
-      .nav-row { flex-direction: column; gap: 12px; }
-      .btn { width: 100%; text-align: center; }
+      .result-hero { padding: 36px 22px 32px; }
+      h1 { font-size: 34px; }
+      .card { padding: 28px 20px; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .blend-row { grid-template-columns: repeat(2, 1fr); }
+      .compat-row { grid-template-columns: 1fr; }
+      .bar-info { width: 110px; }
+      .cta-row { flex-direction: column; align-items: stretch; }
+      .btn { text-align: center; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+<div class="container">
 
-    <div class="header">
-      <a href="index.html" class="back-link">← Back to Tests</a>
-      <div class="header-icon">🔥</div>
-      <div class="eyebrow">Ancient Wisdom · Modern Insight</div>
-      <h1>Temperaments Test</h1>
-      <div class="ornament"></div>
-      <p class="header-desc">40 questions · 8–10 minutes · Discover your dominant temperament with a full percentage breakdown</p>
-    </div>
+  <a href="index.html" class="back-link">← Back to Tests</a>
 
-    <!-- Instruction screen (shown first) -->
-    <div id="instruction-screen" class="instruction-screen">
-      <h2>Before You Begin</h2>
-      <p>This test measures four core temperament types rooted in ancient psychology. There are no right or wrong answers — only honest ones.</p>
-      <p>Answer based on how you <em>naturally are</em>, not how you wish to be or how you act at work. Think of yourself in everyday life.</p>
-      <div class="type-preview">
-        <div class="type-chip">
-          <div class="chip-name">🌟 Sanguine</div>
-          <div class="chip-desc">Enthusiastic, social, expressive, and spontaneous</div>
-        </div>
-        <div class="type-chip">
-          <div class="chip-name">⚡ Choleric</div>
-          <div class="chip-desc">Decisive, driven, goal-oriented, natural leader</div>
-        </div>
-        <div class="type-chip">
-          <div class="chip-name">🌊 Melancholic</div>
-          <div class="chip-desc">Thoughtful, analytical, sensitive, detail-focused</div>
-        </div>
-        <div class="type-chip">
-          <div class="chip-name">🕊 Phlegmatic</div>
-          <div class="chip-desc">Calm, patient, diplomatic, steady presence</div>
-        </div>
-      </div>
-      <p style="font-size:13px; color:var(--accent-gold); font-family:'Segoe UI',sans-serif;">Most people are a blend — you'll see exact percentages for each type.</p>
-      <br>
-      <button class="btn btn-primary" onclick="startQuiz()">Begin Test →</button>
-    </div>
-
-    <!-- Question card -->
-    <div id="question-card" class="question-card" style="display:none">
-      <!-- Inline progress bar -->
-      <div style="margin-bottom:20px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-family:'Segoe UI',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--accent-gold);" id="progress-answered">0 of 40 answered</span>
-          <span style="font-family:'Segoe UI',sans-serif; font-size:11px; font-weight:700; color:var(--primary-dark);" id="progress-pct">0%</span>
-        </div>
-        <div style="width:100%; height:6px; background:rgba(193,140,74,0.15); border-radius:3px; overflow:hidden;">
-          <div id="progress-fill" style="height:100%; background:linear-gradient(90deg, var(--accent-gold), var(--primary-dark)); border-radius:3px; width:0%; transition:width 0.4s ease;"></div>
-        </div>
-      </div>
-      <div class="q-number" id="q-number">Question 1 of 40</div>
-      <div class="q-text" id="q-text"></div>
-      <div class="options" id="options-container"></div>
-      <div class="nav-row">
-        <button class="btn btn-ghost" id="btn-prev" onclick="prevQuestion()" style="visibility:hidden">← Previous</button>
-        <button class="btn btn-primary" id="btn-results" onclick="submitQuiz()" style="display:none">See My Results →</button>
-      </div>
-    </div>
-
+  <!-- Hero -->
+  <div class="result-hero" id="result-hero">
+    <div class="result-eyebrow">Your Temperament Profile</div>
+    <span class="result-icon" id="result-icon"></span>
+    <div class="result-type-label" id="result-type-label"></div>
+    <h1 id="result-name"></h1>
+    <div class="result-tagline" id="result-tagline"></div>
+    <div class="ornament"></div>
+    <p class="result-summary" id="result-summary"></p>
   </div>
 
-  <script>
-    // S = Sanguine, C = Choleric, M = Melancholic, P = Phlegmatic
-    // 10 questions per type, shuffled for natural flow
-    const questions = [
-      // Sanguine
-      { t: 'S', text: 'In social situations, I am usually...', options: [
-        { v: 4, text: 'The one making people laugh and keeping conversation flowing' },
-        { v: 2, text: 'Comfortable but not necessarily the centre of attention' },
-        { v: 1, text: 'Observing more than talking' },
-        { v: 0, text: 'Content to be in the background' }
-      ]},
-      { t: 'C', text: 'When a group is without direction or leadership...', options: [
-        { v: 4, text: 'I naturally step in and start organising things' },
-        { v: 2, text: 'I contribute ideas but let others lead' },
-        { v: 1, text: 'I wait to see how things unfold' },
-        { v: 0, text: 'I prefer someone else to take charge' }
-      ]},
-      { t: 'M', text: 'When making an important decision, I tend to...', options: [
-        { v: 4, text: 'Research thoroughly, weigh every option, and plan carefully' },
-        { v: 2, text: 'Think it through but trust my gut too' },
-        { v: 1, text: 'Decide fairly quickly based on the situation' },
-        { v: 0, text: 'Go with what feels right in the moment' }
-      ]},
-      { t: 'P', text: 'When conflict arises between people I care about...', options: [
-        { v: 4, text: 'I try to mediate and find common ground' },
-        { v: 2, text: 'I listen to both sides and stay neutral' },
-        { v: 1, text: 'I speak my mind if it matters enough' },
-        { v: 0, text: 'I tend to pull back until things settle' }
-      ]},
-      { t: 'S', text: 'How do you feel about spontaneous plans?', options: [
-        { v: 4, text: 'I love them — some of my best memories were unplanned' },
-        { v: 2, text: 'They are fine occasionally if I am in the mood' },
-        { v: 1, text: 'I prefer some warning ahead of time' },
-        { v: 0, text: 'I strongly prefer to plan ahead' }
-      ]},
-      { t: 'C', text: 'When working on a project with others...', options: [
-        { v: 4, text: 'I usually end up directing how things should be done' },
-        { v: 2, text: 'I take initiative on parts I feel confident about' },
-        { v: 1, text: 'I follow the plan but speak up if something is wrong' },
-        { v: 0, text: 'I focus on my assigned role and complete it well' }
-      ]},
-      { t: 'M', text: 'After making a decision, I often...', options: [
-        { v: 4, text: 'Replay it wondering if I chose the best option' },
-        { v: 2, text: 'Think about what I could do better next time' },
-        { v: 1, text: 'Accept it and move on fairly quickly' },
-        { v: 0, text: 'Rarely second-guess once I have decided' }
-      ]},
-      { t: 'P', text: 'My friends would describe me as...', options: [
-        { v: 4, text: 'Reliable, easy-going, and always there when needed' },
-        { v: 2, text: 'Supportive and adaptable' },
-        { v: 1, text: 'Fun and energetic' },
-        { v: 0, text: 'Driven and focused' }
-      ]},
-      { t: 'S', text: 'At a party or gathering, I am usually...', options: [
-        { v: 4, text: 'Meeting new people and energised by the whole atmosphere' },
-        { v: 2, text: 'Enjoying myself but sticking mostly with people I know' },
-        { v: 1, text: 'Finding a few good conversations rather than working the room' },
-        { v: 0, text: 'Ready to leave after a couple of hours' }
-      ]},
-      { t: 'C', text: 'When someone challenges my ideas or decisions...', options: [
-        { v: 4, text: 'I defend my position confidently and argue my case' },
-        { v: 2, text: 'I listen, but stand firm if I believe I am right' },
-        { v: 1, text: 'I consider their view and may revise my thinking' },
-        { v: 0, text: 'I tend to give in to keep the peace' }
-      ]},
-      { t: 'M', text: 'In creative work or projects, I tend to focus on...', options: [
-        { v: 4, text: 'Getting the details exactly right — quality over speed' },
-        { v: 2, text: 'A balance of quality and meeting the deadline' },
-        { v: 1, text: 'Getting it done and improving as I go' },
-        { v: 0, text: 'The big picture more than the small details' }
-      ]},
-      { t: 'P', text: 'When someone upsets me, I typically...', options: [
-        { v: 4, text: 'Avoid confrontation and let it pass' },
-        { v: 2, text: 'Address it calmly when the moment is right' },
-        { v: 1, text: 'Express how I feel fairly directly' },
-        { v: 0, text: 'Deal with it immediately and move on' }
-      ]},
-      { t: 'S', text: 'My energy level around other people is generally...', options: [
-        { v: 4, text: 'Higher — people fuel me and I feel more alive' },
-        { v: 2, text: 'Similar — I enjoy it but do not need it to feel okay' },
-        { v: 1, text: 'I need recovery time after a lot of social activity' },
-        { v: 0, text: 'Drained — I strongly prefer quiet, solitary time' }
-      ]},
-      { t: 'C', text: 'When I set a goal for myself...', options: [
-        { v: 4, text: 'I pursue it with determination until it is done' },
-        { v: 2, text: 'I work hard at it but I am flexible if circumstances change' },
-        { v: 1, text: 'I work steadily at my own pace' },
-        { v: 0, text: 'I sometimes lose steam before finishing' }
-      ]},
-      { t: 'M', text: 'My inner emotional life is generally...', options: [
-        { v: 4, text: 'Rich and complex — I feel things deeply, sometimes too deeply' },
-        { v: 2, text: 'Fairly reflective but I can switch it off' },
-        { v: 1, text: 'Steady, not many highs or lows' },
-        { v: 0, text: 'Mostly pragmatic and action-oriented' }
-      ]},
-      { t: 'P', text: 'When it comes to change in routines or plans...', options: [
-        { v: 4, text: 'I adapt quietly, though I prefer things to stay predictable' },
-        { v: 2, text: 'I go along with it but appreciate a heads-up' },
-        { v: 1, text: 'I adjust easily if there is a good reason' },
-        { v: 0, text: 'I enjoy variety and rarely mind disruption' }
-      ]},
-      { t: 'S', text: 'When telling a story or sharing news...', options: [
-        { v: 4, text: 'I naturally add drama, humour, and expression to bring it to life' },
-        { v: 2, text: 'I share it engagingly but keep it mostly to the point' },
-        { v: 1, text: 'I give the key facts without much embellishment' },
-        { v: 0, text: 'I am brief and factual' }
-      ]},
-      { t: 'C', text: 'Achieving results matters to me...', options: [
-        { v: 4, text: 'A great deal — I hate wasting time and expect excellence' },
-        { v: 2, text: 'Quite a bit, but I care about how we get there too' },
-        { v: 1, text: 'Somewhat — the process and relationships matter as much' },
-        { v: 0, text: 'I value consistency and reliability more than speed' }
-      ]},
-      { t: 'M', text: 'When reading or learning something new, I prefer...', options: [
-        { v: 4, text: 'Going deep into the topic and understanding every layer' },
-        { v: 2, text: 'Understanding it well enough to apply it' },
-        { v: 1, text: 'Getting the main points and moving on' },
-        { v: 0, text: 'Hands-on experience over theory' }
-      ]},
-      { t: 'P', text: 'In group decisions, my usual role is...', options: [
-        { v: 4, text: 'The one who listens to everyone and helps find agreement' },
-        { v: 2, text: 'A steady voice that considers what is fair for all' },
-        { v: 1, text: 'Someone who shares my view but adapts when needed' },
-        { v: 0, text: 'Often the one driving us toward a decision' }
-      ]},
-      { t: 'S', text: 'I tend to speak before I think...', options: [
-        { v: 4, text: 'Often — I process out loud and respond quickly' },
-        { v: 2, text: 'Sometimes, especially when excited' },
-        { v: 1, text: 'Rarely — I usually think before speaking' },
-        { v: 0, text: 'Almost never — I am very deliberate with words' }
-      ]},
-      { t: 'C', text: 'When someone is inefficient or slow...', options: [
-        { v: 4, text: 'It frustrates me and I may step in or say something' },
-        { v: 2, text: 'It bothers me internally but I try to be patient' },
-        { v: 1, text: 'I accept that people work differently' },
-        { v: 0, text: 'It rarely bothers me much' }
-      ]},
-      { t: 'M', text: 'I hold myself to high personal standards...', options: [
-        { v: 4, text: 'Yes, and I often feel I fall short of them' },
-        { v: 2, text: 'Yes, but I try to be realistic and forgive myself' },
-        { v: 1, text: 'Somewhat — I do my best without obsessing' },
-        { v: 0, text: 'Not especially — I take things as they come' }
-      ]},
-      { t: 'P', text: 'When I am under pressure, I tend to...', options: [
-        { v: 4, text: 'Stay quiet and steady, not wanting to add to the tension' },
-        { v: 2, text: 'Keep going at a calm, methodical pace' },
-        { v: 1, text: 'Focus hard and work until the pressure is off' },
-        { v: 0, text: 'Charge ahead to resolve the situation' }
-      ]},
-      { t: 'S', text: 'When I have free time, I tend to...', options: [
-        { v: 4, text: 'Seek out people, activities, and things to do' },
-        { v: 2, text: 'Mix social time with some rest' },
-        { v: 1, text: 'Prefer quieter activities — reading, music, reflection' },
-        { v: 0, text: 'Focus on tasks or goals even in my downtime' }
-      ]},
-      { t: 'C', text: 'Which describes your approach to rules?', options: [
-        { v: 4, text: 'I follow them if they make sense, but will challenge rules I think are wrong' },
-        { v: 2, text: 'I generally follow them but adapt when needed' },
-        { v: 1, text: 'I follow them consistently — they exist for good reason' },
-        { v: 0, text: 'I prefer to find a smooth, agreed-upon way rather than confrontation' }
-      ]},
-      { t: 'M', text: 'My workspace or living space tends to be...', options: [
-        { v: 4, text: 'Organised and tidy — disorder affects my concentration' },
-        { v: 2, text: 'Reasonably organised with a system others might not see' },
-        { v: 1, text: 'Functional — I keep what I need close but am not rigid about it' },
-        { v: 0, text: 'Often messy — I focus on the work, not the setup' }
-      ]},
-      { t: 'P', text: 'When someone needs help, I...', options: [
-        { v: 4, text: 'Am usually the first to offer and follow through quietly' },
-        { v: 2, text: 'Help when asked and give it my full attention' },
-        { v: 1, text: 'Help but make sure to communicate what I can and cannot do' },
-        { v: 0, text: 'Help if it aligns with what I am working on' }
-      ]},
-      { t: 'S', text: 'When I am excited about something, I...', options: [
-        { v: 4, text: 'Tell everyone I know immediately' },
-        { v: 2, text: 'Share it with people close to me' },
-        { v: 1, text: 'Enjoy it privately and share selectively' },
-        { v: 0, text: 'Keep it to myself and channel it into action' }
-      ]},
-      { t: 'C', text: 'Failure affects me by...', options: [
-        { v: 4, text: 'Motivating me — I get up, adjust, and go harder' },
-        { v: 2, text: 'Stinging briefly, then I move forward' },
-        { v: 1, text: 'Making me reflect and analyse what went wrong' },
-        { v: 0, text: 'Taking time to process before I can move forward' }
-      ]},
-      { t: 'M', text: 'I often notice things that others miss — details, patterns, moods...', options: [
-        { v: 4, text: 'Yes, I pick up on things very quickly and remember them' },
-        { v: 2, text: 'I notice quite a bit but do not always act on it' },
-        { v: 1, text: 'Occasionally, especially when something feels off' },
-        { v: 0, text: 'Not particularly — I focus on the bigger picture' }
-      ]},
-      { t: 'P', text: 'When someone asks for my opinion on a sensitive matter, I...', options: [
-        { v: 4, text: 'Choose words carefully to avoid hurting them' },
-        { v: 2, text: 'Give an honest but gentle answer' },
-        { v: 1, text: 'Share my view directly while being respectful' },
-        { v: 0, text: 'Tell them clearly what I think' }
-      ]},
-      { t: 'S', text: 'People often say I bring...', options: [
-        { v: 4, text: 'Energy, laughter, and lightness into the room' },
-        { v: 2, text: 'Warmth and friendliness' },
-        { v: 1, text: 'Thoughtfulness and depth' },
-        { v: 0, text: 'Structure, focus, and direction' }
-      ]},
-      { t: 'C', text: 'My biggest personal strength is...', options: [
-        { v: 4, text: 'My ability to get things done and make things happen' },
-        { v: 2, text: 'My vision and confidence in my decisions' },
-        { v: 1, text: 'My discipline and attention to detail' },
-        { v: 0, text: 'My patience and ability to keep peace' }
-      ]},
-      { t: 'M', text: 'I sometimes struggle with...', options: [
-        { v: 4, text: 'Overthinking, worry, or being too hard on myself' },
-        { v: 2, text: 'Balancing high standards with real-world limitations' },
-        { v: 1, text: 'Being too passive when I should speak up' },
-        { v: 0, text: 'Slowing down and considering others\' feelings' }
-      ]},
-      { t: 'P', text: 'My approach to confrontation is...', options: [
-        { v: 4, text: 'Avoid it if possible — it takes a lot out of me' },
-        { v: 2, text: 'Handle it carefully and only when necessary' },
-        { v: 1, text: 'Address it directly but calmly' },
-        { v: 0, text: 'Tackle it head-on — avoiding it just makes things worse' }
-      ]},
-      { t: 'S', text: 'Looking back, I have started more things than I have finished...', options: [
-        { v: 4, text: 'Definitely — new ideas always grab my attention' },
-        { v: 2, text: 'Sometimes — I lose momentum if interest drops' },
-        { v: 1, text: 'Rarely — I usually see things through' },
-        { v: 0, text: 'Never — completing things is a point of pride for me' }
-      ]},
-      { t: 'C', text: 'My biggest weakness is probably...', options: [
-        { v: 4, text: 'Impatience or coming across as too blunt' },
-        { v: 2, text: 'Being too competitive or stubborn' },
-        { v: 1, text: 'Taking too long to decide or overanalysing' },
-        { v: 0, text: 'Avoiding conflict when I should speak up' }
-      ]},
-      { t: 'M', text: 'When I feel unappreciated, I tend to...', options: [
-        { v: 4, text: 'Withdraw emotionally and feel it deeply' },
-        { v: 2, text: 'Reflect on it and wonder what I did wrong' },
-        { v: 1, text: 'Stay composed but feel it inwardly' },
-        { v: 0, text: 'Address it directly or channel it into work' }
-      ]},
-      { t: 'P', text: 'My ideal working style is...', options: [
-        { v: 4, text: 'Steady and consistent, with a cooperative team' },
-        { v: 2, text: 'Flexible but stable, with clear expectations' },
-        { v: 1, text: 'Structured and detailed, with high standards' },
-        { v: 0, text: 'Fast-paced, goal-focused, and results-driven' }
-      ]},
-      { t: 'S', text: 'I forget about time most easily when I am...', options: [
-        { v: 4, text: 'Connecting with people or doing something creative and fun' },
-        { v: 2, text: 'Working on something I enjoy' },
-        { v: 1, text: 'Deep in research or reading something absorbing' },
-        { v: 0, text: 'Working toward a meaningful goal' }
-      ]},
-      { t: 'C', text: 'When I believe I am right, I am...', options: [
-        { v: 4, text: 'Persistent and willing to argue until others see my point' },
-        { v: 2, text: 'Confident but open to a compelling counter-argument' },
-        { v: 1, text: 'Willing to step back and reconsider' },
-        { v: 0, text: 'Happy to let others disagree — I rarely need to win' }
-      ]}
-    ];
+  <!-- Percentage bars -->
+  <div class="card">
+    <div class="card-title">Your Temperament Breakdown</div>
+    <div id="bars-container"></div>
+  </div>
 
-    let current = 0;
-    let answers = new Array(questions.length).fill(null);
+  <!-- Your blend -->
+  <div class="card">
+    <div class="card-title">Your Full Temperament Blend</div>
+    <div class="blend-row" id="blend-row"></div>
+    <p style="font-size:13px; color:var(--text-light); margin-top:18px; line-height:1.7;" id="blend-note"></p>
+  </div>
 
-    function startQuiz() {
-      document.getElementById('instruction-screen').style.display = 'none';
-      document.getElementById('question-card').style.display = 'block';
-      renderQuestion();
+  <!-- Strengths & Challenges -->
+  <div class="card">
+    <div class="card-title">Strengths & Growth Areas</div>
+    <div class="detail-grid" id="strengths-grid"></div>
+  </div>
+
+  <!-- Careers -->
+  <div class="card">
+    <div class="card-title">Career Paths That Suit You</div>
+    <p style="font-size:14px; color:var(--text-light); margin-bottom:16px; line-height:1.7;" id="career-intro"></p>
+    <div class="career-pills" id="career-pills"></div>
+  </div>
+
+  <!-- Relationships -->
+  <div class="card">
+    <div class="card-title">In Relationships</div>
+    <p class="relationship-text" id="rel-text"></p>
+    <div class="compat-row" id="compat-row"></div>
+  </div>
+
+  <!-- Share -->
+  <div class="card" style="text-align:center;">
+    <div class="card-title">Share Your Results</div>
+    <p style="font-size:14px; color:var(--text-light); margin-bottom:20px; line-height:1.7;">Discovered something interesting about yourself? Let your friends find out their temperament too.</p>
+    <div class="social-share">
+      <button class="share-btn share-whatsapp" id="shareWhatsApp">💬 WhatsApp</button>
+      <button class="share-btn share-twitter"  id="shareTwitter">𝕏 Twitter</button>
+      <button class="share-btn share-facebook" id="shareFacebook">Facebook</button>
+      <button class="share-btn share-copy"     id="shareCopy">🔗 Copy Link</button>
+    </div>
+  </div>
+
+  <!-- Feedback -->
+  <div class="card" style="text-align:center;" id="feedback-card">
+    <div class="card-title">🧠 Does This Feel Accurate?</div>
+    <p style="font-size:15px; color:var(--text-light); line-height:1.8; margin-bottom:24px;">
+      Based on your answers, we matched you with this personality type. Does this description reflect how you see yourself?
+    </p>
+    <div id="feedback-buttons" class="cta-row" style="justify-content:center; margin-bottom:20px;">
+      <button class="btn btn-primary" onclick="submitFeedback('yes')">✓ Yes, it fits me perfectly</button>
+      <button class="btn btn-ghost" onclick="submitFeedback('no')">✗ Not quite, I'm different</button>
+    </div>
+    <div id="feedback-thanks" style="display:none;">
+      <div style="font-size:32px; margin-bottom:10px;" id="feedback-emoji"></div>
+      <p style="font-size:15px; color:var(--text-light); line-height:1.8;" id="feedback-message"></p>
+    </div>
+    <div style="margin-top:20px; padding-top:20px; border-top:1px solid rgba(193,140,74,0.15);">
+      <a href="https://datalternate.github.io/i-personality/index.html" class="back-link" style="margin-bottom:0;">← Back to Home</a>
+    </div>
+  </div>
+
+  <!-- CTAs -->
+  <div class="card" style="text-align:center;">
+    <div class="card-title">What's Next?</div>
+    <div class="cta-row">
+      <a href="temperaments.html" class="btn btn-ghost">Retake This Test</a>
+      <a href="quiz.html" class="btn btn-primary">Also Try the MBTI Test</a>
+    </div>
+    <p class="share-note">Share your results with a friend — see if they guess right 🌱</p>
+  </div>
+
+  <p class="disclaimer">
+    This assessment is for personal insight and growth purposes only. It is not a clinical diagnostic tool.<br>
+    Results reflect tendencies, not fixed traits — you are always more than a type.
+  </p>
+
+</div>
+
+<script>
+  const TYPE_DATA = {
+    S: {
+      name: 'Sanguine',
+      icon: '🌟',
+      tagline: 'The Enthusiast — Social · Expressive · Spontaneous',
+      color: '#e8845a',
+      label: 'SANGUINE TEMPERAMENT',
+      summary: `You are the person who lights up a room without trying. Warm, animated, and naturally magnetic, you process life out loud and find your energy in connection with others. You bring colour and life to every space you enter — your enthusiasm is not a performance, it is simply who you are. Like many Sanguines, you may find that follow-through is harder than starting, but your ability to inspire and energise others is a rare and powerful gift.`,
+      strengths: [
+        'Natural charisma and warmth',
+        'Energises and inspires others',
+        'Creative and imaginative',
+        'Highly adaptable to new situations',
+        'Excellent communicator and storyteller',
+      ],
+      challenges: [
+        'Can struggle to finish what is started',
+        'May avoid difficult conversations',
+        'Impulsive decisions under excitement',
+        'Organisation and follow-through',
+        'Sensitivity to rejection or criticism',
+      ],
+      careers: ['Marketing & Advertising', 'Public Relations', 'Teaching & Training', 'Sales', 'Event Management', 'Journalism', 'Acting & Performance', 'Counselling', 'Social Work', 'Entrepreneurship'],
+      careerIntro: 'You thrive in people-centred, dynamic roles where your energy, communication skills, and creativity are valued assets.',
+      relText: `In relationships, you are affectionate, fun, and deeply invested in connection. You love deeply and show it openly. However, you may need to work on consistency and listening as much as you express. You give a lot of yourself — ensure the relationships you invest in give back.`,
+      compatGood: { type: 'Melancholic', reason: 'Their depth and attention to detail balances your spontaneity. Together you cover what the other misses.' },
+      compatChallenge: { type: 'Choleric', reason: 'Two high-energy drivers can clash over control and direction. Mutual respect is essential.' },
+    },
+    C: {
+      name: 'Choleric',
+      icon: '⚡',
+      tagline: 'The Leader — Driven · Decisive · Goal-Oriented',
+      color: '#c0392b',
+      label: 'CHOLERIC TEMPERAMENT',
+      summary: `You are built to lead. Where others see obstacles, you see problems to solve. Decisive, determined, and results-driven, you move with intention and expect those around you to keep up. You have an exceptional ability to cut through noise and focus on what matters — and you carry a quiet confidence that makes people follow you even when you have not asked them to. Your growth edge lies in slowing down enough to bring people with you, not just ahead of them.`,
+      strengths: [
+        'Natural leadership and initiative',
+        'Decisive under pressure',
+        'Highly productive and goal-focused',
+        'Excellent problem-solver',
+        'Confident and self-motivated',
+      ],
+      challenges: [
+        'Can come across as blunt or domineering',
+        'Impatience with slower-paced people',
+        'May overlook others\' emotional needs',
+        'Difficulty delegating fully',
+        'Tendency toward stubbornness',
+      ],
+      careers: ['Business Leadership & Management', 'Entrepreneurship', 'Law & Advocacy', 'Surgery & Emergency Medicine', 'Military & Law Enforcement', 'Politics', 'Engineering', 'Sports Coaching', 'Finance & Investment', 'Project Management'],
+      careerIntro: 'You excel in high-stakes, results-oriented environments where your decisiveness and drive can directly shape outcomes.',
+      relText: `In relationships, you are loyal and committed — but on your terms. You show love through action, not always words. You protect fiercely and expect honesty in return. Learning to slow down and acknowledge your partner's emotional world will deepen every relationship you have.`,
+      compatGood: { type: 'Phlegmatic', reason: 'Their calm, adaptable nature softens your intensity and provides the steady loyalty you value.' },
+      compatChallenge: { type: 'Sanguine', reason: 'Both want to lead the energy in a room. Shared goals are needed to prevent friction.' },
+    },
+    M: {
+      name: 'Melancholic',
+      icon: '🌊',
+      tagline: 'The Thinker — Analytical · Deep · Detail-Oriented',
+      color: '#2e86ab',
+      label: 'MELANCHOLIC TEMPERAMENT',
+      summary: `You experience life more deeply than most people around you. You notice what others miss — the unspoken tension in a room, the detail no one checked, the pattern hiding in the data. Your mind is always working, always asking whether things could be better, truer, more precise. This depth is your greatest strength and, sometimes, your heaviest burden. Melancholics produce the world's finest work — not because they work the hardest, but because they refuse to settle for less than excellence.`,
+      strengths: [
+        'Deep analytical and critical thinking',
+        'Exceptional attention to detail',
+        'High personal standards and integrity',
+        'Creative with rich emotional depth',
+        'Empathetic and perceptive of others',
+      ],
+      challenges: [
+        'Tendency toward overthinking and worry',
+        'Self-critical beyond what is useful',
+        'Can be slow to decide under perfectionism',
+        'May withdraw when overwhelmed',
+        'Pessimistic outlook in difficult seasons',
+      ],
+      careers: ['Research & Academia', 'Psychology & Counselling', 'Writing & Literature', 'Architecture & Design', 'Data Science & Analysis', 'Medicine & Psychiatry', 'Music & Fine Arts', 'Auditing & Accounting', 'Philosophy', 'Software Engineering'],
+      careerIntro: 'You thrive in roles requiring depth, precision, and original thinking — where quality matters more than speed.',
+      relText: `In relationships, you love with rare depth and loyalty. You are thoughtful and attentive, remembering details others forget. However, your tendency to internalise can make you hard to read. Open, regular communication — even when it feels uncomfortable — is the key to your closest relationships thriving.`,
+      compatGood: { type: 'Sanguine', reason: 'Their lightness and optimism lifts you out of your head. Their warmth meets your depth beautifully.' },
+      compatChallenge: { type: 'Choleric', reason: 'Their bluntness can feel dismissive of your depth. Clear communication on both sides is essential.' },
+    },
+    P: {
+      name: 'Phlegmatic',
+      icon: '🕊',
+      tagline: 'The Peacemaker — Calm · Patient · Steady',
+      color: '#27ae60',
+      label: 'PHLEGMATIC TEMPERAMENT',
+      summary: `You are the person everyone trusts to stay calm when everything else is moving fast. Your steady, grounded presence is not passivity — it is a profound kind of strength. You read people well, hold space generously, and consistently show up for those who need you. In a world that rewards noise and speed, your quiet reliability is underestimated and deeply needed. Your growth edge is learning to claim space for your own needs and opinions as boldly as you protect everyone else's.`,
+      strengths: [
+        'Exceptional listener and mediator',
+        'Steady, reliable, and trustworthy',
+        'Excellent at building team harmony',
+        'Patient under pressure',
+        'Highly empathetic and supportive',
+      ],
+      challenges: [
+        'Can be too passive or conflict-avoidant',
+        'May suppress own needs to keep peace',
+        'Resistance to change even when helpful',
+        'Difficulty making decisions decisively',
+        'Can be taken for granted by others',
+      ],
+      careers: ['Nursing & Healthcare', 'Human Resources', 'Counselling & Therapy', 'Teaching (Early Childhood)', 'Social Work', 'Administration & Operations', 'Diplomacy & Mediation', 'Community Development', 'Library & Information Science', 'Customer Relations'],
+      careerIntro: 'You flourish in stable, people-centred roles where your patience, reliability, and ability to hold space for others creates real impact.',
+      relText: `In relationships, you are one of the most loyal and giving partners possible. You anticipate needs before they are expressed and create a safe, consistent space for those you love. Your work is learning to communicate your own needs with the same care you give everyone else — your feelings matter too.`,
+      compatGood: { type: 'Choleric', reason: 'Their drive and decisiveness gives you direction while your calm gives them balance.' },
+      compatChallenge: { type: 'Melancholic', reason: 'Two inward-processing types can fall into silence. Intentional, regular check-ins keep the connection alive.' },
+    }
+  };
+
+  const TYPE_ICONS = { S: '🌟', C: '⚡', M: '🌊', P: '🕊' };
+  const TYPE_NAMES = { S: 'Sanguine', C: 'Choleric', M: 'Melancholic', P: 'Phlegmatic' };
+
+  function getParams() {
+    const p = new URLSearchParams(window.location.search);
+    return {
+      S: parseInt(p.get('S') || 25),
+      C: parseInt(p.get('C') || 25),
+      M: parseInt(p.get('M') || 25),
+      P: parseInt(p.get('P') || 25),
+    };
+  }
+
+  function dominant(scores) {
+    return Object.entries(scores).reduce((a, b) => b[1] > a[1] ? b : a)[0];
+  }
+
+  function render() {
+    const scores = getParams();
+    const dom = dominant(scores);
+    const d = TYPE_DATA[dom];
+
+    // Sort by score descending
+    const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
+
+    // Hero
+    document.getElementById('result-icon').textContent = d.icon;
+    document.getElementById('result-type-label').textContent = d.label;
+    document.getElementById('result-type-label').style.color = d.color;
+    document.getElementById('result-name').textContent = d.name;
+    document.getElementById('result-tagline').textContent = d.tagline;
+    document.getElementById('result-summary').textContent = d.summary;
+
+    // Bars
+    const barsEl = document.getElementById('bars-container');
+    barsEl.innerHTML = '';
+    sorted.forEach(([t, pct]) => {
+      const td = TYPE_DATA[t];
+      const isDom = t === dom;
+      const row = document.createElement('div');
+      row.className = 'bar-row';
+      row.innerHTML = `
+        <div class="bar-info">
+          <span class="bar-icon">${td.icon}</span>
+          <span class="bar-name">${td.name}${isDom ? '<span class="bar-dominant-tag">You</span>' : ''}</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" id="bar-${t}" style="background: ${td.color};"></div>
+        </div>
+        <span class="bar-pct">${pct}%</span>
+      `;
+      barsEl.appendChild(row);
+    });
+
+    // Animate bars after paint
+    setTimeout(() => {
+      sorted.forEach(([t, pct]) => {
+        const el = document.getElementById(`bar-${t}`);
+        if (el) el.style.width = pct + '%';
+      });
+    }, 200);
+
+    // Blend chips
+    const blendEl = document.getElementById('blend-row');
+    blendEl.innerHTML = '';
+    // Show all 4 sorted
+    sorted.forEach(([t, pct]) => {
+      const td = TYPE_DATA[t];
+      const chip = document.createElement('div');
+      chip.className = 'blend-chip';
+      chip.innerHTML = `
+        <div class="bc-icon">${td.icon}</div>
+        <div class="bc-name">${td.name}</div>
+        <div class="bc-pct" style="color:${td.color}">${pct}%</div>
+        <div class="bc-label">${getStrengthLabel(pct)}</div>
+      `;
+      blendEl.appendChild(chip);
+    });
+
+    // Blend note
+    const second = sorted[1];
+    document.getElementById('blend-note').innerHTML =
+      `Your dominant temperament is <strong>${d.name}</strong>, but you carry a meaningful <strong>${TYPE_NAMES[second[0]]} (${second[1]}%)</strong> influence. This blend shapes your unique personality — you are more nuanced than any single type.`;
+
+    // Strengths & Challenges
+    const grid = document.getElementById('strengths-grid');
+    grid.innerHTML = `
+      <div class="detail-box">
+        <h4>✦ Your Strengths</h4>
+        <ul>${d.strengths.map(s => `<li>${s}</li>`).join('')}</ul>
+      </div>
+      <div class="detail-box">
+        <h4>◇ Growth Areas</h4>
+        <ul>${d.challenges.map(c => `<li>${c}</li>`).join('')}</ul>
+      </div>
+    `;
+
+    // Careers
+    document.getElementById('career-intro').textContent = d.careerIntro;
+    const pillsEl = document.getElementById('career-pills');
+    pillsEl.innerHTML = d.careers.map(c => `<span class="career-pill">${c}</span>`).join('');
+
+    // Relationships
+    document.getElementById('rel-text').textContent = d.relText;
+    const compatEl = document.getElementById('compat-row');
+    compatEl.innerHTML = `
+      <div class="compat-box">
+        <div class="cb-label" style="color: var(--phle-color)">✦ Natural Compatibility</div>
+        <p><strong>${TYPE_ICONS[getTypeKey(d.compatGood.type)]} ${d.compatGood.type}</strong> — ${d.compatGood.reason}</p>
+      </div>
+      <div class="compat-box">
+        <div class="cb-label" style="color: #c0392b;">◇ Where to Be Mindful</div>
+        <p><strong>${TYPE_ICONS[getTypeKey(d.compatChallenge.type)]} ${d.compatChallenge.type}</strong> — ${d.compatChallenge.reason}</p>
+      </div>
+    `;
+
+    // Init share buttons with dominant type name
+    initShare(d.name);
+  }
+
+  function getTypeKey(name) {
+    const map = { Sanguine:'S', Choleric:'C', Melancholic:'M', Phlegmatic:'P' };
+    return map[name] || 'S';
+  }
+
+  function getStrengthLabel(pct) {
+    if (pct >= 40) return 'Dominant';
+    if (pct >= 25) return 'Strong';
+    if (pct >= 15) return 'Present';
+    return 'Subtle';
+  }
+
+  render();
+
+  function initShare(dominantName) {
+    const resultUrl = window.location.href;
+    const resultText = `I just discovered I'm a ${dominantName} temperament! Find out yours on i-Personality. ${resultUrl}`;
+
+    document.getElementById('shareWhatsApp').onclick = function() {
+      window.open(`https://wa.me/?text=${encodeURIComponent(resultText)}`, '_blank');
+    };
+
+    document.getElementById('shareTwitter').onclick = function() {
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(resultText)}`, '_blank');
+    };
+
+    document.getElementById('shareFacebook').onclick = function() {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(resultUrl)}`, '_blank');
+    };
+
+    document.getElementById('shareCopy').onclick = function() {
+      navigator.clipboard.writeText(resultUrl).then(() => {
+        this.textContent = '✓ Copied!';
+        setTimeout(() => { this.textContent = '🔗 Copy Link'; }, 2000);
+      });
+    };
+  }
+
+  function submitFeedback(choice) {
+    document.getElementById('feedback-buttons').style.display = 'none';
+    const thanks = document.getElementById('feedback-thanks');
+    const emoji = document.getElementById('feedback-emoji');
+    const msg = document.getElementById('feedback-message');
+
+    if (choice === 'yes') {
+      emoji.textContent = '🎯';
+      msg.textContent = "Thank you! We're glad the results resonated. Self-knowledge is the beginning of growth — carry this insight with you.";
+    } else {
+      emoji.textContent = '💡';
+      msg.textContent = "That's valuable to know. Personality blends are complex — consider retaking the test and answering based on your most natural self, not your current season of life. You may also find the MBTI test gives you a clearer fit.";
     }
 
-    function renderQuestion() {
-      const q = questions[current];
-      document.getElementById('q-number').textContent = `Question ${current + 1} of ${questions.length}`;
-      document.getElementById('q-text').textContent = q.text;
-      const answered = answers.filter(a => a !== null).length;
-      const pct = Math.round((answered / questions.length) * 100);
-      document.getElementById('progress-fill').style.width = pct + '%';
-      document.getElementById('progress-answered').textContent = `${answered} of ${questions.length} answered`;
-      document.getElementById('progress-pct').textContent = pct + '%';
+    thanks.style.display = 'block';
 
-      const container = document.getElementById('options-container');
-      container.innerHTML = '';
-
-      const labels = ['A', 'B', 'C', 'D'];
-      q.options.forEach((opt, i) => {
-        const label = document.createElement('label');
-        label.className = 'option' + (answers[current] === i ? ' selected' : '');
-        label.innerHTML = `
-          <input type="radio" name="q" value="${i}" ${answers[current] === i ? 'checked' : ''} style="display:none">
-          <div class="option-dot"></div>
-          <span class="option-label">${labels[i]}</span>
-          <span class="option-text">${opt.text}</span>
-        `;
-        container.appendChild(label);
-      });
-
-      // Radio change — show selection briefly then advance
-      document.querySelectorAll('input[type="radio"]').forEach(radio => {
-        radio.addEventListener('change', () => {
-          const selected = parseInt(radio.value);
-          answers[current] = selected;
-
-          // Highlight selected so user sees it lock in
-          document.querySelectorAll('label.option').forEach((el, i) => {
-            el.classList.toggle('selected', i === selected);
-            el.style.pointerEvents = 'none'; // prevent double-click
-          });
-
-          // On last question show results button, otherwise advance after delay
-          if (current === questions.length - 1) {
-            document.getElementById('btn-results').style.display = 'inline-block';
-          } else {
-            setTimeout(() => {
-              current++;
-              renderQuestion();
-            }, 350);
-          }
-        });
-      });
-
-      document.getElementById('btn-prev').style.visibility = current === 0 ? 'hidden' : 'visible';
-      // Show results button only if last question already answered
-      document.getElementById('btn-results').style.display = (current === questions.length - 1 && answers[current] !== null) ? 'inline-block' : 'none';
-
-      // Scroll to top of card
-      document.getElementById('question-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'temperament_feedback', { feedback: choice });
     }
-
-    function selectOption(index) {
-      answers[current] = index;
-      document.querySelectorAll('label.option').forEach((el, i) => {
-        el.classList.toggle('selected', i === index);
-      });
-    }
-
-    function nextQuestion() {
-      if (answers[current] === null) return;
-      if (current === questions.length - 1) {
-        submitQuiz();
-      } else {
-        current++;
-        renderQuestion();
-      }
-    }
-
-    function prevQuestion() {
-      if (current > 0) {
-        current--;
-        renderQuestion();
-      }
-    }
-
-    function submitQuiz() {
-      // Tally scores
-      const scores = { S: 0, C: 0, M: 0, P: 0 };
-      const maxScores = { S: 0, C: 0, M: 0, P: 0 };
-
-      questions.forEach((q, i) => {
-        const selectedIdx = answers[i];
-        if (selectedIdx !== null) {
-          scores[q.t] += q.options[selectedIdx].v;
-        }
-        // max possible per question is 4
-        maxScores[q.t] += 4;
-      });
-
-      // Convert to percentages
-      const pct = {};
-      ['S','C','M','P'].forEach(t => {
-        pct[t] = Math.round((scores[t] / maxScores[t]) * 100);
-      });
-
-      // Normalise so they add to 100
-      const total = pct.S + pct.C + pct.M + pct.P;
-      if (total > 0) {
-        ['S','C','M','P'].forEach(t => {
-          pct[t] = Math.round((pct[t] / total) * 100);
-        });
-      }
-
-      // Fix rounding to sum to 100
-      const sum = pct.S + pct.C + pct.M + pct.P;
-      const diff = 100 - sum;
-      const dominant = ['S','C','M','P'].reduce((a,b) => pct[a] > pct[b] ? a : b);
-      pct[dominant] += diff;
-
-      const params = new URLSearchParams({
-        S: pct.S, C: pct.C, M: pct.M, P: pct.P
-      });
-
-      window.location.href = `temperaments-result.html?${params.toString()}`;
-    }
-  </script>
+  }
+</script>
 </body>
 </html>
